@@ -66,6 +66,7 @@ class EspnFantasyFootballTest {
             assertEquals("Team A", matchups.single().homeTeam.name)
             val path = requireNotNull(server.takeRequest().path)
             assertTrue("view=mSettings" in path, path)
+            assertFalse("mScoreboard" in path, "plain matchups don't need the lineup players: $path")
         }
 
     @Test

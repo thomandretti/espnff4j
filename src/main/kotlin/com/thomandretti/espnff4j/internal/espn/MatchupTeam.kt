@@ -10,4 +10,7 @@ internal data class MatchupTeam(
     val totalProjectedPoints: Double? = null,
     val totalProjectedPointsLive: Double? = null,
     val winProbability: Double? = null,
+    // The side's lineup for the requested week, only for that week's matchups. Player identities are
+    // filled in only when the request includes the mScoreboard view; mMatchupScore alone sends stats.
+    val rosterForCurrentScoringPeriod: Roster? = null,
 )

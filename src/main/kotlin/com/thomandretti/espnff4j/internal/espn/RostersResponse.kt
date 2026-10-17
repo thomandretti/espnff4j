@@ -31,19 +31,24 @@ internal data class RosterTeam(
     ): TeamRoster =
         TeamRoster(
             team = Team(id = id, name = name, record = record, playoffSeed = playoffSeed, abbrev = abbrev),
-            players =
-                roster
-                    ?.entries
-                    .orEmpty()
-                    .map { it.toRosterPlayer(seasonId, week) }
-                    // Starters in lineup order, then bench and IR; ESPN's own order is kept within a slot.
-                    .sortedBy { it.lineupSlot.ordinal },
+            players = roster.toPlayers(seasonId, week),
         )
 }
 
 internal data class Roster(
     val entries: List<RosterEntry> = emptyList(),
 )
+
+/** Starters in lineup order, then bench and IR; ESPN's own order is kept within a slot. */
+internal fun Roster?.toPlayers(
+    seasonId: Int,
+    week: Int,
+): List<RosterPlayer> =
+    this
+        ?.entries
+        .orEmpty()
+        .map { it.toRosterPlayer(seasonId, week) }
+        .sortedBy { it.lineupSlot.ordinal }
 
 internal data class RosterEntry(
     val lineupSlotId: Int,

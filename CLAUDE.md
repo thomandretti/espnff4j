@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A small Kotlin/JVM library (Java 21 toolchain) wrapping the unofficial, undocumented ESPN Fantasy
 Football API. Public operations: league settings and season state (`getLeague`), standings, weekly
-matchups (with live scores, projections and ESPN win probabilities), and weekly rosters (lineup slot,
-injury status, points and projection per player).
+matchups (with live scores, projections and ESPN win probabilities), weekly rosters (lineup slot,
+injury status, points and projection per player), and box scores (matchups plus both lineups).
 
 ## Commands
 
@@ -36,10 +36,19 @@ Request path, outermost first:
    properties ignored) produce the raw interface.
 2. `internal/espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every endpoint
    hits the same URL and differs only in the `view` query params: `mSettings` (league), `mTeam`
-   (standings), `mRoster,mTeam` (rosters) and `mMatchupScore,mTeam,mSettings` (matchups). Request only
-   the views a call needs, because `mRoster` alone is ~3 MB for a ten-team league.
+   (standings), `mRoster,mTeam` (rosters), `mMatchupScore,mTeam,mSettings` (matchups) and
+   `mMatchupScore,mScoreboard,mTeam,mSettings` (box scores). Request only the views a call needs,
+   because `mRoster` alone is ~3 MB for a ten-team league.
+3. `FantasyFootballClient` — awaits the `Call`s and normalises the raw ESPN DTOs (`internal/espn/`,
+   `*Response` and friends) into the public `model/` types (`League`, `Team`, `MatchupInfo`, …).
+   Standings are sorted by `playoffSeed`. Matchups and box scores share `matchupsFor(week)`, which
+   drops byes (`away == null`) and joins team IDs against the `teams` list.
 
-### Rosters
+### Rosters and box scores
+
+Players are mapped once, in `RosterEntry.toRosterPlayer` / `Roster?.toPlayers`, for both
+`mRoster`'s `teams[].roster` and the box score's `schedule[].home/away.rosterForCurrentScoringPeriod`;
+both have the same entry shape.
 
 Each player's `stats[]` mixes seasons, weeks, actuals and projections. A week's figure is the entry
 with the league's `seasonId`, `scoringPeriodId` = the week and `statSplitTypeId` 1 (a single week; 0
@@ -47,10 +56,11 @@ and 2 are season totals and averages). Within that, `statSourceId` 0 is actual p
 projection, both as `appliedTotal`, i.e. scored with the league's settings. Actual points are absent
 until a player's game starts. ESPN's numeric IDs for lineup slots, positions and NFL teams are mapped in
 `internal/espn/EspnIds.kt`. Unknown IDs map to `UNKNOWN` (or a null `proTeam`) rather than failing.
-3. `FantasyFootballClient` — awaits the `Call`s and normalises the raw ESPN DTOs (`internal/espn/`,
-   `*Response` and friends) into the public `model/` types (`League`, `Team`, `MatchupInfo`, …).
-   Standings are sorted by `playoffSeed`; matchups drop byes (`away == null`) and join team IDs
-   against the `teams` list.
+
+`mMatchupScore` alone sends lineup entries with stats but **no player identity** (null id and name).
+`mScoreboard` fills them in and roughly doubles the response, which is why box scores are a separate
+call from matchups. Starters' week points sum to the side's `totalPointsLive`, which
+`EspnBoxScoreResponseTest` checks.
 
 ### Weeks vs matchup periods
 
@@ -103,7 +113,8 @@ model fields nullable/defaulted unless ESPN always sends them.
 
 - Fixtures in `src/test/resources/` are trimmed, anonymised captures of real ESPN responses
   (`espn-live-week1.json` for a live `mMatchupScore` week, `espn-league-settings.json` for `mSettings`,
-  `espn-rosters-week6.json` for two teams' `mRoster,mTeam` mid-week).
+  `espn-rosters-week6.json` for two teams' `mRoster,mTeam` mid-week, `espn-box-scores-week6.json` for
+  two of that week's matchups with `mScoreboard` lineups).
   They pin the model against the real API shape. Refresh or add captures rather than hand-writing
   payloads when ESPN changes something, and replace league IDs and names before committing.
 - `EspnFantasyFootballTest` exercises the full factory stack against `MockWebServer` (pass its URL as

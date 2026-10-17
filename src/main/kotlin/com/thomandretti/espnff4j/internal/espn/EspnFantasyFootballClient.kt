@@ -39,4 +39,14 @@ internal interface EspnFantasyFootballClient {
         // mSettings carries the scoring period -> matchup period mapping.
         @Query("view") vararg views: String = arrayOf("mMatchupScore", "mTeam", "mSettings"),
     ): Call<ScheduleResponse>
+
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getBoxScoresAtWeek(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        @Query("scoringPeriodId") scoringPeriodId: Int,
+        // mScoreboard fills in who each lineup entry is; without it ESPN sends only the stats, roughly
+        // halving the response.
+        @Query("view") vararg views: String = arrayOf("mMatchupScore", "mScoreboard", "mTeam", "mSettings"),
+    ): Call<ScheduleResponse>
 }

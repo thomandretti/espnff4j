@@ -1,9 +1,13 @@
 package com.thomandretti.espnff4j
 
 import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.Matchup
 import com.thomandretti.espnff4j.internal.espn.MatchupTeam
 import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
+import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
+import com.thomandretti.espnff4j.internal.espn.toPlayers
+import com.thomandretti.espnff4j.model.BoxScore
 import com.thomandretti.espnff4j.model.League
 import com.thomandretti.espnff4j.model.MatchupInfo
 import com.thomandretti.espnff4j.model.Team
@@ -46,6 +50,9 @@ class FantasyFootballClient private constructor(
 
     fun getRostersForWeekAsync(week: Int): CompletableFuture<List<TeamRoster>> =
         scope.future { getRostersForWeek(week) }
+
+    fun getBoxScoresForWeekAsync(week: Int): CompletableFuture<List<BoxScore>> =
+        scope.future { getBoxScoresForWeek(week) }
 
     /** League settings and where the season stands, including the current week. */
     @JvmSynthetic
@@ -94,27 +101,54 @@ class FantasyFootballClient private constructor(
      * weeks, both weeks return that round's matchups.
      */
     @JvmSynthetic
-    suspend fun getMatchupsForWeek(week: Int): List<MatchupInfo> {
-        val response = espnClient.getScheduleAtWeek(seasonId, leagueId, week).awaitEspn()
+    suspend fun getMatchupsForWeek(week: Int): List<MatchupInfo> =
+        espnClient
+            .getScheduleAtWeek(seasonId, leagueId, week)
+            .awaitEspn()
+            .matchupsFor(week)
+            .map { (_, info) -> info }
+
+    /**
+     * The matchups in play during NFL [week], as [getMatchupsForWeek], plus both lineups with each
+     * player's points and projection for the week. The response is about twice the size, so prefer
+     * [getMatchupsForWeek] when the lineups aren't needed.
+     */
+    @JvmSynthetic
+    suspend fun getBoxScoresForWeek(week: Int): List<BoxScore> =
+        espnClient
+            .getBoxScoresAtWeek(seasonId, leagueId, week)
+            .awaitEspn()
+            .matchupsFor(week)
+            .map { (matchup, info) ->
+                BoxScore(
+                    matchup = info,
+                    homeLineup = matchup.home.rosterForCurrentScoringPeriod.toPlayers(seasonId, week),
+                    awayLineup = matchup.away?.rosterForCurrentScoringPeriod.toPlayers(seasonId, week),
+                )
+            }
+
+    /** This week's matchups, byes dropped, each with the summary built from it. */
+    private fun ScheduleResponse.matchupsFor(week: Int): List<Pair<Matchup, MatchupInfo>> {
         // ESPN numbers matchups by matchup period, not NFL week. The two line up one-to-one until a
         // multi-week playoff round, so fall back to the week itself if ESPN sends no mapping.
-        val matchupPeriod = response.settings?.scheduleSettings?.matchupPeriodFor(week) ?: week
-        val teamsById = response.teams.associateBy { it.id }
-        return response.schedule
+        val matchupPeriod = settings?.scheduleSettings?.matchupPeriodFor(week) ?: week
+        val teamsById = teams.associateBy { it.id }
+        return schedule
             .filter { it.matchupPeriodId == matchupPeriod && it.away != null }
             .mapNotNull { matchup ->
                 val homeTeam = teamsById[matchup.home.teamId] ?: return@mapNotNull null
                 val awayTeam = teamsById[matchup.away!!.teamId] ?: return@mapNotNull null
-                MatchupInfo(
-                    homeTeam = homeTeam,
-                    homeScore = matchup.home.liveTotal(),
-                    awayTeam = awayTeam,
-                    awayScore = matchup.away.liveTotal(),
-                    homeProjected = matchup.home.projectedTotal(),
-                    awayProjected = matchup.away.projectedTotal(),
-                    espnHomeWinProbability = matchup.home.winProbability,
-                    outcome = matchup.outcome,
-                )
+                matchup to
+                    MatchupInfo(
+                        homeTeam = homeTeam,
+                        homeScore = matchup.home.liveTotal(),
+                        awayTeam = awayTeam,
+                        awayScore = matchup.away.liveTotal(),
+                        homeProjected = matchup.home.projectedTotal(),
+                        awayProjected = matchup.away.projectedTotal(),
+                        espnHomeWinProbability = matchup.home.winProbability,
+                        outcome = matchup.outcome,
+                    )
             }
     }
 
