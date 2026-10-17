@@ -22,6 +22,7 @@ interface EspnFantasyFootballClient {
         @Path("leagueId") leagueId: Int,
         @Query("scoringPeriodId") scoringPeriodId: Long,
         // mMatchupScore is a superset of mMatchup: it adds per-week rosters and player projections.
-        @Query("view") vararg views: String = arrayOf("mMatchupScore", "mTeam"),
+        // mSettings carries the scoring period -> matchup period mapping.
+        @Query("view") vararg views: String = arrayOf("mMatchupScore", "mTeam", "mSettings"),
     ): Call<ScheduleResponse>
 }

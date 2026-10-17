@@ -45,6 +45,28 @@ class EspnFantasyFootballTest {
         }
 
     @Test
+    fun `the second week of a two-week playoff round returns that round's matchups`() =
+        runBlocking {
+            val team = """"record":{"overall":{"wins":0,"losses":0,"ties":0}},"playoffSeed":1"""
+            server.enqueue(
+                MockResponse().setBody(
+                    """
+                    {"teams":[{"id":1,"name":"Team A",$team},{"id":2,"name":"Team B",$team}],
+                     "schedule":[{"matchupPeriodId":15,"home":{"teamId":1,"totalPoints":0.0},
+                                  "away":{"teamId":2,"totalPoints":0.0}}],
+                     "settings":{"scheduleSettings":{"matchupPeriods":{"14":[14],"15":[15,16]}}}}
+                    """.trimIndent(),
+                ),
+            )
+
+            val matchups = client().getMatchupsForWeek(16L)
+
+            assertEquals("Team A", matchups.single().homeTeam.name)
+            val path = requireNotNull(server.takeRequest().path)
+            assertTrue("view=mSettings" in path, path)
+        }
+
+    @Test
     fun `sends no cookies when no credentials are given`() =
         runBlocking {
             server.enqueue(MockResponse().setBody(teamsBody))

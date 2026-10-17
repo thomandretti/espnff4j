@@ -1,11 +1,13 @@
 package com.thomandretti.espnff4j
 
 import com.thomandretti.espnff4j.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.model.LeagueSettings
 import com.thomandretti.espnff4j.model.Matchup
 import com.thomandretti.espnff4j.model.MatchupTeam
 import com.thomandretti.espnff4j.model.Record
 import com.thomandretti.espnff4j.model.RecordPart
 import com.thomandretti.espnff4j.model.ScheduleResponse
+import com.thomandretti.espnff4j.model.ScheduleSettings
 import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.TeamsResponse
 import kotlinx.coroutines.runBlocking
@@ -42,9 +44,12 @@ class FantasyFootballClientTest {
         score: Double,
     ) = MatchupTeam(teamId = teamId, totalPoints = score)
 
-    private fun stubSchedule(response: ScheduleResponse) {
+    private fun stubSchedule(
+        response: ScheduleResponse,
+        week: Long = 5L,
+    ) {
         val call = mock<Call<ScheduleResponse>>()
-        whenever(espnClient.getScheduleAtWeek(2024, 123, 5L)).thenReturn(call)
+        whenever(espnClient.getScheduleAtWeek(2024, 123, week)).thenReturn(call)
         // retrofit2.await() suspends on the Call; stub the synchronous response path via execute()
         whenever(call.execute()).thenReturn(Response.success(response))
         whenever(call.enqueue(org.mockito.kotlin.any())).thenAnswer { invocation ->
@@ -151,6 +156,24 @@ class FantasyFootballClientTest {
             val result = client.getMatchupsForWeek(5L)
 
             assertTrue(result.isEmpty())
+        }
+
+    @Test
+    fun `getMatchupsForWeek maps both weeks of a two-week playoff round to that round`() =
+        runBlocking {
+            val teams = listOf(team(1, "Team A"), team(2, "Team B"), team(3, "Team C"), team(4, "Team D"))
+            val schedule =
+                listOf(
+                    Matchup(matchupPeriodId = 14, home = matchupTeam(3, 80.0), away = matchupTeam(4, 70.0)),
+                    Matchup(matchupPeriodId = 15, home = matchupTeam(1, 100.0), away = matchupTeam(2, 90.0)),
+                )
+            val settings =
+                LeagueSettings(ScheduleSettings(mapOf(14 to listOf(14), 15 to listOf(15, 16))))
+            stubSchedule(ScheduleResponse(schedule = schedule, teams = teams, settings = settings), week = 16L)
+
+            val result = client.getMatchupsForWeek(16L)
+
+            assertEquals("Team A", result.single().homeTeam.name)
         }
 
     @Test

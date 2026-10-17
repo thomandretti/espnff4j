@@ -19,11 +19,19 @@ class FantasyFootballClient(
             .teams
             .sortedBy { it.playoffSeed }
 
+    /**
+     * The matchups in play during NFL [week]. When the league stretches a playoff round over two
+     * weeks, both weeks return that round's matchups.
+     */
     suspend fun getMatchupsForWeek(week: Long): List<MatchupInfo> {
         val response = espnClient.getScheduleAtWeek(seasonId, leagueId, week).await()
+        // ESPN numbers matchups by matchup period, not NFL week. The two line up one-to-one until a
+        // multi-week playoff round, so fall back to the week itself if ESPN sends no mapping.
+        val matchupPeriod =
+            response.settings?.scheduleSettings?.matchupPeriodFor(week.toInt()) ?: week.toInt()
         val teamsById = response.teams.associateBy { it.id }
         return response.schedule
-            .filter { it.matchupPeriodId == week.toInt() && it.away != null }
+            .filter { it.matchupPeriodId == matchupPeriod && it.away != null }
             .mapNotNull { matchup ->
                 val homeTeam = teamsById[matchup.home.teamId] ?: return@mapNotNull null
                 val awayTeam = teamsById[matchup.away!!.teamId] ?: return@mapNotNull null
