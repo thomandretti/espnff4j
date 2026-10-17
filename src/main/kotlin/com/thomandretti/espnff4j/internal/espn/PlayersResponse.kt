@@ -30,7 +30,7 @@ internal fun EspnPoolPlayer.toPlayer(
 ): Player =
     Player(
         id = id,
-        name = player.fullName,
+        name = player.fullName ?: "Unknown player $id",
         position = player.position(),
         proTeam = player.proTeam(),
         injuryStatus = player.injury(),

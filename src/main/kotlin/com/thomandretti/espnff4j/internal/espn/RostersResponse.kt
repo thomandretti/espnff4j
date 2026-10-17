@@ -28,7 +28,10 @@ internal data class Roster(
     val entries: List<RosterEntry> = emptyList(),
 )
 
-/** Starters in lineup order, then bench and IR; ESPN's own order is kept within a slot. */
+/**
+ * Starters in lineup order, then bench and IR; ESPN's own order is kept within a slot. Entries with no
+ * player identity are skipped: `mMatchupScore` without `mScoreboard` sends lineups that way.
+ */
 internal fun Roster?.toPlayers(
     seasonId: Int,
     week: Int,
@@ -36,7 +39,7 @@ internal fun Roster?.toPlayers(
     this
         ?.entries
         .orEmpty()
-        .map { it.toRosterPlayer(seasonId, week) }
+        .mapNotNull { it.toRosterPlayer(seasonId, week) }
         .sortedBy { it.lineupSlot.ordinal }
 
 internal data class RosterEntry(
@@ -46,11 +49,12 @@ internal data class RosterEntry(
     fun toRosterPlayer(
         seasonId: Int,
         week: Int,
-    ): RosterPlayer {
+    ): RosterPlayer? {
         val player = playerPoolEntry.player
+        val name = player.fullName ?: return null
         return RosterPlayer(
             id = player.id,
-            name = player.fullName,
+            name = name,
             position = player.position(),
             proTeam = player.proTeam(),
             lineupSlot = lineupSlot(lineupSlotId),
@@ -68,9 +72,11 @@ internal data class PlayerPoolEntry(
 
 /** A player as ESPN sends one in rosters, lineups and player searches. */
 internal data class EspnPlayer(
-    val id: Int,
-    val fullName: String,
-    val defaultPositionId: Int,
+    // id, fullName and defaultPositionId are absent from the anonymous lineup entries mMatchupScore sends
+    // without mScoreboard.
+    val id: Int = 0,
+    val fullName: String? = null,
+    val defaultPositionId: Int = 0,
     val proTeamId: Int = 0,
     val injuryStatus: String? = null,
     val eligibleSlots: List<Int> = emptyList(),

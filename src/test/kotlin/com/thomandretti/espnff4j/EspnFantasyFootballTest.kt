@@ -70,6 +70,25 @@ class EspnFantasyFootballTest {
         }
 
     @Test
+    fun `live-week matchups parse although ESPN sends their lineups without player identities`() =
+        runBlocking {
+            // A trimmed capture of exactly what getMatchupsForWeek requests, mid-week 6. Without
+            // mScoreboard, ESPN's lineup entries carry stats but no id or name; 0.3.0 failed to parse them.
+            val fixture = checkNotNull(javaClass.getResource("/espn-matchups-week6.json")) { "missing ESPN fixture" }
+            server.enqueue(MockResponse().setBody(fixture.readText()))
+
+            val matchups = client().getMatchupsForWeek(6)
+
+            assertEquals(
+                listOf("Team B" to "Team G", "Team H" to "Team E"),
+                matchups.map {
+                    it.homeTeam.name to it.awayTeam.name
+                },
+            )
+            assertEquals(30.6, matchups[1].homeScore)
+        }
+
+    @Test
     fun `getLeague reads the season state from a real mSettings payload`() =
         runBlocking {
             // A trimmed capture of a live mSettings response (league id and name anonymised).
