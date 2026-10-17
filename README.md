@@ -79,16 +79,32 @@ ESPN's payload changes shape over the course of a week, and the client normalise
 
 ## Installing
 
-Requires Java 21. Not yet published to Maven Central. To build and use it locally:
+Requires Java 21. Not yet published to Maven Central, so build it into your local Maven repository:
 
 ```bash
+git checkout v0.3.0
 ./gradlew publishToMavenLocal
 ```
 
+Then depend on it with Gradle:
+
 ```kotlin
 repositories { mavenLocal() }
-dependencies { implementation("com.thomandretti:espnff4j:0.1.0") }
+dependencies { implementation("com.thomandretti:espnff4j:0.3.0") }
 ```
+
+or Maven, which reads the local repository by default:
+
+```xml
+<dependency>
+  <groupId>com.thomandretti</groupId>
+  <artifactId>espnff4j</artifactId>
+  <version>0.3.0</version>
+</dependency>
+```
+
+It brings OkHttp, Retrofit, Jackson and kotlinx-coroutines in at runtime. Kotlin callers declare their own
+`kotlinx-coroutines-core` dependency to call the `suspend` functions (e.g. from `runBlocking`).
 
 ## Development
 
