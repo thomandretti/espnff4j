@@ -43,6 +43,7 @@ class EspnFantasyFootballTest {
             val path = requireNotNull(server.takeRequest().path)
             assertTrue(path.startsWith("/seasons/2026/segments/0/leagues/12345?"), path)
             assertTrue("scoringPeriodId=3" in path, path)
+            assertFalse("mRoster" in path, "standings don't need the ~3 MB roster view: $path")
         }
 
     @Test

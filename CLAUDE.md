@@ -5,8 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A small Kotlin/JVM library (Java 21 toolchain) wrapping the unofficial, undocumented ESPN Fantasy
-Football API. Public operations: league settings and season state (`getLeague`), standings, and
-weekly matchups (with live scores, projections and ESPN win probabilities).
+Football API. Public operations: league settings and season state (`getLeague`), standings, weekly
+matchups (with live scores, projections and ESPN win probabilities), and weekly rosters (lineup slot,
+injury status, points and projection per player).
 
 ## Commands
 
@@ -34,8 +35,18 @@ Request path, outermost first:
    block, which runs *after* the library's interceptors. Retrofit + Jackson (`OBJECT_MAPPER`, unknown
    properties ignored) produce the raw interface.
 2. `internal/espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every endpoint
-   hits the same URL and differs only in the `view` query params (`mSettings`; `mRoster,mTeam`;
-   `mMatchupScore,mTeam,mSettings`).
+   hits the same URL and differs only in the `view` query params: `mSettings` (league), `mTeam`
+   (standings), `mRoster,mTeam` (rosters) and `mMatchupScore,mTeam,mSettings` (matchups). Request only
+   the views a call needs, because `mRoster` alone is ~3 MB for a ten-team league.
+
+### Rosters
+
+Each player's `stats[]` mixes seasons, weeks, actuals and projections. A week's figure is the entry
+with the league's `seasonId`, `scoringPeriodId` = the week and `statSplitTypeId` 1 (a single week; 0
+and 2 are season totals and averages). Within that, `statSourceId` 0 is actual points and 1 is ESPN's
+projection, both as `appliedTotal`, i.e. scored with the league's settings. Actual points are absent
+until a player's game starts. ESPN's numeric IDs for lineup slots, positions and NFL teams are mapped in
+`internal/espn/EspnIds.kt`. Unknown IDs map to `UNKNOWN` (or a null `proTeam`) rather than failing.
 3. `FantasyFootballClient` — awaits the `Call`s and normalises the raw ESPN DTOs (`internal/espn/`,
    `*Response` and friends) into the public `model/` types (`League`, `Team`, `MatchupInfo`, …).
    Standings are sorted by `playoffSeed`; matchups drop byes (`away == null`) and join team IDs
@@ -91,7 +102,8 @@ model fields nullable/defaulted unless ESPN always sends them.
 ## Testing notes
 
 - Fixtures in `src/test/resources/` are trimmed, anonymised captures of real ESPN responses
-  (`espn-live-week1.json` for a live `mMatchupScore` week, `espn-league-settings.json` for `mSettings`).
+  (`espn-live-week1.json` for a live `mMatchupScore` week, `espn-league-settings.json` for `mSettings`,
+  `espn-rosters-week6.json` for two teams' `mRoster,mTeam` mid-week).
   They pin the model against the real API shape. Refresh or add captures rather than hand-writing
   payloads when ESPN changes something, and replace league IDs and names before committing.
 - `EspnFantasyFootballTest` exercises the full factory stack against `MockWebServer` (pass its URL as

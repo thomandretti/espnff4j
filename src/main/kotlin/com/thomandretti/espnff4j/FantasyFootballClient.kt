@@ -7,6 +7,7 @@ import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
 import com.thomandretti.espnff4j.model.League
 import com.thomandretti.espnff4j.model.MatchupInfo
 import com.thomandretti.espnff4j.model.Team
+import com.thomandretti.espnff4j.model.TeamRoster
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -27,6 +28,7 @@ import java.util.concurrent.CompletableFuture
  * which throw an [EspnException] on failure. Java sees only the `*Async` variants, whose futures
  * complete exceptionally with one (wrapped in a `CompletionException` by `join()`).
  */
+@Suppress("TooManyFunctions") // Each operation is a suspend function plus its *Async twin for Java.
 class FantasyFootballClient private constructor(
     private val espnClient: EspnFantasyFootballClient,
     private val seasonId: Int,
@@ -41,6 +43,9 @@ class FantasyFootballClient private constructor(
 
     fun getMatchupsForWeekAsync(week: Int): CompletableFuture<List<MatchupInfo>> =
         scope.future { getMatchupsForWeek(week) }
+
+    fun getRostersForWeekAsync(week: Int): CompletableFuture<List<TeamRoster>> =
+        scope.future { getRostersForWeek(week) }
 
     /** League settings and where the season stands, including the current week. */
     @JvmSynthetic
@@ -71,6 +76,18 @@ class FantasyFootballClient private constructor(
             .awaitEspn()
             .teams
             .sortedBy { it.playoffSeed }
+
+    /**
+     * Every team's roster as set for NFL [week], with each player's points and ESPN projection for that
+     * week. Earlier weeks return the lineup as it was then.
+     */
+    @JvmSynthetic
+    suspend fun getRostersForWeek(week: Int): List<TeamRoster> =
+        espnClient
+            .getRostersAtWeek(seasonId, leagueId, week)
+            .awaitEspn()
+            .teams
+            .map { it.toTeamRoster(seasonId, week) }
 
     /**
      * The matchups in play during NFL [week]. When the league stretches a playoff round over two

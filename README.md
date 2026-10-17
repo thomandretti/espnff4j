@@ -1,7 +1,7 @@
 # espnff4j
 
 A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
-league settings, standings and weekly matchups, including ESPN's live scores, projections and win
+league settings, standings, rosters and weekly matchups, including ESPN's live scores, projections and win
 probabilities.
 
 ## Usage
@@ -20,6 +20,8 @@ val client = EspnFantasyFootball.client(
 val league: League = client.getLeague()   // settings, plus league.currentWeek
 val standings: List<Team> = client.getStandingsForWeek(week = 3)
 val matchups: List<MatchupInfo> = client.getMatchupsForWeek(week = 3)
+val rosters: List<TeamRoster> = client.getRostersForWeek(week = 3)   // lineups, injuries, points
+rosters.first().starters.forEach { println("${it.lineupSlot} ${it.name} (${it.proTeam}) ${it.points ?: "-"}") }
 ```
 
 Weeks are NFL weeks (ESPN "scoring periods"). If a league stretches a playoff round over two weeks,

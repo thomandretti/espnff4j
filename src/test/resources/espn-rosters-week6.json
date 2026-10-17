@@ -1,0 +1,3997 @@
+{
+  "id": 12345,
+  "seasonId": 2026,
+  "scoringPeriodId": 6,
+  "teams": [
+    {
+      "id": 2,
+      "playoffSeed": 3,
+      "name": "Team A",
+      "abbrev": "TMA",
+      "record": {
+        "overall": {
+          "wins": 4,
+          "losses": 1,
+          "ties": 0
+        }
+      },
+      "roster": {
+        "entries": [
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 2,
+            "playerId": 4379399,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4379399,
+              "onTeamId": 2,
+              "appliedStatTotal": 22.8,
+              "player": {
+                "id": 4379399,
+                "fullName": "James Cook III",
+                "firstName": "James",
+                "lastName": "Cook III",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 17.7764705882353,
+                    "appliedTotal": 302.2,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 17.86,
+                    "appliedTotal": 89.3,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 22.8,
+                    "externalId": "401872994",
+                    "id": "01401872994",
+                    "proTeamId": 2,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 19.28238468,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 15.876210167764706,
+                    "appliedTotal": 269.89557285,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 15.70819039,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 16.7960013375,
+                    "appliedTotal": 268.7360214,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 17.865352128833333,
+                    "appliedTotal": 214.38422555,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 4,
+            "playerId": 4241389,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4241389,
+              "onTeamId": 2,
+              "appliedStatTotal": 2.9,
+              "player": {
+                "id": 4241389,
+                "fullName": "CeeDee Lamb",
+                "firstName": "CeeDee",
+                "lastName": "Lamb",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 6,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 14.35,
+                    "appliedTotal": 200.9,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 23.02,
+                    "appliedTotal": 115.1,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 2.9,
+                    "externalId": "401872980",
+                    "id": "01401872980",
+                    "proTeamId": 6,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 18.60605869,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 18.67824194270588,
+                    "appliedTotal": 317.53011303,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 19.12851916,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 17.019796424125,
+                    "appliedTotal": 272.31674279,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 18.68005280983333,
+                    "appliedTotal": 224.16063372,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4427366,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4427366,
+              "onTeamId": 2,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 4427366,
+                "fullName": "Breece Hall",
+                "firstName": "Breece",
+                "lastName": "Hall",
+                "active": true,
+                "injured": true,
+                "injuryStatus": "OUT",
+                "defaultPositionId": 2,
+                "proTeamId": 20,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 12.97875,
+                    "appliedTotal": 207.66,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 14.166666666666666,
+                    "appliedTotal": 42.5,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "401872983",
+                    "id": "01401872983",
+                    "proTeamId": 20,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 13.296620166705882,
+                    "appliedTotal": 226.04254283,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 15.461751785125001,
+                    "appliedTotal": 247.38802856,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 15.576391641636366,
+                    "appliedTotal": 171.34030806,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 4,
+            "playerId": 4569618,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4569618,
+              "onTeamId": 2,
+              "appliedStatTotal": 23.4,
+              "player": {
+                "id": 4569618,
+                "fullName": "Garrett Wilson",
+                "firstName": "Garrett",
+                "lastName": "Wilson",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 20,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 12.4375,
+                    "appliedTotal": 99.5,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 17.28,
+                    "appliedTotal": 86.4,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 23.4,
+                    "externalId": "401872983",
+                    "id": "01401872983",
+                    "proTeamId": 20,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 14.79782344,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.199753395941176,
+                    "appliedTotal": 241.39580773,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 14.64304698,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 15.540145680625,
+                    "appliedTotal": 248.64233089,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 15.006493697833335,
+                    "appliedTotal": 180.07792437,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 6,
+            "playerId": 5083076,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 5083076,
+              "onTeamId": 2,
+              "appliedStatTotal": 1.4,
+              "player": {
+                "id": 5083076,
+                "fullName": "Harold Fannin Jr.",
+                "firstName": "Harold",
+                "lastName": "Fannin Jr.",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 4,
+                "proTeamId": 5,
+                "eligibleSlots": [
+                  5,
+                  6,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 11.65,
+                    "appliedTotal": 186.4,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 10.34,
+                    "appliedTotal": 51.7,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 1.4,
+                    "externalId": "401872983",
+                    "id": "01401872983",
+                    "proTeamId": 5,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 10.23177051,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 3.1461807512941182,
+                    "appliedTotal": 53.48507277,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 11.98563368,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 10.5025934164375,
+                    "appliedTotal": 168.04149466,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 10.294580572333333,
+                    "appliedTotal": 123.53496687,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4431452,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4431452,
+              "onTeamId": 2,
+              "appliedStatTotal": 39.46,
+              "player": {
+                "id": 4431452,
+                "fullName": "Drake Maye",
+                "firstName": "Drake",
+                "lastName": "Maye",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 1,
+                "proTeamId": 17,
+                "eligibleSlots": [
+                  0,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 20.703529411764706,
+                    "appliedTotal": 351.96,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 39.46,
+                    "externalId": "401872986",
+                    "id": "01401872986",
+                    "proTeamId": 17,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 17.444,
+                    "appliedTotal": 87.22,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 20.25513889,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 16.779903403764706,
+                    "appliedTotal": 285.25835786,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 18.46546857,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 19.789867713125,
+                    "appliedTotal": 316.63788341,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 20.647263703666667,
+                    "appliedTotal": 247.76716444,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 23,
+            "playerId": 4685278,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4685278,
+              "onTeamId": 2,
+              "appliedStatTotal": 8.9,
+              "player": {
+                "id": 4685278,
+                "fullName": "Luther Burden III",
+                "firstName": "Luther",
+                "lastName": "Burden III",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 3,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 8.526666666666667,
+                    "appliedTotal": 127.9,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 11.16,
+                    "appliedTotal": 55.8,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 8.9,
+                    "externalId": "401872990",
+                    "id": "01401872990",
+                    "proTeamId": 3,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 12.46474337,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 5.380005613176471,
+                    "appliedTotal": 91.46009542,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 12.28019705,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 12.657194427,
+                    "appliedTotal": 202.51511083,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 12.151353147666667,
+                    "appliedTotal": 145.81623777,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 2,
+            "playerId": 4569987,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4569987,
+              "onTeamId": 2,
+              "appliedStatTotal": 36.800000000000004,
+              "player": {
+                "id": 4569987,
+                "fullName": "Jaylen Warren",
+                "firstName": "Jaylen",
+                "lastName": "Warren",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 23,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 36.8,
+                    "externalId": "401872985",
+                    "id": "01401872985",
+                    "proTeamId": 23,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 13.568750000000001,
+                    "appliedTotal": 217.1,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 18.6,
+                    "appliedTotal": 93.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 14.98248468,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.718779402235295,
+                    "appliedTotal": 250.21924984,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 17.58161476,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 12.001606973625002,
+                    "appliedTotal": 192.02571158,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 15.62008176483333,
+                    "appliedTotal": 187.44098118,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 3916433,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 3916433,
+              "onTeamId": 2,
+              "appliedStatTotal": 5.7,
+              "player": {
+                "id": 3916433,
+                "fullName": "Jakobi Meyers",
+                "firstName": "Jakobi",
+                "lastName": "Meyers",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 30,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 10.9875,
+                    "appliedTotal": 175.8,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 9.48,
+                    "appliedTotal": 47.4,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 5.7,
+                    "externalId": "401872981",
+                    "id": "01401872981",
+                    "proTeamId": 30,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 9.2464636,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 12.919831002882354,
+                    "appliedTotal": 219.63712705,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 10.69784716,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 10.469662104687501,
+                    "appliedTotal": 167.51459368,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 9.616300126383335,
+                    "appliedTotal": 115.39560152,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4241985,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4241985,
+              "onTeamId": 2,
+              "appliedStatTotal": 29.0,
+              "player": {
+                "id": 4241985,
+                "fullName": "J.K. Dobbins",
+                "firstName": "J.K.",
+                "lastName": "Dobbins",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 7,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 11.59,
+                    "appliedTotal": 115.9,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 8.283333333333333,
+                    "appliedTotal": 49.7,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 13.6,
+                    "externalId": "401872995",
+                    "id": "01401872995",
+                    "proTeamId": 7,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 10.06448707,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 10.080353005647062,
+                    "appliedTotal": 171.3660011,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 10.61011052,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 11.532027010000002,
+                    "appliedTotal": 184.51243216,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedTotal": 15.4,
+                    "externalId": "401872989",
+                    "id": "01401872989",
+                    "proTeamId": 7,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 11.46660190525,
+                    "appliedTotal": 137.59922286,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 0,
+            "playerId": 4361741,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4361741,
+              "onTeamId": 2,
+              "appliedStatTotal": 16.16,
+              "player": {
+                "id": 4361741,
+                "fullName": "Brock Purdy",
+                "firstName": "Brock",
+                "lastName": "Purdy",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 1,
+                "proTeamId": 25,
+                "eligibleSlots": [
+                  0,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 19.70888888888889,
+                    "appliedTotal": 177.38,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 23.328,
+                    "appliedTotal": 116.64,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 16.16,
+                    "externalId": "401872992",
+                    "id": "01401872992",
+                    "proTeamId": 25,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 21.37798444,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 18.012351430117647,
+                    "appliedTotal": 306.20997431,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 17.90204723,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 18.285997054124998,
+                    "appliedTotal": 292.57595287,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 20.1339169365,
+                    "appliedTotal": 241.60700324,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 17,
+            "playerId": 3055899,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 3055899,
+              "onTeamId": 2,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 3055899,
+                "fullName": "Harrison Butker",
+                "firstName": "Harrison",
+                "lastName": "Butker",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 5,
+                "proTeamId": 12,
+                "eligibleSlots": [
+                  17,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 8.470588235294118,
+                    "appliedTotal": 144.0,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 8.5,
+                    "appliedTotal": 34.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 9.54705901,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 8.154171688294118,
+                    "appliedTotal": 138.6209187,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 8.76661494975,
+                    "appliedTotal": 140.2658392,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 9.288441467076922,
+                    "appliedTotal": 120.74973907,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4870653,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4870653,
+              "onTeamId": 2,
+              "appliedStatTotal": 1.5,
+              "player": {
+                "id": 4870653,
+                "fullName": "KC Concepcion",
+                "firstName": "KC",
+                "lastName": "Concepcion",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 5,
+                "eligibleSlots": [
+                  25,
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 6.359999999999999,
+                    "appliedTotal": 31.8,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 1.5,
+                    "externalId": "401872983",
+                    "id": "01401872983",
+                    "proTeamId": 5,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 8.20453309,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 10.518184,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 10.0834527935,
+                    "appliedTotal": 161.3352447,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 9.210770353083333,
+                    "appliedTotal": 110.52924424,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 21,
+            "playerId": 4426385,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4426385,
+              "onTeamId": 2,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 4426385,
+                "fullName": "Zach Charbonnet",
+                "firstName": "Zach",
+                "lastName": "Charbonnet",
+                "active": true,
+                "injured": true,
+                "injuryStatus": "OUT",
+                "defaultPositionId": 2,
+                "proTeamId": 26,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 11.3375,
+                    "appliedTotal": 181.4,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 0.0,
+                    "appliedTotal": 0.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "401872995",
+                    "id": "01401872995",
+                    "proTeamId": 26,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "401872992",
+                    "id": "01401872992",
+                    "proTeamId": 26,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 8.060286844823528,
+                    "appliedTotal": 137.02487636,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 12.103865922181818,
+                    "appliedTotal": 133.14252514,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 13.159228926181818,
+                    "appliedTotal": 144.75151819,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4431545,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4431545,
+              "onTeamId": 2,
+              "appliedStatTotal": 8.299999999999999,
+              "player": {
+                "id": 4431545,
+                "fullName": "Will Shipley",
+                "firstName": "Will",
+                "lastName": "Shipley",
+                "active": true,
+                "injured": true,
+                "injuryStatus": "INJURY_RESERVE",
+                "defaultPositionId": 2,
+                "proTeamId": 21,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 1.1666666666666667,
+                    "appliedTotal": 17.5,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 3.96,
+                    "appliedTotal": 19.8,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 8.3,
+                    "externalId": "401872981",
+                    "id": "01401872981",
+                    "proTeamId": 21,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 3.403781292352941,
+                    "appliedTotal": 57.86428197,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 10.25185497,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 0.0,
+                    "appliedTotal": 0.0,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 0.0,
+                    "appliedTotal": 0.0,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 16,
+            "playerId": -16012,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": -16012,
+              "onTeamId": 2,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": -16012,
+                "fullName": "Chiefs D/ST",
+                "firstName": "Chiefs",
+                "lastName": "D/ST",
+                "active": true,
+                "injured": false,
+                "injuryStatus": null,
+                "defaultPositionId": 16,
+                "proTeamId": 12,
+                "eligibleSlots": [
+                  16,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 5.176470588235294,
+                    "appliedTotal": 88.0,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 5.75,
+                    "appliedTotal": 23.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 7.09481831,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 5.703982508058824,
+                    "appliedTotal": 96.96770264,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 6.5106351726875,
+                    "appliedTotal": 104.17016276,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 4.071946429941176,
+                    "appliedTotal": 69.22308931,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4360238,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4360238,
+              "onTeamId": 2,
+              "appliedStatTotal": 3.2,
+              "player": {
+                "id": 4360238,
+                "fullName": "Dameon Pierce",
+                "firstName": "Dameon",
+                "lastName": "Pierce",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 21,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 0.72,
+                    "appliedTotal": 3.6,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 3.2,
+                    "appliedTotal": 3.2,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 3.2,
+                    "externalId": "401872981",
+                    "id": "01401872981",
+                    "proTeamId": 21,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 12.34279562,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 3.0304773326470587,
+                    "appliedTotal": 51.51811466,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 7.33993908,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 5.8685927316666655,
+                    "appliedTotal": 70.42311278,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "playoffSeed": 5,
+      "name": "Team B",
+      "abbrev": "TMB",
+      "record": {
+        "overall": {
+          "wins": 2,
+          "losses": 3,
+          "ties": 0
+        }
+      },
+      "roster": {
+        "entries": [
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 4,
+            "playerId": 4430878,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4430878,
+              "onTeamId": 8,
+              "appliedStatTotal": 48.2,
+              "player": {
+                "id": 4430878,
+                "fullName": "Jaxon Smith-Njigba",
+                "firstName": "Jaxon",
+                "lastName": "Smith-Njigba",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 26,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 21.170588235294115,
+                    "appliedTotal": 359.9,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 27.47666666666667,
+                    "appliedTotal": 164.86,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 25.4,
+                    "externalId": "401872995",
+                    "id": "01401872995",
+                    "proTeamId": 26,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 22.8,
+                    "externalId": "401872992",
+                    "id": "01401872992",
+                    "proTeamId": 26,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 19.04407678,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.171264565235294,
+                    "appliedTotal": 240.91149761,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 20.48361891,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 19.289884818187502,
+                    "appliedTotal": 308.63815709,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 20.067698037833335,
+                    "appliedTotal": 240.81237645,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4428331,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4428331,
+              "onTeamId": 8,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 4428331,
+                "fullName": "Rashee Rice",
+                "firstName": "Rashee",
+                "lastName": "Rice",
+                "active": true,
+                "injured": true,
+                "injuryStatus": "OUT",
+                "defaultPositionId": 3,
+                "proTeamId": 12,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 18.7625,
+                    "appliedTotal": 150.1,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 9.5,
+                    "appliedTotal": 38.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.823839751072729,
+                    "appliedTotal": 163.06223726,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.8021565566875,
+                    "appliedTotal": 236.83450491,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 14.353460421500001,
+                    "appliedTotal": 172.24152506,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 21,
+            "playerId": 4239996,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4239996,
+              "onTeamId": 8,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 4239996,
+                "fullName": "Travis Etienne Jr.",
+                "firstName": "Travis",
+                "lastName": "Etienne Jr.",
+                "active": true,
+                "injured": true,
+                "injuryStatus": "INJURY_RESERVE",
+                "defaultPositionId": 2,
+                "proTeamId": 18,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "401872987",
+                    "id": "01401872987",
+                    "proTeamId": 18,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.935294117647057,
+                    "appliedTotal": 253.9,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 10.3,
+                    "appliedTotal": 30.9,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 11.067135744117646,
+                    "appliedTotal": 188.14130765,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 14.249428127749999,
+                    "appliedTotal": 227.99085004,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 12.5075636394,
+                    "appliedTotal": 125.07563639,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 2,
+            "playerId": 4696981,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4696981,
+              "onTeamId": 8,
+              "appliedStatTotal": 7.1000000000000005,
+              "player": {
+                "id": 4696981,
+                "fullName": "Cam Skattebo",
+                "firstName": "Cam",
+                "lastName": "Skattebo",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 19,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 7.1,
+                    "externalId": "401872988",
+                    "id": "01401872988",
+                    "proTeamId": 19,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 15.9625,
+                    "appliedTotal": 127.7,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 10.260000000000002,
+                    "appliedTotal": 51.3,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 12.5262734,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 8.196919441294119,
+                    "appliedTotal": 139.3476305,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 13.20736749,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 13.951176575375,
+                    "appliedTotal": 223.21882521,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 10.698692023666668,
+                    "appliedTotal": 128.38430428,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 6,
+            "playerId": 3040151,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 3040151,
+              "onTeamId": 8,
+              "appliedStatTotal": 7.4,
+              "player": {
+                "id": 3040151,
+                "fullName": "George Kittle",
+                "firstName": "George",
+                "lastName": "Kittle",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 4,
+                "proTeamId": 25,
+                "eligibleSlots": [
+                  5,
+                  6,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 14.681818181818182,
+                    "appliedTotal": 161.5,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 14.36,
+                    "appliedTotal": 71.8,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 7.4,
+                    "externalId": "401872992",
+                    "id": "01401872992",
+                    "proTeamId": 25,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 14.90457237,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 13.395498834352944,
+                    "appliedTotal": 227.72348018,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 13.66373251,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 11.334640609625,
+                    "appliedTotal": 181.35424975,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 13.807736809666666,
+                    "appliedTotal": 165.69284172,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4431611,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4431611,
+              "onTeamId": 8,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 4431611,
+                "fullName": "Caleb Williams",
+                "firstName": "Caleb",
+                "lastName": "Williams",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "QUESTIONABLE",
+                "defaultPositionId": 1,
+                "proTeamId": 3,
+                "eligibleSlots": [
+                  0,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 18.716470588235296,
+                    "appliedTotal": 318.18,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 22.490000000000002,
+                    "appliedTotal": 44.98,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "401872990",
+                    "id": "01401872990",
+                    "proTeamId": 3,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 16.70010899,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 16.458307919764707,
+                    "appliedTotal": 279.79123464,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 19.470658485875,
+                    "appliedTotal": 311.53053577,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 18.921381829090908,
+                    "appliedTotal": 208.13520012,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 4,
+            "playerId": 4432620,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4432620,
+              "onTeamId": 8,
+              "appliedStatTotal": 30.4,
+              "player": {
+                "id": 4432620,
+                "fullName": "Parker Washington",
+                "firstName": "Parker",
+                "lastName": "Washington",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 30,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 11.54375,
+                    "appliedTotal": 184.7,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 16.3,
+                    "appliedTotal": 81.5,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 30.4,
+                    "externalId": "401872981",
+                    "id": "01401872981",
+                    "proTeamId": 30,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 14.83885239,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 2.6139115121176473,
+                    "appliedTotal": 44.43649571,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 14.11238829,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 13.017934729062501,
+                    "appliedTotal": 208.28695567,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 15.402021798341666,
+                    "appliedTotal": 184.82426158,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4038815,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4038815,
+              "onTeamId": 8,
+              "appliedStatTotal": 0.0,
+              "player": {
+                "id": 4038815,
+                "fullName": "Rico Dowdle",
+                "firstName": "Rico",
+                "lastName": "Dowdle",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "QUESTIONABLE",
+                "defaultPositionId": 2,
+                "proTeamId": 23,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "401872985",
+                    "id": "01401872985",
+                    "proTeamId": 23,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 12.723529411764707,
+                    "appliedTotal": 216.3,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 5.25,
+                    "appliedTotal": 10.5,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 6.36886862,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 4.938426920352942,
+                    "appliedTotal": 83.95325765,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 10.708381769625001,
+                    "appliedTotal": 171.33410831,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 7.28396584690909,
+                    "appliedTotal": 80.12362432,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "DRAFT",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 23,
+            "playerId": 4701936,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4701936,
+              "onTeamId": 8,
+              "appliedStatTotal": 20.3,
+              "player": {
+                "id": 4701936,
+                "fullName": "Matthew Golden",
+                "firstName": "Matthew",
+                "lastName": "Golden",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 9,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 5.0,
+                    "appliedTotal": 70.0,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 15.660000000000002,
+                    "appliedTotal": 78.3,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 20.3,
+                    "externalId": "401872990",
+                    "id": "01401872990",
+                    "proTeamId": 9,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 15.67020625,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 11.960182568352943,
+                    "appliedTotal": 203.32310366,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 12.76807667,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 11.12958734375,
+                    "appliedTotal": 178.0733975,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 14.419489760416667,
+                    "appliedTotal": 173.03387713,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4569559,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4569559,
+              "onTeamId": 8,
+              "appliedStatTotal": 6.6,
+              "player": {
+                "id": 4569559,
+                "fullName": "Devaughn Vele",
+                "firstName": "Devaughn",
+                "lastName": "Vele",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 3,
+                "proTeamId": 18,
+                "eligibleSlots": [
+                  3,
+                  4,
+                  5,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 6.6,
+                    "externalId": "401872987",
+                    "id": "01401872987",
+                    "proTeamId": 18,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 5.1,
+                    "appliedTotal": 66.3,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 12.440000000000001,
+                    "appliedTotal": 62.2,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 11.18247497,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 2.672208740470588,
+                    "appliedTotal": 45.42754859,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 10.7909322,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 7.415047920625001,
+                    "appliedTotal": 118.64076673,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 7.961070788000001,
+                    "appliedTotal": 95.53284946,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 3117256,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 3117256,
+              "onTeamId": 8,
+              "appliedStatTotal": 6.0,
+              "player": {
+                "id": 3117256,
+                "fullName": "Dalton Schultz",
+                "firstName": "Dalton",
+                "lastName": "Schultz",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 4,
+                "proTeamId": 34,
+                "eligibleSlots": [
+                  5,
+                  6,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 10.452941176470588,
+                    "appliedTotal": 177.7,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 9.680000000000001,
+                    "appliedTotal": 48.4,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 6.0,
+                    "externalId": "401872984",
+                    "id": "01401872984",
+                    "proTeamId": 34,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 7.27093532,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 7.414789988705882,
+                    "appliedTotal": 126.05142981,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 8.06425562,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 7.743653024625,
+                    "appliedTotal": 123.89844839,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 7.287798745666666,
+                    "appliedTotal": 87.45358495,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4685247,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4685247,
+              "onTeamId": 8,
+              "appliedStatTotal": 18.6,
+              "player": {
+                "id": 4685247,
+                "fullName": "Braelon Allen",
+                "firstName": "Braelon",
+                "lastName": "Allen",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 20,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 3.825,
+                    "appliedTotal": 15.3,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 8.9,
+                    "appliedTotal": 44.5,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 18.6,
+                    "externalId": "401872983",
+                    "id": "01401872983",
+                    "proTeamId": 20,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 14.4875271,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 5.539592944705881,
+                    "appliedTotal": 94.17308006,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 14.10219,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 7.6889445497499995,
+                    "appliedTotal": 123.0231128,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 7.552277618166667,
+                    "appliedTotal": 90.62733142,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 20,
+            "playerId": 4567104,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4567104,
+              "onTeamId": 8,
+              "appliedStatTotal": 16.0,
+              "player": {
+                "id": 4567104,
+                "fullName": "Will Reichard",
+                "firstName": "Will",
+                "lastName": "Reichard",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 5,
+                "proTeamId": 16,
+                "eligibleSlots": [
+                  17,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 16.0,
+                    "externalId": "401872987",
+                    "id": "01401872987",
+                    "proTeamId": 16,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 9.294117647058824,
+                    "appliedTotal": 158.0,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 13.6,
+                    "appliedTotal": 68.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 0.0,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 7.879583581588236,
+                    "appliedTotal": 133.95292089,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 9.52679083,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 8.611913308375,
+                    "appliedTotal": 137.79061293,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 11.232945352833333,
+                    "appliedTotal": 134.79534423,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 2,
+            "playerId": 4887558,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 4887558,
+              "onTeamId": 8,
+              "appliedStatTotal": 18.400000000000002,
+              "player": {
+                "id": 4887558,
+                "fullName": "Emanuel Wilson",
+                "firstName": "Emanuel",
+                "lastName": "Wilson",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 2,
+                "proTeamId": 26,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  23,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 5.5588235294117645,
+                    "appliedTotal": 94.5,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedAverage": 9.383333333333333,
+                    "appliedTotal": 56.3,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 5.2,
+                    "externalId": "401872995",
+                    "id": "01401872995",
+                    "proTeamId": 26,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 13.2,
+                    "externalId": "401872992",
+                    "id": "01401872992",
+                    "proTeamId": 26,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 14.84330304,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 1.8900007308235294,
+                    "appliedTotal": 32.13001242,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 13.58552345,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 1.8242125424199993,
+                    "appliedTotal": 9.12106271,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 11.812468878000002,
+                    "appliedTotal": 23.62493776,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 0,
+            "playerId": 14880,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 14880,
+              "onTeamId": 8,
+              "appliedStatTotal": 13.72,
+              "player": {
+                "id": 14880,
+                "fullName": "Kirk Cousins",
+                "firstName": "Kirk",
+                "lastName": "Cousins",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 1,
+                "proTeamId": 13,
+                "eligibleSlots": [
+                  0,
+                  7,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 10.354000000000001,
+                    "appliedTotal": 103.54,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 13.72,
+                    "externalId": "401872986",
+                    "id": "01401872986",
+                    "proTeamId": 13,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 18.512,
+                    "appliedTotal": 92.56,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 18.29268679,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 0.14161696789411765,
+                    "appliedTotal": 2.40748845,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 14.19145606,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 12.4288966195,
+                    "appliedTotal": 24.85779324,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 15.112267276600003,
+                    "appliedTotal": 75.56133638,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 16,
+            "playerId": -16017,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": -16017,
+              "onTeamId": 8,
+              "appliedStatTotal": 6.0,
+              "player": {
+                "id": -16017,
+                "fullName": "Patriots D/ST",
+                "firstName": "Patriots",
+                "lastName": "D/ST",
+                "active": true,
+                "injured": false,
+                "injuryStatus": null,
+                "defaultPositionId": 16,
+                "proTeamId": 17,
+                "eligibleSlots": [
+                  16,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedAverage": 7.823529411764706,
+                    "appliedTotal": 133.0,
+                    "externalId": "2025",
+                    "id": "002025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 6.0,
+                    "externalId": "401872986",
+                    "id": "01401872986",
+                    "proTeamId": 17,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 7.6,
+                    "appliedTotal": 38.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 6.61341686,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 5.966791709588235,
+                    "appliedTotal": 101.43545906,
+                    "externalId": "2025",
+                    "id": "102025",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2025,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 5.91462998,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 6.168243691562499,
+                    "appliedTotal": 98.69189906,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 4.362235322941175,
+                    "appliedTotal": 74.15800049,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "acquisitionType": "ADD",
+            "injuryStatus": "NORMAL",
+            "lineupSlotId": 17,
+            "playerId": 5082424,
+            "status": "NORMAL",
+            "playerPoolEntry": {
+              "id": 5082424,
+              "onTeamId": 8,
+              "appliedStatTotal": 10.0,
+              "player": {
+                "id": 5082424,
+                "fullName": "Dominic Zvada",
+                "firstName": "Dominic",
+                "lastName": "Zvada",
+                "active": true,
+                "injured": false,
+                "injuryStatus": "ACTIVE",
+                "defaultPositionId": 5,
+                "proTeamId": 19,
+                "eligibleSlots": [
+                  25,
+                  17,
+                  20,
+                  21
+                ],
+                "stats": [
+                  {
+                    "appliedTotal": 10.0,
+                    "externalId": "401872988",
+                    "id": "01401872988",
+                    "proTeamId": 19,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 9.6,
+                    "appliedTotal": 48.0,
+                    "externalId": "2026",
+                    "id": "002026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0
+                  },
+                  {
+                    "appliedTotal": 10.91207125,
+                    "externalId": "20266",
+                    "id": "1120266",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 6,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedTotal": 8.13700651,
+                    "externalId": "20265",
+                    "id": "1120265",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 5,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 1
+                  },
+                  {
+                    "appliedAverage": 8.367673426875001,
+                    "appliedTotal": 133.88277483,
+                    "externalId": "2026",
+                    "id": "122026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 2
+                  },
+                  {
+                    "appliedAverage": 10.236021476,
+                    "appliedTotal": 122.83225771,
+                    "externalId": "2026",
+                    "id": "102026",
+                    "proTeamId": 0,
+                    "scoringPeriodId": 0,
+                    "seasonId": 2026,
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

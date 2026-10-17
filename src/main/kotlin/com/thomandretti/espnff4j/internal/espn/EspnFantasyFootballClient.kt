@@ -18,8 +18,17 @@ internal interface EspnFantasyFootballClient {
         @Path("seasonId") seasonId: Int,
         @Path("leagueId") leagueId: Int,
         @Query("scoringPeriodId") scoringPeriodId: Int,
-        @Query("view") vararg views: String = arrayOf("mRoster", "mTeam"),
+        // mTeam alone carries records and seeds; adding mRoster grows the response from ~40 KB to ~3 MB.
+        @Query("view") vararg views: String = arrayOf("mTeam"),
     ): Call<TeamsResponse>
+
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getRostersAtWeek(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        @Query("scoringPeriodId") scoringPeriodId: Int,
+        @Query("view") vararg views: String = arrayOf("mRoster", "mTeam"),
+    ): Call<RostersResponse>
 
     @GET("{seasonId}/segments/0/leagues/{leagueId}")
     fun getScheduleAtWeek(

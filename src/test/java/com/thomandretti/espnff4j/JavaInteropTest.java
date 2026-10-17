@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.thomandretti.espnff4j.model.Position;
+import com.thomandretti.espnff4j.model.RosterPlayer;
 import com.thomandretti.espnff4j.model.Team;
 import java.io.IOException;
 import java.util.List;
@@ -47,6 +49,22 @@ class JavaInteropTest {
 
         assertEquals("Team A", teams.get(0).getName());
         assertEquals(1, teams.get(0).getRecord().getOverall().getWins());
+    }
+
+    @Test
+    void rosterEnumsAndGettersReadNaturallyFromJava() {
+        server.enqueue(new MockResponse().setBody(
+            "{\"teams\":[{\"id\":1,\"name\":\"Team A\",\"playoffSeed\":1,"
+                + "\"record\":{\"overall\":{\"wins\":1,\"losses\":0,\"ties\":0}},"
+                + "\"roster\":{\"entries\":[{\"lineupSlotId\":0,\"playerPoolEntry\":{\"player\":"
+                + "{\"id\":7,\"fullName\":\"Some QB\",\"defaultPositionId\":1,\"proTeamId\":12}}}]}}]}"));
+        FantasyFootballClient client = EspnFantasyFootball.client(2026, 12345, null, baseUrl());
+
+        RosterPlayer qb = client.getRostersForWeekAsync(6).join().get(0).getStarters().get(0);
+
+        assertEquals(Position.QB, qb.getPosition());
+        assertEquals("KC", qb.getProTeam());
+        assertTrue(qb.isStarter());
     }
 
     @Test
