@@ -46,7 +46,7 @@ class FantasyFootballClientTest {
 
     private fun stubSchedule(
         response: ScheduleResponse,
-        week: Long = 5L,
+        week: Int = 5,
     ) {
         val call = mock<Call<ScheduleResponse>>()
         whenever(espnClient.getScheduleAtWeek(2024, 123, week)).thenReturn(call)
@@ -59,7 +59,7 @@ class FantasyFootballClientTest {
     }
 
     private fun stubTeams(
-        week: Long,
+        week: Int,
         response: TeamsResponse,
     ) {
         val call = mock<Call<TeamsResponse>>()
@@ -80,7 +80,7 @@ class FantasyFootballClientTest {
                 listOf(Matchup(matchupPeriodId = 5, home = matchupTeam(1, 95.5), away = matchupTeam(2, 88.25)))
             stubSchedule(ScheduleResponse(schedule = schedule, teams = teams))
 
-            val result = client.getMatchupsForWeek(5L)
+            val result = client.getMatchupsForWeek(5)
 
             assertEquals(1, result.size)
             assertEquals("Team A", result[0].homeTeam.name)
@@ -100,7 +100,7 @@ class FantasyFootballClientTest {
                 )
             stubSchedule(ScheduleResponse(schedule = schedule, teams = teams))
 
-            val result = client.getMatchupsForWeek(5L)
+            val result = client.getMatchupsForWeek(5)
 
             assertEquals(1, result.size)
             assertEquals("Team A", result[0].homeTeam.name)
@@ -117,7 +117,7 @@ class FantasyFootballClientTest {
                 )
             stubSchedule(ScheduleResponse(schedule = schedule, teams = teams))
 
-            val result = client.getMatchupsForWeek(5L)
+            val result = client.getMatchupsForWeek(5)
 
             assertEquals(1, result.size)
         }
@@ -130,7 +130,7 @@ class FantasyFootballClientTest {
                 listOf(Matchup(matchupPeriodId = 5, home = matchupTeam(99, 100.0), away = matchupTeam(2, 90.0)))
             stubSchedule(ScheduleResponse(schedule = schedule, teams = teams))
 
-            val result = client.getMatchupsForWeek(5L)
+            val result = client.getMatchupsForWeek(5)
 
             assertTrue(result.isEmpty())
         }
@@ -143,7 +143,7 @@ class FantasyFootballClientTest {
                 listOf(Matchup(matchupPeriodId = 5, home = matchupTeam(1, 100.0), away = matchupTeam(99, 90.0)))
             stubSchedule(ScheduleResponse(schedule = schedule, teams = teams))
 
-            val result = client.getMatchupsForWeek(5L)
+            val result = client.getMatchupsForWeek(5)
 
             assertTrue(result.isEmpty())
         }
@@ -153,7 +153,7 @@ class FantasyFootballClientTest {
         runBlocking {
             stubSchedule(ScheduleResponse(schedule = emptyList(), teams = emptyList()))
 
-            val result = client.getMatchupsForWeek(5L)
+            val result = client.getMatchupsForWeek(5)
 
             assertTrue(result.isEmpty())
         }
@@ -171,9 +171,9 @@ class FantasyFootballClientTest {
                 LeagueSettings(
                     scheduleSettings = ScheduleSettings(matchupPeriods = mapOf(14 to listOf(14), 15 to listOf(15, 16))),
                 )
-            stubSchedule(ScheduleResponse(schedule = schedule, teams = teams, settings = settings), week = 16L)
+            stubSchedule(ScheduleResponse(schedule = schedule, teams = teams, settings = settings), week = 16)
 
-            val result = client.getMatchupsForWeek(16L)
+            val result = client.getMatchupsForWeek(16)
 
             assertEquals("Team A", result.single().homeTeam.name)
         }
@@ -187,9 +187,9 @@ class FantasyFootballClientTest {
                     teamWithSeed(2, "Team A", playoffSeed = 1),
                     teamWithSeed(3, "Team B", playoffSeed = 2),
                 )
-            stubTeams(5L, TeamsResponse(teams = teams))
+            stubTeams(5, TeamsResponse(teams = teams))
 
-            val result = client.getStandingsForWeek(5L)
+            val result = client.getStandingsForWeek(5)
 
             assertEquals(3, result.size)
             assertEquals(1, result[0].playoffSeed)
@@ -200,9 +200,9 @@ class FantasyFootballClientTest {
     @Test
     fun `getStandingsForWeek returns empty list when no teams`() =
         runBlocking {
-            stubTeams(5L, TeamsResponse(teams = emptyList()))
+            stubTeams(5, TeamsResponse(teams = emptyList()))
 
-            val result = client.getStandingsForWeek(5L)
+            val result = client.getStandingsForWeek(5)
 
             assertTrue(result.isEmpty())
         }
@@ -211,9 +211,9 @@ class FantasyFootballClientTest {
     fun `getStandingsForWeek returns single team`() =
         runBlocking {
             val teams = listOf(teamWithSeed(1, "Team A", playoffSeed = 1))
-            stubTeams(5L, TeamsResponse(teams = teams))
+            stubTeams(5, TeamsResponse(teams = teams))
 
-            val result = client.getStandingsForWeek(5L)
+            val result = client.getStandingsForWeek(5)
 
             assertEquals(1, result.size)
             assertEquals("Team A", result[0].name)
@@ -223,9 +223,9 @@ class FantasyFootballClientTest {
     fun `getStandingsForWeek passes correct week to ESPN client`() =
         runBlocking {
             val teams = listOf(teamWithSeed(1, "Team A", playoffSeed = 1))
-            stubTeams(7L, TeamsResponse(teams = teams))
+            stubTeams(7, TeamsResponse(teams = teams))
 
-            val result = client.getStandingsForWeek(7L)
+            val result = client.getStandingsForWeek(7)
 
             assertEquals(1, result.size)
             assertEquals("Team A", result[0].name)

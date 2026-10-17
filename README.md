@@ -25,7 +25,14 @@ Weeks are NFL weeks (ESPN "scoring periods"). If a league stretches a playoff ro
 both weeks return that round's matchups.
 
 All calls are `suspend` functions. Requests that fail with a 5xx or a connection error are retried
-up to three times with a short back-off.
+up to three times with a short back-off. Failures are thrown as subclasses of the sealed
+`EspnException`:
+
+- `EspnUnauthorizedException` (HTTP 401/403): a private league without valid cookies. ESPN gives the
+  same answer for a league ID that doesn't exist.
+- `EspnNotFoundException` (HTTP 404): typically a season ESPN doesn't serve.
+- `EspnApiException`: anything else, such as a persistent server error, a network failure or a
+  response the client couldn't parse.
 
 ### Finding your league ID and cookies
 

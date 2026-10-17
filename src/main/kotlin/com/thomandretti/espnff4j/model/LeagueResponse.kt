@@ -1,6 +1,6 @@
 package com.thomandretti.espnff4j.model
 
-data class LeagueResponse(
+internal data class LeagueResponse(
     val id: Int,
     val seasonId: Int,
     // The current NFL week.
@@ -9,7 +9,7 @@ data class LeagueResponse(
     val settings: LeagueSettings,
 )
 
-data class LeagueStatus(
+internal data class LeagueStatus(
     val currentMatchupPeriod: Int,
     val firstScoringPeriod: Int,
     val finalScoringPeriod: Int,

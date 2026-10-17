@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface EspnFantasyFootballClient {
+internal interface EspnFantasyFootballClient {
     @GET("{seasonId}/segments/0/leagues/{leagueId}")
     fun getLeague(
         @Path("seasonId") seasonId: Int,
@@ -20,7 +20,7 @@ interface EspnFantasyFootballClient {
     fun getTeamsAtWeek(
         @Path("seasonId") seasonId: Int,
         @Path("leagueId") leagueId: Int,
-        @Query("scoringPeriodId") scoringPeriodId: Long,
+        @Query("scoringPeriodId") scoringPeriodId: Int,
         @Query("view") vararg views: String = arrayOf("mRoster", "mTeam"),
     ): Call<TeamsResponse>
 
@@ -28,7 +28,7 @@ interface EspnFantasyFootballClient {
     fun getScheduleAtWeek(
         @Path("seasonId") seasonId: Int,
         @Path("leagueId") leagueId: Int,
-        @Query("scoringPeriodId") scoringPeriodId: Long,
+        @Query("scoringPeriodId") scoringPeriodId: Int,
         // mMatchupScore is a superset of mMatchup: it adds per-week rosters and player projections.
         // mSettings carries the scoring period -> matchup period mapping.
         @Query("view") vararg views: String = arrayOf("mMatchupScore", "mTeam", "mSettings"),

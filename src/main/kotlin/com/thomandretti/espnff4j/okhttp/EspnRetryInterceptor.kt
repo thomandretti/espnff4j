@@ -11,7 +11,7 @@ private const val HTTP_SERVER_ERROR_MIN = 500
 
 private val logger = KotlinLogging.logger {}
 
-class EspnRetryInterceptor : Interceptor {
+internal class EspnRetryInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         var lastException: IOException? = null

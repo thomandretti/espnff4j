@@ -49,8 +49,16 @@ playoff rounds, so `getMatchupsForWeek` converts using `settings.scheduleSetting
 (matchup period → list of scoring periods, from the `mSettings` view). If that mapping is missing it
 assumes they're equal.
 
-`retrofit` is an `api` dependency because Retrofit and `OkHttpClient.Builder` types appear in the public
-API.
+The public surface is deliberately small: the factory, `EspnCredentials`, `FantasyFootballClient` (internal
+constructor), the result models (`League`, `Team`, `MatchupInfo`, …) and the `EspnException` hierarchy.
+The Retrofit interface, OkHttp helpers and raw `*Response` DTOs are `internal`. Retrofit is an
+`implementation` dependency; OkHttp is `api` because `configure` exposes `OkHttpClient.Builder`, so keep
+its version in step with the one Retrofit pulls in.
+
+Every client call goes through `awaitEspn()`, which maps failures to the sealed `EspnException`:
+401/403 → `EspnUnauthorizedException` (ESPN also returns 401 for a league that doesn't exist, so it
+can't be told apart from a missing cookie), 404 → `EspnNotFoundException`, and everything else,
+including network and Jackson errors, → `EspnApiException`.
 
 ### ESPN payload quirks (the main source of bugs)
 

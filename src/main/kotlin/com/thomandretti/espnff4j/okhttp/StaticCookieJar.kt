@@ -4,13 +4,13 @@ import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
-object CookieJarConstants {
+internal object CookieJarConstants {
     const val ESPN_DOMAIN = "fantasy.espn.com"
     const val SWID_KEY = "SWID"
     const val ESPN_S2_KEY = "espn_s2"
 }
 
-class StaticCookieJar(
+internal class StaticCookieJar(
     private val swid: String,
     private val espnS2: String,
 ) : CookieJar {

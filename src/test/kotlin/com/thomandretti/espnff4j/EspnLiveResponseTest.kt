@@ -88,7 +88,7 @@ class EspnLiveResponseTest {
     @Test
     fun `the client surfaces the live score rather than the settled zero`() =
         runBlocking {
-            val scores = client().getMatchupsForWeek(1L).flatMap { listOf(it.homeScore, it.awayScore) }
+            val scores = client().getMatchupsForWeek(1).flatMap { listOf(it.homeScore, it.awayScore) }
             assertTrue(scores.any { it > 0.0 }, "expected live points to reach MatchupInfo, got $scores")
         }
 

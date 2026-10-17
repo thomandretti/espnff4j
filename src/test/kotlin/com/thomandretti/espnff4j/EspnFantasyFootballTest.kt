@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.test.assertFailsWith
 
 class EspnFantasyFootballTest {
     private val server = MockWebServer()
@@ -36,7 +37,7 @@ class EspnFantasyFootballTest {
         runBlocking {
             server.enqueue(MockResponse().setBody(teamsBody))
 
-            val teams = client().getStandingsForWeek(3L)
+            val teams = client().getStandingsForWeek(3)
 
             assertEquals("Team A", teams.single().name)
             val path = requireNotNull(server.takeRequest().path)
@@ -59,7 +60,7 @@ class EspnFantasyFootballTest {
                 ),
             )
 
-            val matchups = client().getMatchupsForWeek(16L)
+            val matchups = client().getMatchupsForWeek(16)
 
             assertEquals("Team A", matchups.single().homeTeam.name)
             val path = requireNotNull(server.takeRequest().path)
@@ -93,11 +94,51 @@ class EspnFantasyFootballTest {
         }
 
     @Test
+    fun `a 401 becomes EspnUnauthorizedException carrying ESPN's own message`() {
+        // ESPN's real body for a private league requested without cookies.
+        server.enqueue(
+            MockResponse().setResponseCode(401).setBody(
+                """{"messages":["You are not authorized to view this League."],"details":[]}""",
+            ),
+        )
+
+        val e = assertFailsWith<EspnUnauthorizedException> { runBlocking { client().getLeague() } }
+
+        assertEquals(401, e.statusCode)
+        assertTrue("You are not authorized to view this League." in e.message.orEmpty(), e.message)
+    }
+
+    @Test
+    fun `a 404 becomes EspnNotFoundException`() {
+        server.enqueue(MockResponse().setResponseCode(404))
+
+        assertFailsWith<EspnNotFoundException> { runBlocking { client().getStandingsForWeek(1) } }
+    }
+
+    @Test
+    fun `a server error that outlasts the retries becomes EspnApiException with its status`() {
+        repeat(3) { server.enqueue(MockResponse().setResponseCode(503)) }
+
+        val e = assertFailsWith<EspnApiException> { runBlocking { client().getMatchupsForWeek(1) } }
+
+        assertEquals(503, e.statusCode)
+    }
+
+    @Test
+    fun `a payload that no longer fits the model becomes EspnApiException`() {
+        server.enqueue(MockResponse().setBody("""{"teams":[{"id":1}]}"""))
+
+        val e = assertFailsWith<EspnApiException> { runBlocking { client().getStandingsForWeek(1) } }
+
+        assertNull(e.statusCode)
+    }
+
+    @Test
     fun `sends no cookies when no credentials are given`() =
         runBlocking {
             server.enqueue(MockResponse().setBody(teamsBody))
 
-            client().getStandingsForWeek(1L)
+            client().getStandingsForWeek(1)
 
             assertNull(server.takeRequest().getHeader("Cookie"))
         }
@@ -115,7 +156,7 @@ class EspnFantasyFootballTest {
                     }
                 }
 
-            client.getStandingsForWeek(1L)
+            client.getStandingsForWeek(1)
 
             assertTrue(intercepted)
         }

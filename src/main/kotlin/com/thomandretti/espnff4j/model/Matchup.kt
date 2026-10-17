@@ -13,7 +13,7 @@ enum class MatchupOutcome {
     }
 }
 
-data class Matchup(
+internal data class Matchup(
     val matchupPeriodId: Int,
     val home: MatchupTeam,
     val away: MatchupTeam?,
