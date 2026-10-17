@@ -2,6 +2,7 @@ package com.thomandretti.espnff4j.internal.espn
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -49,4 +50,23 @@ internal interface EspnFantasyFootballClient {
         // halving the response.
         @Query("view") vararg views: String = arrayOf("mMatchupScore", "mScoreboard", "mTeam", "mSettings"),
     ): Call<ScheduleResponse>
+
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getTransactionsAtWeek(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        @Query("scoringPeriodId") scoringPeriodId: Int,
+        @Query("view") vararg views: String = arrayOf("mTransactions2", "mTeam"),
+    ): Call<TransactionsResponse>
+
+    // kona_player_info searches every player in the game, narrowed by the filter (see PlayerFilters). Add
+    // mTeam to resolve onTeamId to a team.
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getPlayers(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        @Query("scoringPeriodId") scoringPeriodId: Int,
+        @Header("X-Fantasy-Filter") filter: String,
+        @Query("view") vararg views: String = arrayOf("kona_player_info", "mTeam"),
+    ): Call<PlayersResponse>
 }

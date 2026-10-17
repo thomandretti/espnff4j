@@ -80,3 +80,17 @@ internal val PRO_TEAMS =
         33 to "BAL",
         34 to "HOU",
     )
+
+/** The lineup slot that holds [position], which is how ESPN filters players by position. */
+internal fun slotId(position: Position): Int =
+    requireNotNull(POSITION_SLOTS[position]) { "Cannot filter players by position $position" }
+
+private val POSITION_SLOTS =
+    mapOf(
+        Position.QB to 0,
+        Position.RB to 2,
+        Position.WR to 4,
+        Position.TE to 6,
+        Position.DST to 16,
+        Position.K to 17,
+    )

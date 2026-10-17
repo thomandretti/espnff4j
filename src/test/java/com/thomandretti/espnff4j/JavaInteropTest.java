@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.thomandretti.espnff4j.model.Player;
 import com.thomandretti.espnff4j.model.Position;
 import com.thomandretti.espnff4j.model.RosterPlayer;
 import com.thomandretti.espnff4j.model.Team;
@@ -65,6 +66,23 @@ class JavaInteropTest {
         assertEquals(Position.QB, qb.getPosition());
         assertEquals("KC", qb.getProTeam());
         assertTrue(qb.isStarter());
+    }
+
+    @Test
+    void optionalArgumentsHaveJavaOverloads() {
+        String noPlayers = "{\"players\":[]}";
+        for (int i = 0; i < 5; i++) {
+            server.enqueue(new MockResponse().setBody(noPlayers));
+        }
+        FantasyFootballClient client = EspnFantasyFootball.client(2026, 12345, null, baseUrl());
+
+        List<Player> all = client.getFreeAgentsAsync(6).join();
+        List<Player> rbs = client.getFreeAgentsAsync(6, Position.RB).join();
+        List<Player> topRbs = client.getFreeAgentsAsync(6, Position.RB, 5).join();
+        List<Player> found = client.searchPlayersAsync("allen", 6).join();
+        List<Player> topFound = client.searchPlayersAsync("allen", 6, 3).join();
+
+        assertTrue(all.isEmpty() && rbs.isEmpty() && topRbs.isEmpty() && found.isEmpty() && topFound.isEmpty());
     }
 
     @Test

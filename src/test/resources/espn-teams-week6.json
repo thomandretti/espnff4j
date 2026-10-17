@@ -1,0 +1,814 @@
+{
+  "gameId": 1,
+  "id": 12345,
+  "members": [
+    {
+      "displayName": "owner1",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000001}",
+      "lastName": "1"
+    },
+    {
+      "displayName": "owner2",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000002}",
+      "lastName": "2"
+    },
+    {
+      "displayName": "owner3",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000003}",
+      "lastName": "3"
+    },
+    {
+      "displayName": "owner4",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000004}",
+      "lastName": "4"
+    },
+    {
+      "displayName": "owner5",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000005}",
+      "lastName": "5"
+    },
+    {
+      "displayName": "owner6",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000006}",
+      "lastName": "6"
+    },
+    {
+      "displayName": "owner7",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000007}",
+      "lastName": "7"
+    },
+    {
+      "displayName": "owner8",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000008}",
+      "lastName": "8"
+    },
+    {
+      "displayName": "owner9",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000009}",
+      "lastName": "9"
+    },
+    {
+      "displayName": "owner10",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000010}",
+      "lastName": "10"
+    },
+    {
+      "displayName": "owner11",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000011}",
+      "lastName": "11"
+    }
+  ],
+  "scoringPeriodId": 6,
+  "seasonId": 2026,
+  "segmentId": 0,
+  "status": {
+    "activatedDate": 1788277055006,
+    "createdAsLeagueType": 3,
+    "currentLeagueType": 3,
+    "currentMatchupPeriod": 6,
+    "finalScoringPeriod": 17,
+    "firstScoringPeriod": 1,
+    "isActive": true,
+    "isExpired": false,
+    "isFull": true,
+    "isPlayoffMatchupEdited": false,
+    "isToBeDeleted": false,
+    "isViewable": false,
+    "isWaiverOrderEdited": false,
+    "latestScoringPeriod": 6,
+    "previousSeasons": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "standingsUpdateDate": 1792223701669,
+    "teamsJoined": 10,
+    "transactionScoringPeriod": 6,
+    "waiverLastExecutionDate": 1792223701574,
+    "waiverProcessStatus": {
+      "2026-09-16T07:14:49.280+00:00": 5,
+      "2026-09-23T07:20:26.620+00:00": 7,
+      "2026-09-30T07:05:25.098+00:00": 6,
+      "2026-10-07T07:26:49.090+00:00": 4,
+      "2026-10-14T07:29:05.904+00:00": 4
+    }
+  },
+  "teams": [
+    {
+      "abbrev": "TA",
+      "currentProjectedRank": 1,
+      "divisionId": 0,
+      "draftDayProjectedRank": 4,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 1,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-1.png",
+      "name": "Team A",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000010}"
+      ],
+      "playoffSeed": 1,
+      "points": 596.12,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000010}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 1
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 5,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 5
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 4,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 458.16,
+          "pointsFor": 596.12,
+          "streakLength": 5,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 5
+        }
+      },
+      "waiverRank": 10
+    },
+    {
+      "abbrev": "TB",
+      "currentProjectedRank": 3,
+      "divisionId": 0,
+      "draftDayProjectedRank": 6,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 2,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-2.png",
+      "name": "Team B",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000009}"
+      ],
+      "playoffSeed": 3,
+      "points": 680.4599999999999,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000009}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.6666666666666666,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "division": {
+          "gamesBack": 1.0,
+          "losses": 1,
+          "percentage": 0.8,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 4,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "overall": {
+          "gamesBack": 1.0,
+          "losses": 1,
+          "percentage": 0.8,
+          "pointsAgainst": 640.24,
+          "pointsFor": 680.4599999999999,
+          "streakLength": 4,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        }
+      },
+      "waiverRank": 9
+    },
+    {
+      "abbrev": "TC",
+      "currentProjectedRank": 5,
+      "divisionId": 0,
+      "draftDayProjectedRank": 8,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 3,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-3.png",
+      "name": "Team C",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000009}",
+        "{00000000-0000-4000-8000-000000000003}",
+        "{00000000-0000-4000-8000-000000000006}"
+      ],
+      "playoffSeed": 6,
+      "points": 595.98,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000009}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.5,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        },
+        "division": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 3,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 2,
+          "percentage": 0.3333333333333333,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        },
+        "overall": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 599.3399999999999,
+          "pointsFor": 595.98,
+          "streakLength": 3,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        }
+      },
+      "waiverRank": 3
+    },
+    {
+      "abbrev": "TD",
+      "currentProjectedRank": 6,
+      "divisionId": 0,
+      "draftDayProjectedRank": 9,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 4,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-4.png",
+      "name": "Team D",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000002}"
+      ],
+      "playoffSeed": 7,
+      "points": 594.94,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000002}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 2,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 3,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.6666666666666666,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        },
+        "overall": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 582.28,
+          "pointsFor": 594.94,
+          "streakLength": 3,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        }
+      },
+      "waiverRank": 8
+    },
+    {
+      "abbrev": "TE",
+      "currentProjectedRank": 10,
+      "divisionId": 0,
+      "draftDayProjectedRank": 5,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 5,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-5.png",
+      "name": "Team E",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000004}"
+      ],
+      "playoffSeed": 10,
+      "points": 466.16,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000004}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.5,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 1
+        },
+        "division": {
+          "gamesBack": 4.0,
+          "losses": 4,
+          "percentage": 0.2,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 3,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 3,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 4.0,
+          "losses": 4,
+          "percentage": 0.2,
+          "pointsAgainst": 591.24,
+          "pointsFor": 466.16,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        }
+      },
+      "waiverRank": 1
+    },
+    {
+      "abbrev": "TF",
+      "currentProjectedRank": 4,
+      "divisionId": 0,
+      "draftDayProjectedRank": 7,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 6,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-6.png",
+      "name": "Team F",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000007}"
+      ],
+      "playoffSeed": 4,
+      "points": 630.24,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000007}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 3,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 3,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "overall": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 633.58,
+          "pointsFor": 630.24,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 2
+        }
+      },
+      "waiverRank": 5
+    },
+    {
+      "abbrev": "TG",
+      "currentProjectedRank": 2,
+      "divisionId": 0,
+      "draftDayProjectedRank": 3,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 7,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-7.png",
+      "name": "Team G",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000005}"
+      ],
+      "playoffSeed": 2,
+      "points": 746.54,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000005}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 3,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 3
+        },
+        "division": {
+          "gamesBack": 1.0,
+          "losses": 1,
+          "percentage": 0.8,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.5,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        },
+        "overall": {
+          "gamesBack": 1.0,
+          "losses": 1,
+          "percentage": 0.8,
+          "pointsAgainst": 620.14,
+          "pointsFor": 746.54,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        }
+      },
+      "waiverRank": 6
+    },
+    {
+      "abbrev": "TH",
+      "currentProjectedRank": 7,
+      "divisionId": 0,
+      "draftDayProjectedRank": 2,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 8,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-8.png",
+      "name": "Team H",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000001}"
+      ],
+      "playoffSeed": 5,
+      "points": 599.8000000000001,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000001}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 3,
+          "percentage": 0.25,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 1
+        },
+        "division": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 1
+        },
+        "overall": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 692.82,
+          "pointsFor": 599.8000000000001,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        }
+      },
+      "waiverRank": 4
+    },
+    {
+      "abbrev": "TI",
+      "currentProjectedRank": 8,
+      "divisionId": 0,
+      "draftDayProjectedRank": 1,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 9,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-9.png",
+      "name": "Team I",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000011}"
+      ],
+      "playoffSeed": 8,
+      "points": 576.64,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000011}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.5,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 1
+        },
+        "division": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 2,
+          "percentage": 0.3333333333333333,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 1
+        },
+        "overall": {
+          "gamesBack": 3.0,
+          "losses": 3,
+          "percentage": 0.4,
+          "pointsAgainst": 611.3399999999999,
+          "pointsFor": 576.64,
+          "streakLength": 1,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        }
+      },
+      "waiverRank": 2
+    },
+    {
+      "abbrev": "TJ",
+      "currentProjectedRank": 9,
+      "divisionId": 0,
+      "draftDayProjectedRank": 10,
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 10,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-10.png",
+      "name": "Team J",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000008}"
+      ],
+      "playoffSeed": 9,
+      "points": 557.04,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000008}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 2,
+          "percentage": 0.3333333333333333,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 1,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        },
+        "division": {
+          "gamesBack": 4.0,
+          "losses": 4,
+          "percentage": 0.2,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 2,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 4.0,
+          "losses": 4,
+          "percentage": 0.2,
+          "pointsAgainst": 614.78,
+          "pointsFor": 557.04,
+          "streakLength": 2,
+          "streakType": "LOSS",
+          "ties": 0,
+          "wins": 1
+        }
+      },
+      "waiverRank": 7
+    }
+  ]
+}

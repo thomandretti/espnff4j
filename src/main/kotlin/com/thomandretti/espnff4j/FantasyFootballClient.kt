@@ -4,14 +4,23 @@ import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
 import com.thomandretti.espnff4j.internal.espn.Matchup
 import com.thomandretti.espnff4j.internal.espn.MatchupTeam
 import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
+import com.thomandretti.espnff4j.internal.espn.PlayerFilters
+import com.thomandretti.espnff4j.internal.espn.PlayersResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
+import com.thomandretti.espnff4j.internal.espn.completed
+import com.thomandretti.espnff4j.internal.espn.toPlayer
 import com.thomandretti.espnff4j.internal.espn.toPlayers
+import com.thomandretti.espnff4j.internal.espn.toTeams
+import com.thomandretti.espnff4j.internal.espn.toTransaction
 import com.thomandretti.espnff4j.model.BoxScore
 import com.thomandretti.espnff4j.model.League
 import com.thomandretti.espnff4j.model.MatchupInfo
+import com.thomandretti.espnff4j.model.Player
+import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.TeamRoster
+import com.thomandretti.espnff4j.model.Transaction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,6 +33,9 @@ import java.net.HttpURLConnection.HTTP_FORBIDDEN
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
 import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
 import java.util.concurrent.CompletableFuture
+
+private const val DEFAULT_FREE_AGENTS = 25
+private const val DEFAULT_SEARCH_RESULTS = 10
 
 /**
  * One league's data for one season. Build it with [EspnFantasyFootball.client].
@@ -54,6 +66,23 @@ class FantasyFootballClient private constructor(
     fun getBoxScoresForWeekAsync(week: Int): CompletableFuture<List<BoxScore>> =
         scope.future { getBoxScoresForWeek(week) }
 
+    fun getTransactionsForWeekAsync(week: Int): CompletableFuture<List<Transaction>> =
+        scope.future { getTransactionsForWeek(week) }
+
+    @JvmOverloads
+    fun getFreeAgentsAsync(
+        week: Int,
+        position: Position? = null,
+        limit: Int = DEFAULT_FREE_AGENTS,
+    ): CompletableFuture<List<Player>> = scope.future { getFreeAgents(week, position, limit) }
+
+    @JvmOverloads
+    fun searchPlayersAsync(
+        name: String,
+        week: Int,
+        limit: Int = DEFAULT_SEARCH_RESULTS,
+    ): CompletableFuture<List<Player>> = scope.future { searchPlayers(name, week, limit) }
+
     /** League settings and where the season stands, including the current week. */
     @JvmSynthetic
     suspend fun getLeague(): League {
@@ -81,7 +110,7 @@ class FantasyFootballClient private constructor(
         espnClient
             .getTeamsAtWeek(seasonId, leagueId, week)
             .awaitEspn()
-            .teams
+            .let { it.teams.toTeams(it.members) }
             .sortedBy { it.playoffSeed }
 
     /**
@@ -93,8 +122,7 @@ class FantasyFootballClient private constructor(
         espnClient
             .getRostersAtWeek(seasonId, leagueId, week)
             .awaitEspn()
-            .teams
-            .map { it.toTeamRoster(seasonId, week) }
+            .toTeamRosters(seasonId, week)
 
     /**
      * The matchups in play during NFL [week]. When the league stretches a playoff round over two
@@ -127,12 +155,77 @@ class FantasyFootballClient private constructor(
                 )
             }
 
+    /**
+     * Free-agent pickups, waiver claims and trades completed during NFL [week], newest first. Lineup
+     * changes, failed claims and trade offers that didn't go through are left out. A trade appears in the
+     * week its review period ended, which can be the week after it was accepted. Costs two requests:
+     * ESPN identifies the players only by id.
+     */
+    @JvmSynthetic
+    suspend fun getTransactionsForWeek(week: Int): List<Transaction> {
+        val response = espnClient.getTransactionsAtWeek(seasonId, leagueId, week).awaitEspn()
+        val completed = response.completed()
+        if (completed.isEmpty()) return emptyList()
+        val teamsById = response.teams.toTeams(response.members).associateBy { it.id }
+        val playerIds = completed.flatMap { tx -> tx.items.map { it.playerId } }.toSet()
+        val playersById =
+            espnClient
+                .getPlayers(seasonId, leagueId, week, PlayerFilters.byIds(playerIds, week), "kona_player_info")
+                .awaitEspn()
+                .players
+                .map { it.toPlayer(seasonId, week, teamsById) }
+                .associateBy { it.id }
+        return completed.mapNotNull { it.toTransaction(teamsById, playersById) }.sortedByDescending { it.date }
+    }
+
+    /**
+     * The best available players for NFL [week], free agents and players on waivers, ordered by ESPN's
+     * projection for the week. [position] narrows the list to players eligible there; it can't be
+     * [Position.UNKNOWN].
+     */
+    @JvmSynthetic
+    suspend fun getFreeAgents(
+        week: Int,
+        position: Position? = null,
+        limit: Int = DEFAULT_FREE_AGENTS,
+    ): List<Player> {
+        require(limit > 0) { "limit must be positive, was $limit" }
+        return espnClient
+            .getPlayers(seasonId, leagueId, week, PlayerFilters.freeAgents(seasonId, week, position, limit))
+            .awaitEspn()
+            .toPlayers(week)
+    }
+
+    /**
+     * Players whose full name or surname starts with [name], ignoring case ("josh al" and "allen" both
+     * find Josh Allen), most widely owned first. Each comes with who rosters them in this league and
+     * their points and projection for NFL [week].
+     */
+    @JvmSynthetic
+    suspend fun searchPlayers(
+        name: String,
+        week: Int,
+        limit: Int = DEFAULT_SEARCH_RESULTS,
+    ): List<Player> {
+        require(name.isNotBlank()) { "name must not be blank" }
+        require(limit > 0) { "limit must be positive, was $limit" }
+        return espnClient
+            .getPlayers(seasonId, leagueId, week, PlayerFilters.byName(name.trim(), week, limit))
+            .awaitEspn()
+            .toPlayers(week)
+    }
+
+    private fun PlayersResponse.toPlayers(week: Int): List<Player> {
+        val teamsById = teams.toTeams(members).associateBy { it.id }
+        return players.map { it.toPlayer(seasonId, week, teamsById) }
+    }
+
     /** This week's matchups, byes dropped, each with the summary built from it. */
     private fun ScheduleResponse.matchupsFor(week: Int): List<Pair<Matchup, MatchupInfo>> {
         // ESPN numbers matchups by matchup period, not NFL week. The two line up one-to-one until a
         // multi-week playoff round, so fall back to the week itself if ESPN sends no mapping.
         val matchupPeriod = settings?.scheduleSettings?.matchupPeriodFor(week) ?: week
-        val teamsById = teams.associateBy { it.id }
+        val teamsById = teams.toTeams(members).associateBy { it.id }
         return schedule
             .filter { it.matchupPeriodId == matchupPeriod && it.away != null }
             .mapNotNull { matchup ->

@@ -2,9 +2,7 @@ package com.thomandretti.espnff4j.internal.espn
 
 import com.thomandretti.espnff4j.model.InjuryStatus
 import com.thomandretti.espnff4j.model.Position
-import com.thomandretti.espnff4j.model.Record
 import com.thomandretti.espnff4j.model.RosterPlayer
-import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.TeamRoster
 
 // Selectors into PlayerStat: statSourceId 0 is what happened, 1 is ESPN's projection; statSplitTypeId 1 is a
@@ -14,25 +12,16 @@ private const val STAT_SOURCE_PROJECTED = 1
 private const val STAT_SPLIT_WEEK = 1
 
 internal data class RostersResponse(
-    val teams: List<RosterTeam>,
-)
-
-internal data class RosterTeam(
-    val id: Int,
-    val name: String,
-    val abbrev: String? = null,
-    val record: Record,
-    val playoffSeed: Int,
-    val roster: Roster? = null,
+    val teams: List<EspnTeam>,
+    val members: List<Member> = emptyList(),
 ) {
-    fun toTeamRoster(
+    fun toTeamRosters(
         seasonId: Int,
         week: Int,
-    ): TeamRoster =
-        TeamRoster(
-            team = Team(id = id, name = name, record = record, playoffSeed = playoffSeed, abbrev = abbrev),
-            players = roster.toPlayers(seasonId, week),
-        )
+    ): List<TeamRoster> =
+        teams.toTeams(members).zip(teams) { team, espnTeam ->
+            TeamRoster(team = team, players = espnTeam.roster.toPlayers(seasonId, week))
+        }
 }
 
 internal data class Roster(
@@ -62,27 +51,23 @@ internal data class RosterEntry(
         return RosterPlayer(
             id = player.id,
             name = player.fullName,
-            position = POSITIONS[player.defaultPositionId] ?: Position.UNKNOWN,
-            proTeam = PRO_TEAMS[player.proTeamId],
+            position = player.position(),
+            proTeam = player.proTeam(),
             lineupSlot = lineupSlot(lineupSlotId),
             eligibleSlots = player.eligibleSlots.map(::lineupSlot),
-            injuryStatus =
-                when (val status = player.injuryStatus) {
-                    // ESPN sends null for D/ST, which cannot be injured.
-                    null -> InjuryStatus.ACTIVE
-                    else -> InjuryStatus.entries.firstOrNull { it.name == status } ?: InjuryStatus.UNKNOWN
-                },
-            points = player.weekTotal(seasonId, week, STAT_SOURCE_ACTUAL),
-            projectedPoints = player.weekTotal(seasonId, week, STAT_SOURCE_PROJECTED),
+            injuryStatus = player.injury(),
+            points = player.weekPoints(seasonId, week),
+            projectedPoints = player.weekProjection(seasonId, week),
         )
     }
 }
 
 internal data class PlayerPoolEntry(
-    val player: Player,
+    val player: EspnPlayer,
 )
 
-internal data class Player(
+/** A player as ESPN sends one in rosters, lineups and player searches. */
+internal data class EspnPlayer(
     val id: Int,
     val fullName: String,
     val defaultPositionId: Int,
@@ -90,8 +75,31 @@ internal data class Player(
     val injuryStatus: String? = null,
     val eligibleSlots: List<Int> = emptyList(),
     val stats: List<PlayerStat> = emptyList(),
+    // Only in player searches.
+    val ownership: Ownership? = null,
 ) {
-    fun weekTotal(
+    fun position(): Position = POSITIONS[defaultPositionId] ?: Position.UNKNOWN
+
+    fun proTeam(): String? = PRO_TEAMS[proTeamId]
+
+    fun injury(): InjuryStatus =
+        when (val status = injuryStatus) {
+            // ESPN sends null for D/ST, which cannot be injured.
+            null -> InjuryStatus.ACTIVE
+            else -> InjuryStatus.entries.firstOrNull { it.name == status } ?: InjuryStatus.UNKNOWN
+        }
+
+    fun weekPoints(
+        seasonId: Int,
+        week: Int,
+    ): Double? = weekTotal(seasonId, week, STAT_SOURCE_ACTUAL)
+
+    fun weekProjection(
+        seasonId: Int,
+        week: Int,
+    ): Double? = weekTotal(seasonId, week, STAT_SOURCE_PROJECTED)
+
+    private fun weekTotal(
         seasonId: Int,
         week: Int,
         statSourceId: Int,
@@ -104,6 +112,11 @@ internal data class Player(
                     it.statSplitTypeId == STAT_SPLIT_WEEK
             }?.appliedTotal
 }
+
+internal data class Ownership(
+    // Share of all ESPN leagues, not just this one, that roster the player.
+    val percentOwned: Double? = null,
+)
 
 internal data class PlayerStat(
     val seasonId: Int,

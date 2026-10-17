@@ -1,15 +1,15 @@
 package com.thomandretti.espnff4j
 
 import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.EspnRecord
+import com.thomandretti.espnff4j.internal.espn.EspnRecordPart
+import com.thomandretti.espnff4j.internal.espn.EspnTeam
 import com.thomandretti.espnff4j.internal.espn.LeagueSettings
 import com.thomandretti.espnff4j.internal.espn.Matchup
 import com.thomandretti.espnff4j.internal.espn.MatchupTeam
 import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
 import com.thomandretti.espnff4j.internal.espn.TeamsResponse
-import com.thomandretti.espnff4j.model.Record
-import com.thomandretti.espnff4j.model.RecordPart
-import com.thomandretti.espnff4j.model.Team
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -26,16 +26,16 @@ class FantasyFootballClientTest {
     private fun team(
         id: Int,
         name: String,
-    ) = Team(id = id, name = name, record = Record(RecordPart(wins = 0, losses = 0, ties = 0)), playoffSeed = id)
+    ) = teamWithSeed(id, name, playoffSeed = id)
 
     private fun teamWithSeed(
         id: Int,
         name: String,
         playoffSeed: Int,
-    ) = Team(
+    ) = EspnTeam(
         id = id,
         name = name,
-        record = Record(RecordPart(wins = 0, losses = 0, ties = 0)),
+        record = EspnRecord(EspnRecordPart(wins = 0, losses = 0, ties = 0)),
         playoffSeed = playoffSeed,
     )
 

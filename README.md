@@ -1,8 +1,8 @@
 # espnff4j
 
 A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
-league settings, standings, rosters, weekly matchups and box scores, including ESPN's live scores, projections and win
-probabilities.
+league settings, standings, rosters, weekly matchups and box scores (with ESPN's live scores, projections and win
+probabilities), transactions, free agents and player search.
 
 ## Usage
 
@@ -18,12 +18,19 @@ val client = EspnFantasyFootball.client(
 }
 
 val league: League = client.getLeague()   // settings, plus league.currentWeek
-val standings: List<Team> = client.getStandingsForWeek(week = 3)
+val standings: List<Team> = client.getStandingsForWeek(week = 3) // records, points for/against, streaks, owners
 val matchups: List<MatchupInfo> = client.getMatchupsForWeek(week = 3)
 val rosters: List<TeamRoster> = client.getRostersForWeek(week = 3)   // lineups, injuries, points
 val boxScores: List<BoxScore> = client.getBoxScoresForWeek(week = 3) // matchups plus both lineups
 rosters.first().starters.forEach { println("${it.lineupSlot} ${it.name} (${it.proTeam}) ${it.points ?: "-"}") }
+
+val moves: List<Transaction> = client.getTransactionsForWeek(week = 3) // pickups, waiver claims, trades
+val bestRbs: List<Player> = client.getFreeAgents(week = 3, position = Position.RB, limit = 10)
+val found: List<Player> = client.searchPlayers("josh al", week = 3)  // player.team: who rosters them
 ```
+
+Free agents include players on waivers and are ordered by ESPN's projection for the week. Search
+matches the start of a player's full name or surname.
 
 Weeks are NFL weeks (ESPN "scoring periods"). If a league stretches a playoff round over two weeks,
 both weeks return that round's matchups.
