@@ -1,8 +1,9 @@
 package com.thomandretti.espnff4j
 
-import com.thomandretti.espnff4j.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
+import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
 import com.thomandretti.espnff4j.model.MatchupOutcome
-import com.thomandretti.espnff4j.model.ScheduleResponse
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -31,7 +32,7 @@ class EspnLiveResponseTest {
         }
         val espn = mock<EspnFantasyFootballClient>()
         whenever(espn.getScheduleAtWeek(any(), any(), any(), anyVararg())).thenReturn(call)
-        return FantasyFootballClient(espn, seasonId = 2026, leagueId = 12345)
+        return FantasyFootballClient.create(espn, seasonId = 2026, leagueId = 12345)
     }
 
     private fun response(): ScheduleResponse =
@@ -70,7 +71,7 @@ class EspnLiveResponseTest {
 
     @Test
     fun `an unplayed week parses as undecided`() {
-        response().schedule.forEach { assertEquals(MatchupOutcome.UNDECIDED, MatchupOutcome.parse(it.winner)) }
+        response().schedule.forEach { assertEquals(MatchupOutcome.UNDECIDED, it.outcome) }
     }
 
     @Test

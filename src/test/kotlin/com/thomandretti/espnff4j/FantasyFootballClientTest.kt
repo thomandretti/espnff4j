@@ -1,15 +1,15 @@
 package com.thomandretti.espnff4j
 
-import com.thomandretti.espnff4j.espn.EspnFantasyFootballClient
-import com.thomandretti.espnff4j.model.LeagueSettings
-import com.thomandretti.espnff4j.model.Matchup
-import com.thomandretti.espnff4j.model.MatchupTeam
+import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.LeagueSettings
+import com.thomandretti.espnff4j.internal.espn.Matchup
+import com.thomandretti.espnff4j.internal.espn.MatchupTeam
+import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
+import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
+import com.thomandretti.espnff4j.internal.espn.TeamsResponse
 import com.thomandretti.espnff4j.model.Record
 import com.thomandretti.espnff4j.model.RecordPart
-import com.thomandretti.espnff4j.model.ScheduleResponse
-import com.thomandretti.espnff4j.model.ScheduleSettings
 import com.thomandretti.espnff4j.model.Team
-import com.thomandretti.espnff4j.model.TeamsResponse
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class FantasyFootballClientTest {
     private val espnClient = mock<EspnFantasyFootballClient>()
-    private val client = FantasyFootballClient(espnClient, seasonId = 2024, leagueId = 123)
+    private val client = FantasyFootballClient.create(espnClient, seasonId = 2024, leagueId = 123)
 
     private fun team(
         id: Int,

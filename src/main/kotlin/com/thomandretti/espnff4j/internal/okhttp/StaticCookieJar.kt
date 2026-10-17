@@ -1,4 +1,4 @@
-package com.thomandretti.espnff4j.okhttp
+package com.thomandretti.espnff4j.internal.okhttp
 
 import okhttp3.Cookie
 import okhttp3.CookieJar

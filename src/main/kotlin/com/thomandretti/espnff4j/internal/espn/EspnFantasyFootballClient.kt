@@ -1,8 +1,5 @@
-package com.thomandretti.espnff4j.espn
+package com.thomandretti.espnff4j.internal.espn
 
-import com.thomandretti.espnff4j.model.LeagueResponse
-import com.thomandretti.espnff4j.model.ScheduleResponse
-import com.thomandretti.espnff4j.model.TeamsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,7 +1,8 @@
 # espnff4j
 
-A small Kotlin client for the (unofficial, undocumented) ESPN Fantasy Football API: league standings
-and weekly matchups, including ESPN's live scores, projections and win probabilities.
+A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
+league settings, standings and weekly matchups, including ESPN's live scores, projections and win
+probabilities.
 
 ## Usage
 
@@ -24,9 +25,20 @@ val matchups: List<MatchupInfo> = client.getMatchupsForWeek(week = 3)
 Weeks are NFL weeks (ESPN "scoring periods"). If a league stretches a playoff round over two weeks,
 both weeks return that round's matchups.
 
-All calls are `suspend` functions. Requests that fail with a 5xx or a connection error are retried
+From Java, use the `*Async` variants, which return a `CompletableFuture`:
+
+```java
+FantasyFootballClient client = EspnFantasyFootball.client(2026, 12345, credentials, EspnFantasyFootballKt.ESPN_BASE_URL,
+    builder -> builder.addInterceptor(myMetricsInterceptor));   // or just client(2026, 12345)
+
+League league = client.getLeagueAsync().join();
+List<MatchupInfo> matchups = client.getMatchupsForWeekAsync(league.getCurrentWeek()).join();
+```
+
+Kotlin calls are `suspend` functions. Requests that fail with a 5xx or a connection error are retried
 up to three times with a short back-off. Failures are thrown as subclasses of the sealed
-`EspnException`:
+`EspnException`. From Java, the future completes exceptionally with one, which `join()` wraps in a
+`CompletionException`.
 
 - `EspnUnauthorizedException` (HTTP 401/403): a private league without valid cookies. ESPN gives the
   same answer for a league ID that doesn't exist.

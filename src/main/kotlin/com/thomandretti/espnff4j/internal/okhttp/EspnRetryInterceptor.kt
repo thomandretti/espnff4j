@@ -1,4 +1,4 @@
-package com.thomandretti.espnff4j.okhttp
+package com.thomandretti.espnff4j.internal.okhttp
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import okhttp3.Interceptor

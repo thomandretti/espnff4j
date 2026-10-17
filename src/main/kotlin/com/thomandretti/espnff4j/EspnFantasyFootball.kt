@@ -1,21 +1,15 @@
 package com.thomandretti.espnff4j
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.thomandretti.espnff4j.espn.EspnFantasyFootballClient
-import com.thomandretti.espnff4j.okhttp.EspnRetryInterceptor
-import com.thomandretti.espnff4j.okhttp.StaticCookieJar
+import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
+import com.thomandretti.espnff4j.internal.okhttp.EspnRetryInterceptor
+import com.thomandretti.espnff4j.internal.okhttp.StaticCookieJar
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
+import java.util.function.Consumer
 
 const val ESPN_BASE_URL = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/"
-
-internal val OBJECT_MAPPER: ObjectMapper =
-    ObjectMapper()
-        .registerModules(KotlinModule.Builder().build())
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
 /**
  * The `SWID` and `espn_s2` cookies from a logged-in ESPN session. Only private leagues need them.
@@ -34,12 +28,13 @@ object EspnFantasyFootball {
      * [configure] runs against the OkHttp builder after the library's own retry interceptor is added,
      * so callers can attach logging, metrics or timeouts without rebuilding the stack themselves.
      */
+    @JvmSynthetic
     fun client(
         seasonId: Int,
         leagueId: Int,
         credentials: EspnCredentials? = null,
         baseUrl: String = ESPN_BASE_URL,
-        configure: OkHttpClient.Builder.() -> Unit = {},
+        configure: OkHttpClient.Builder.() -> Unit,
     ): FantasyFootballClient {
         val httpClient =
             OkHttpClient
@@ -56,6 +51,21 @@ object EspnFantasyFootball {
                 .addConverterFactory(JacksonConverterFactory.create(OBJECT_MAPPER))
                 .build()
                 .create(EspnFantasyFootballClient::class.java)
-        return FantasyFootballClient(espnClient, seasonId, leagueId)
+        return FantasyFootballClient.create(espnClient, seasonId, leagueId)
     }
+
+    /**
+     * Builds a [FantasyFootballClient] for one league and season. This is the Java entry point, also
+     * used from Kotlin when there is nothing to configure; Kotlin callers configuring OkHttp get the
+     * receiver-lambda overload instead.
+     */
+    @JvmStatic
+    @JvmOverloads
+    fun client(
+        seasonId: Int,
+        leagueId: Int,
+        credentials: EspnCredentials? = null,
+        baseUrl: String = ESPN_BASE_URL,
+        configure: Consumer<OkHttpClient.Builder> = Consumer {},
+    ): FantasyFootballClient = client(seasonId, leagueId, credentials, baseUrl) { configure.accept(this) }
 }

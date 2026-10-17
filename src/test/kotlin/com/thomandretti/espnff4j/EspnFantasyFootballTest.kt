@@ -134,6 +134,15 @@ class EspnFantasyFootballTest {
     }
 
     @Test
+    fun `the async variants return the same results as the suspend functions`() {
+        server.enqueue(MockResponse().setBody(teamsBody))
+
+        val teams = client().getStandingsForWeekAsync(1).join()
+
+        assertEquals("Team A", teams.single().name)
+    }
+
+    @Test
     fun `sends no cookies when no credentials are given`() =
         runBlocking {
             server.enqueue(MockResponse().setBody(teamsBody))

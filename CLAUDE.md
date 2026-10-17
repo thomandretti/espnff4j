@@ -33,13 +33,13 @@ Request path, outermost first:
    (3 attempts, linear back-off, retries 5xx and `IOException` only), then the caller's `configure`
    block, which runs *after* the library's interceptors. Retrofit + Jackson (`OBJECT_MAPPER`, unknown
    properties ignored) produce the raw interface.
-2. `espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every endpoint hits the
-   same URL and differs only in the `view` query params (`mSettings`; `mRoster,mTeam`;
+2. `internal/espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every endpoint
+   hits the same URL and differs only in the `view` query params (`mSettings`; `mRoster,mTeam`;
    `mMatchupScore,mTeam,mSettings`).
-3. `FantasyFootballClient` — public `suspend` API; awaits the `Call`s and normalises ESPN's payload
-   into `model/` types (`*Response` classes are the raw ESPN shape; `League`/`MatchupInfo` are the
-   mapped public results). Standings are sorted by `playoffSeed`; matchups drop byes
-   (`away == null`) and join team IDs against the `teams` list.
+3. `FantasyFootballClient` — awaits the `Call`s and normalises the raw ESPN DTOs (`internal/espn/`,
+   `*Response` and friends) into the public `model/` types (`League`, `Team`, `MatchupInfo`, …).
+   Standings are sorted by `playoffSeed`; matchups drop byes (`away == null`) and join team IDs
+   against the `teams` list.
 
 ### Weeks vs matchup periods
 
@@ -49,11 +49,26 @@ playoff rounds, so `getMatchupsForWeek` converts using `settings.scheduleSetting
 (matchup period → list of scoring periods, from the `mSettings` view). If that mapping is missing it
 assumes they're equal.
 
-The public surface is deliberately small: the factory, `EspnCredentials`, `FantasyFootballClient` (internal
-constructor), the result models (`League`, `Team`, `MatchupInfo`, …) and the `EspnException` hierarchy.
-The Retrofit interface, OkHttp helpers and raw `*Response` DTOs are `internal`. Retrofit is an
-`implementation` dependency; OkHttp is `api` because `configure` exposes `OkHttpClient.Builder`, so keep
-its version in step with the one Retrofit pulls in.
+### Public API, from Kotlin and Java
+
+The public surface is deliberately small: the factory, `EspnCredentials`, `FantasyFootballClient`, the
+`model/` result types and the `EspnException` hierarchy. Everything else lives under
+`com.thomandretti.espnff4j.internal` and is Kotlin-`internal`.
+
+Java ignores Kotlin's `internal`, so the API is shaped for both languages, and `JavaInteropTest`
+(in `src/test/java`) fails to compile if Java usability breaks:
+
+- Each `suspend` call is `@JvmSynthetic`, so Java doesn't see it, and has a `*Async` twin returning
+  `CompletableFuture` (via `kotlinx.coroutines.future`). Add both when adding an operation.
+- `FantasyFootballClient` has a private constructor. The factory builds it through the companion's
+  `@JvmSynthetic internal fun create`, which tests use too.
+- The factory has a `@JvmSynthetic` Kotlin overload taking an `OkHttpClient.Builder.() -> Unit`
+  receiver lambda, and a `@JvmStatic @JvmOverloads` one taking a `Consumer<OkHttpClient.Builder>` for
+  Java (and for Kotlin calls with no lambda).
+
+Retrofit is an `implementation` dependency; OkHttp is `api` because `configure` exposes
+`OkHttpClient.Builder`, so keep its version in step with the one Retrofit pulls in.
+`kotlinx-coroutines-core` is a runtime requirement (Retrofit's `await()` and the futures use it).
 
 Every client call goes through `awaitEspn()`, which maps failures to the sealed `EspnException`:
 401/403 → `EspnUnauthorizedException` (ESPN also returns 401 for a league that doesn't exist, so it

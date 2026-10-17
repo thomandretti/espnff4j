@@ -1,4 +1,4 @@
-package com.thomandretti.espnff4j.model
+package com.thomandretti.espnff4j.internal.espn
 
 internal data class MatchupTeam(
     val teamId: Int,
