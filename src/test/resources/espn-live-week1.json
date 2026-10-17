@@ -1,0 +1,636 @@
+{
+  "teams": [
+    {
+      "abbrev": "ALPH",
+      "id": 1,
+      "name": "Team Alpha",
+      "playoffSeed": 10,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "BRAV",
+      "id": 2,
+      "name": "Team Bravo",
+      "playoffSeed": 9,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "CHAR",
+      "id": 3,
+      "name": "Team Charlie",
+      "playoffSeed": 8,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "DELT",
+      "id": 4,
+      "name": "Team Delta",
+      "playoffSeed": 7,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "ECHO",
+      "id": 5,
+      "name": "Team Echo",
+      "playoffSeed": 6,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "FOXT",
+      "id": 6,
+      "name": "Team Foxtrot",
+      "playoffSeed": 5,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "GOLF",
+      "id": 7,
+      "name": "Team Golf",
+      "playoffSeed": 4,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "HOTE",
+      "id": 8,
+      "name": "Team Hotel",
+      "playoffSeed": 3,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "INDI",
+      "id": 9,
+      "name": "Team India",
+      "playoffSeed": 2,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    },
+    {
+      "abbrev": "JULI",
+      "id": 10,
+      "name": "Team Juliet",
+      "playoffSeed": 1,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 0.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      }
+    }
+  ],
+  "schedule": [
+    {
+      "away": {
+        "teamId": 2,
+        "totalPoints": 0.0,
+        "totalPointsLive": 9.82,
+        "totalProjectedPoints": 117.77751316,
+        "totalProjectedPointsLive": 111.34522521,
+        "winProbability": 0.45
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 0.0,
+        "totalPointsLive": 0.0,
+        "totalProjectedPoints": 122.02109543,
+        "totalProjectedPointsLive": 122.02109543,
+        "winProbability": 0.55
+      },
+      "id": 1,
+      "matchupPeriodId": 1,
+      "playoffTierType": "NONE",
+      "winner": "UNDECIDED"
+    },
+    {
+      "away": {
+        "teamId": 7,
+        "totalPoints": 0.0,
+        "totalPointsLive": 7.0,
+        "totalProjectedPoints": 120.11366832,
+        "totalProjectedPointsLive": 122.45885921,
+        "winProbability": 0.48
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 0.0,
+        "totalPointsLive": 0.0,
+        "totalProjectedPoints": 126.67066405,
+        "totalProjectedPointsLive": 126.67066405,
+        "winProbability": 0.52
+      },
+      "id": 2,
+      "matchupPeriodId": 1,
+      "playoffTierType": "NONE",
+      "winner": "UNDECIDED"
+    },
+    {
+      "away": {
+        "teamId": 8,
+        "totalPoints": 0.0,
+        "totalPointsLive": 26.2,
+        "totalProjectedPoints": 120.14690947,
+        "totalProjectedPointsLive": 127.42581556,
+        "winProbability": 0.53
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 0.0,
+        "totalPointsLive": 0.0,
+        "totalProjectedPoints": 120.94549686,
+        "totalProjectedPointsLive": 120.94549686,
+        "winProbability": 0.47
+      },
+      "id": 3,
+      "matchupPeriodId": 1,
+      "playoffTierType": "NONE",
+      "winner": "UNDECIDED"
+    },
+    {
+      "away": {
+        "teamId": 5,
+        "totalPoints": 0.0,
+        "totalPointsLive": 7.8,
+        "totalProjectedPoints": 109.93002918,
+        "totalProjectedPointsLive": 104.1086753,
+        "winProbability": 0.37
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 0.0,
+        "totalPointsLive": 14.5,
+        "totalProjectedPoints": 127.61708412,
+        "totalProjectedPointsLive": 128.14622304,
+        "winProbability": 0.63
+      },
+      "id": 4,
+      "matchupPeriodId": 1,
+      "playoffTierType": "NONE",
+      "winner": "UNDECIDED"
+    },
+    {
+      "away": {
+        "teamId": 10,
+        "totalPoints": 0.0,
+        "totalPointsLive": 0.0,
+        "totalProjectedPoints": 112.72182975,
+        "totalProjectedPointsLive": 112.72182975,
+        "winProbability": 0.5
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 0.0,
+        "totalPointsLive": 26.6,
+        "totalProjectedPoints": 117.10199004,
+        "totalProjectedPointsLive": 112.91568748,
+        "winProbability": 0.5
+      },
+      "id": 5,
+      "matchupPeriodId": 1,
+      "playoffTierType": "NONE",
+      "winner": "UNDECIDED"
+    }
+  ]
+}

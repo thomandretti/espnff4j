@@ -1,0 +1,55 @@
+package com.thomandretti.espnff4j
+
+import com.thomandretti.espnff4j.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.model.MatchupInfo
+import com.thomandretti.espnff4j.model.MatchupOutcome
+import com.thomandretti.espnff4j.model.MatchupTeam
+import com.thomandretti.espnff4j.model.Team
+import retrofit2.await
+
+class FantasyFootballClient(
+    private val espnClient: EspnFantasyFootballClient,
+    private val seasonId: Int,
+    private val leagueId: Int,
+) {
+    suspend fun getStandingsForWeek(week: Long): List<Team> =
+        espnClient
+            .getTeamsAtWeek(seasonId, leagueId, week)
+            .await()
+            .teams
+            .sortedBy { it.playoffSeed }
+
+    suspend fun getMatchupsForWeek(week: Long): List<MatchupInfo> {
+        val response = espnClient.getScheduleAtWeek(seasonId, leagueId, week).await()
+        val teamsById = response.teams.associateBy { it.id }
+        return response.schedule
+            .filter { it.matchupPeriodId == week.toInt() && it.away != null }
+            .mapNotNull { matchup ->
+                val homeTeam = teamsById[matchup.home.teamId] ?: return@mapNotNull null
+                val awayTeam = teamsById[matchup.away!!.teamId] ?: return@mapNotNull null
+                MatchupInfo(
+                    homeTeam = homeTeam,
+                    homeScore = matchup.home.liveTotal(),
+                    awayTeam = awayTeam,
+                    awayScore = matchup.away.liveTotal(),
+                    homeProjected = matchup.home.projectedTotal(),
+                    awayProjected = matchup.away.projectedTotal(),
+                    espnHomeWinProbability = matchup.home.winProbability,
+                    outcome = MatchupOutcome.parse(matchup.winner),
+                )
+            }
+    }
+
+    /**
+     * Points on the board right now. ESPN keeps `totalPoints` at zero for the whole of a live
+     * week and reports the running score in `totalPointsLive`, then does the reverse once the
+     * week settles and drops the live field. Reading only `totalPoints` shows 0.00 all week.
+     */
+    private fun MatchupTeam.liveTotal(): Double = totalPointsLive ?: totalPoints
+
+    /**
+     * The live projection tracks players as their games finish, so it is preferred over the
+     * pre-week figure. Both vanish once ESPN settles the week.
+     */
+    private fun MatchupTeam.projectedTotal(): Double? = totalProjectedPointsLive ?: totalProjectedPoints
+}
