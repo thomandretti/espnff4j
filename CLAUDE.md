@@ -5,8 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A small Kotlin/JVM library (Java 21 toolchain) wrapping the unofficial, undocumented ESPN Fantasy
-Football API. Two public operations: league standings and weekly matchups (with live scores,
-projections and ESPN win probabilities).
+Football API. Public operations: league settings and season state (`getLeague`), standings, and
+weekly matchups (with live scores, projections and ESPN win probabilities).
 
 ## Commands
 
@@ -33,11 +33,21 @@ Request path, outermost first:
    (3 attempts, linear back-off, retries 5xx and `IOException` only), then the caller's `configure`
    block, which runs *after* the library's interceptors. Retrofit + Jackson (`OBJECT_MAPPER`, unknown
    properties ignored) produce the raw interface.
-2. `espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Both endpoints hit the
-   same URL and differ only in the `view` query params (`mRoster,mTeam` vs `mMatchupScore,mTeam`).
+2. `espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every endpoint hits the
+   same URL and differs only in the `view` query params (`mSettings`; `mRoster,mTeam`;
+   `mMatchupScore,mTeam,mSettings`).
 3. `FantasyFootballClient` — public `suspend` API; awaits the `Call`s and normalises ESPN's payload
-   into `model/` types. Standings are sorted by `playoffSeed`; matchups are filtered to the requested
-   `matchupPeriodId`, drop byes (`away == null`), and join team IDs against the `teams` list.
+   into `model/` types (`*Response` classes are the raw ESPN shape; `League`/`MatchupInfo` are the
+   mapped public results). Standings are sorted by `playoffSeed`; matchups drop byes
+   (`away == null`) and join team IDs against the `teams` list.
+
+### Weeks vs matchup periods
+
+The public API's `week` is an NFL week, which ESPN calls a *scoring period* (`scoringPeriodId`).
+Schedule entries are keyed by *matchup period* instead. The two match one-to-one except in multi-week
+playoff rounds, so `getMatchupsForWeek` converts using `settings.scheduleSettings.matchupPeriods`
+(matchup period → list of scoring periods, from the `mSettings` view). If that mapping is missing it
+assumes they're equal.
 
 `retrofit` is an `api` dependency because Retrofit and `OkHttpClient.Builder` types appear in the public
 API.
@@ -57,9 +67,10 @@ model fields nullable/defaulted unless ESPN always sends them.
 
 ## Testing notes
 
-- `EspnLiveResponseTest` deserialises a captured, anonymised live payload
-  (`src/test/resources/espn-live-week1.json`) to pin the model against the real API shape. Refresh or
-  add fixtures rather than hand-writing payloads when ESPN changes something.
+- Fixtures in `src/test/resources/` are trimmed, anonymised captures of real ESPN responses
+  (`espn-live-week1.json` for a live `mMatchupScore` week, `espn-league-settings.json` for `mSettings`).
+  They pin the model against the real API shape. Refresh or add captures rather than hand-writing
+  payloads when ESPN changes something, and replace league IDs and names before committing.
 - `EspnFantasyFootballTest` exercises the full factory stack against `MockWebServer` (pass its URL as
   `baseUrl`).
 - When mocking `Call<T>` with Mockito, stub `enqueue()` — `retrofit2.await()` resumes from the

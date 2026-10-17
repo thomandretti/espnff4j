@@ -67,6 +67,32 @@ class EspnFantasyFootballTest {
         }
 
     @Test
+    fun `getLeague reads the season state from a real mSettings payload`() =
+        runBlocking {
+            // A trimmed capture of a live mSettings response (league id and name anonymised).
+            val fixture =
+                checkNotNull(javaClass.getResource("/espn-league-settings.json")) { "missing ESPN fixture" }
+            server.enqueue(MockResponse().setBody(fixture.readText()))
+
+            val league = client().getLeague()
+
+            assertEquals(12345, league.id)
+            assertEquals("Test League", league.name)
+            assertEquals(10, league.size)
+            assertEquals("H2H_POINTS", league.scoringType)
+            assertEquals(6, league.currentWeek)
+            assertEquals(6, league.currentMatchupPeriod)
+            assertEquals(1, league.firstWeek)
+            assertEquals(17, league.finalWeek)
+            assertEquals(14, league.regularSeasonMatchupPeriods)
+            assertEquals(6, league.playoffTeamCount)
+            assertEquals(listOf(16), league.matchupPeriods[16])
+            assertTrue(league.isActive)
+            val path = requireNotNull(server.takeRequest().path)
+            assertTrue(path.startsWith("/seasons/2026/segments/0/leagues/12345?view=mSettings"), path)
+        }
+
+    @Test
     fun `sends no cookies when no credentials are given`() =
         runBlocking {
             server.enqueue(MockResponse().setBody(teamsBody))

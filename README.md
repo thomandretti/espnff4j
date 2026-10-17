@@ -16,11 +16,15 @@ val client = EspnFantasyFootball.client(
     addInterceptor(myMetricsInterceptor)
 }
 
+val league: League = client.getLeague()   // settings, plus league.currentWeek
 val standings: List<Team> = client.getStandingsForWeek(week = 3)
 val matchups: List<MatchupInfo> = client.getMatchupsForWeek(week = 3)
 ```
 
-Both calls are `suspend` functions. Requests that fail with a 5xx or a connection error are retried
+Weeks are NFL weeks (ESPN "scoring periods"). If a league stretches a playoff round over two weeks,
+both weeks return that round's matchups.
+
+All calls are `suspend` functions. Requests that fail with a 5xx or a connection error are retried
 up to three times with a short back-off.
 
 ### Finding your league ID and cookies

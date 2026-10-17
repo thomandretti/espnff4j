@@ -1,9 +1,11 @@
 package com.thomandretti.espnff4j
 
 import com.thomandretti.espnff4j.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.model.League
 import com.thomandretti.espnff4j.model.MatchupInfo
 import com.thomandretti.espnff4j.model.MatchupOutcome
 import com.thomandretti.espnff4j.model.MatchupTeam
+import com.thomandretti.espnff4j.model.ScheduleSettings
 import com.thomandretti.espnff4j.model.Team
 import retrofit2.await
 
@@ -12,6 +14,27 @@ class FantasyFootballClient(
     private val seasonId: Int,
     private val leagueId: Int,
 ) {
+    /** League settings and where the season stands, including the current week. */
+    suspend fun getLeague(): League {
+        val response = espnClient.getLeague(seasonId, leagueId).await()
+        val schedule = response.settings.scheduleSettings ?: ScheduleSettings()
+        return League(
+            id = response.id,
+            seasonId = response.seasonId,
+            name = response.settings.name,
+            size = response.settings.size,
+            scoringType = response.settings.scoringSettings?.scoringType,
+            currentWeek = response.scoringPeriodId,
+            firstWeek = response.status.firstScoringPeriod,
+            finalWeek = response.status.finalScoringPeriod,
+            currentMatchupPeriod = response.status.currentMatchupPeriod,
+            regularSeasonMatchupPeriods = schedule.matchupPeriodCount,
+            playoffTeamCount = schedule.playoffTeamCount,
+            matchupPeriods = schedule.matchupPeriods,
+            isActive = response.status.isActive,
+        )
+    }
+
     suspend fun getStandingsForWeek(week: Long): List<Team> =
         espnClient
             .getTeamsAtWeek(seasonId, leagueId, week)

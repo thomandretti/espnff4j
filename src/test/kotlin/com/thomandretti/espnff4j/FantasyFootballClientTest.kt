@@ -168,7 +168,9 @@ class FantasyFootballClientTest {
                     Matchup(matchupPeriodId = 15, home = matchupTeam(1, 100.0), away = matchupTeam(2, 90.0)),
                 )
             val settings =
-                LeagueSettings(ScheduleSettings(mapOf(14 to listOf(14), 15 to listOf(15, 16))))
+                LeagueSettings(
+                    scheduleSettings = ScheduleSettings(matchupPeriods = mapOf(14 to listOf(14), 15 to listOf(15, 16))),
+                )
             stubSchedule(ScheduleResponse(schedule = schedule, teams = teams, settings = settings), week = 16L)
 
             val result = client.getMatchupsForWeek(16L)

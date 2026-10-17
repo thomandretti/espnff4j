@@ -1,5 +1,6 @@
 package com.thomandretti.espnff4j.espn
 
+import com.thomandretti.espnff4j.model.LeagueResponse
 import com.thomandretti.espnff4j.model.ScheduleResponse
 import com.thomandretti.espnff4j.model.TeamsResponse
 import retrofit2.Call
@@ -8,6 +9,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface EspnFantasyFootballClient {
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getLeague(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        @Query("view") vararg views: String = arrayOf("mSettings"),
+    ): Call<LeagueResponse>
+
     @GET("{seasonId}/segments/0/leagues/{leagueId}")
     fun getTeamsAtWeek(
         @Path("seasonId") seasonId: Int,
