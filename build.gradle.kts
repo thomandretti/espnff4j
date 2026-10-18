@@ -1,9 +1,15 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinJvm
+
 plugins {
     kotlin("jvm") version "2.4.21"
     `java-library`
-    `maven-publish`
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
+    // Builds the javadoc jar Maven Central requires from the KDoc.
+    id("org.jetbrains.dokka") version "2.2.0"
+    // Sources and javadoc jars, signing, POM checks and the Central Portal upload.
+    id("com.vanniktech.maven.publish") version "0.37.0"
 }
 
 repositories {
@@ -32,10 +38,6 @@ kotlin {
     jvmToolchain(21)
 }
 
-java {
-    withSourcesJar()
-}
-
 tasks.test {
     useJUnitPlatform { excludeTags("live") }
 }
@@ -58,24 +60,48 @@ tasks.check {
     dependsOn("detekt", "ktlintCheck")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            pom {
-                name.set("espnff4j")
-                description.set("Kotlin client for the ESPN Fantasy Football API")
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
+mavenPublishing {
+    configure(KotlinJvm(javadocJar = JavadocJar.Dokka("dokkaGeneratePublicationHtml"), sourcesJar = true))
+    publishToMavenCentral()
+    // Only when a key is configured, so publishToMavenLocal works without one.
+    if (providers.gradleProperty("signingInMemoryKey").isPresent) signAllPublications()
+    coordinates(group.toString(), "espnff4j", version.toString())
+
+    pom {
+        name.set("espnff4j")
+        description.set("Kotlin client, usable from Java, for the unofficial ESPN Fantasy Football API")
+        url.set("https://github.com/thomandretti/espnff4j")
+        inceptionYear.set("2026")
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("repo")
             }
         }
+        developers {
+            developer {
+                id.set("thomandretti")
+                name.set("Thom Andretti")
+                url.set("https://github.com/thomandretti")
+            }
+        }
+        scm {
+            url.set("https://github.com/thomandretti/espnff4j")
+            connection.set("scm:git:https://github.com/thomandretti/espnff4j.git")
+            developerConnection.set("scm:git:ssh://git@github.com/thomandretti/espnff4j.git")
+        }
+        issueManagement {
+            system.set("GitHub")
+            url.set("https://github.com/thomandretti/espnff4j/issues")
+        }
     }
+}
+
+publishing {
     repositories {
-        // Set MAVEN_REPO_URL, MAVEN_REPO_USER and MAVEN_REPO_TOKEN to publish anywhere other than mavenLocal.
+        // Set MAVEN_REPO_URL, MAVEN_REPO_USER and MAVEN_REPO_TOKEN to also publish to a plain Maven repository,
+        // such as a private package registry.
         System.getenv("MAVEN_REPO_URL")?.let { repoUrl ->
             maven {
                 name = "remote"

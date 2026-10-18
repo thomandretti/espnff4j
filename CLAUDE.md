@@ -226,7 +226,21 @@ model fields nullable/defaulted unless ESPN always sends them.
 
 ## Release
 
-CI (`.github/workflows/build.yml`) runs `./gradlew check` on PRs and pushes to `main`. Pushing a
-`vX.Y.Z` tag publishes `X.Y.Z` (via `-Pversion`, overriding `gradle.properties`) only when the
-`MAVEN_REPO_URL` / `MAVEN_REPO_USER` variables and `MAVEN_REPO_TOKEN` secret are set. CI can't run
-`liveTest`, so run it locally before tagging.
+CI (`.github/workflows/build.yml`) runs `./gradlew check` on PRs and pushes to `main`. The same file runs on
+GitHub (the public home, `github.com/thomandretti/espnff4j`) and on a private mirror, and each publish job is opt-in by
+repository variable. Pushing a `vX.Y.Z` tag publishes `X.Y.Z` (via `-Pversion`, overriding
+`gradle.properties`) wherever these are set:
+
+- `publish-central`: the `MAVEN_CENTRAL_USERNAME` variable and the `MAVEN_CENTRAL_PASSWORD`, `SIGNING_KEY`
+  and `SIGNING_KEY_PASSWORD` secrets (a Central Portal user token and an ASCII-armoured GPG private key).
+  It runs `publishToMavenCentral` via the `com.vanniktech.maven.publish` plugin, which uploads and
+  validates but leaves the deployment for a manual "Publish" at central.sonatype.com. A Central release
+  can never be deleted or replaced, so check the deployment before publishing it.
+- `publish`: the `MAVEN_REPO_URL` / `MAVEN_REPO_USER` variables and `MAVEN_REPO_TOKEN` secret, for a plain
+  Maven repository (a private package registry). It runs
+  `publishAllPublicationsToRemoteRepository`, not `publish`: plain `publish` also tries Central and
+  fails without its credentials.
+
+Signing only happens when `signingInMemoryKey` is set, so `publishToMavenLocal` needs no key. The javadoc
+jar is Dokka HTML of the public API; Kotlin-`internal` declarations are left out. CI can't run `liveTest`,
+so run it locally before tagging.

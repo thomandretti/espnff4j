@@ -1,5 +1,7 @@
 # espnff4j
 
+[![Build](https://github.com/thomandretti/espnff4j/actions/workflows/build.yml/badge.svg)](https://github.com/thomandretti/espnff4j/actions/workflows/build.yml)
+
 A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
 league settings, standings, rosters, weekly matchups and box scores (with ESPN's live scores, projections and win
 probabilities), transactions and pending trades, waiver order, free agents and player search, a player's
@@ -131,8 +133,8 @@ It brings OkHttp, Retrofit, Jackson and kotlinx-coroutines in at runtime. Kotlin
 ESPN_LEAGUE_ID=12345 ESPN_SWID=... ESPN_S2=... ./gradlew liveTest   # every call against the real API
 ```
 
-Tagging `vX.Y.Z` publishes version `X.Y.Z` from CI when the `MAVEN_REPO_URL` / `MAVEN_REPO_USER`
-repository variables and `MAVEN_REPO_TOKEN` secret are set; otherwise the publish job is skipped.
+Tagging `vX.Y.Z` makes CI publish version `X.Y.Z`, to Maven Central and/or a plain Maven repository,
+depending on which repository variables and secrets are set. See `.github/workflows/build.yml`.
 
 ## Disclaimer
 
