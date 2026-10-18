@@ -123,6 +123,7 @@ It brings OkHttp, Retrofit, Jackson and kotlinx-coroutines in at runtime. Kotlin
 ```bash
 ./gradlew ktlintFormat   # fix formatting
 ./gradlew check          # tests + ktlint + detekt
+ESPN_LEAGUE_ID=12345 ESPN_SWID=... ESPN_S2=... ./gradlew liveTest   # every call against the real API
 ```
 
 Tagging `vX.Y.Z` publishes version `X.Y.Z` from CI when the `MAVEN_REPO_URL` / `MAVEN_REPO_USER`

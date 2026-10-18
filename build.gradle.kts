@@ -37,7 +37,21 @@ java {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform { excludeTags("live") }
+}
+
+// Calls the real ESPN API, so it's never part of check. See EspnLiveSmokeTest for the variables it needs.
+val liveTest by tasks.registering(Test::class) {
+    description = "Runs the live smoke tests against ESPN."
+    group = "verification"
+    testClassesDirs =
+        sourceSets.test
+            .get()
+            .output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    useJUnitPlatform { includeTags("live") }
+    // ESPN's answers change; never treat a previous run as up to date.
+    outputs.upToDateWhen { false }
 }
 
 tasks.check {

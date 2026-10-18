@@ -21,6 +21,7 @@ league history, via a client per past season), the draft, and NFL game times.
 ./gradlew ktlintFormat          # auto-fix formatting before ktlintCheck
 ./gradlew detekt
 ./gradlew publishToMavenLocal   # consume locally as com.thomandretti:espnff4j:<version>
+ESPN_LEAGUE_ID=... ESPN_SWID=... ESPN_S2=... ./gradlew liveTest   # real ESPN calls; never part of check
 ```
 
 ktlint uses `kotlin.code.style=official` with a 120-column limit (`.editorconfig`). detekt runs on its
@@ -183,6 +184,11 @@ model fields nullable/defaulted unless ESPN always sends them.
   season). They pin the model against the real API shape. Refresh or add captures rather than
   hand-writing payloads when ESPN changes something. Before committing, replace the league ID, team
   and member names, logos and every SWID (the `{...}` member and owner IDs).
+- `EspnLiveSmokeTest` (tag `live`, run by `liveTest` and excluded from `test`) calls every operation against
+  the real API for the current week and the last completed season. Run it before tagging a release:
+  fixtures only pin the shapes ESPN sent when captured, which is how 0.3.0 shipped broken. It takes the
+  league ID and cookies from the environment only; keep them out of the repo. Test methods must return
+  Unit (end on an assertion, not a value), or JUnit silently skips them.
 - `EspnFantasyFootballTest` exercises the full factory stack against `MockWebServer` (pass its URL as
   `baseUrl`).
 - When mocking `Call<T>` with Mockito, stub `enqueue()` — `retrofit2.await()` resumes from the
@@ -195,4 +201,5 @@ model fields nullable/defaulted unless ESPN always sends them.
 
 CI (`.github/workflows/build.yml`) runs `./gradlew check` on PRs and pushes to `main`. Pushing a
 `vX.Y.Z` tag publishes `X.Y.Z` (via `-Pversion`, overriding `gradle.properties`) only when the
-`MAVEN_REPO_URL` / `MAVEN_REPO_USER` variables and `MAVEN_REPO_TOKEN` secret are set.
+`MAVEN_REPO_URL` / `MAVEN_REPO_USER` variables and `MAVEN_REPO_TOKEN` secret are set. CI can't run
+`liveTest`, so run it locally before tagging.
