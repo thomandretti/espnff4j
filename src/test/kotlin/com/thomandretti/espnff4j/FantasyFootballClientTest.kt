@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class FantasyFootballClientTest {
     private val espnClient = mock<EspnFantasyFootballClient>()
-    private val client = FantasyFootballClient.create(espnClient, seasonId = 2024, leagueId = 123)
+    private val client = FantasyFootballClient.create(espnClient, mock(), seasonId = 2024, leagueId = 123)
 
     private fun team(
         id: Int,

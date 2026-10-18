@@ -66,6 +66,12 @@ class EspnLiveSmokeTest {
             assertTrue(client.getFreeAgents(week, limit = 5).isNotEmpty())
             val rostered = client.getRostersForWeek(week).flatMap { it.players }.first()
             assertTrue(client.searchPlayers(rostered.name, week).any { it.id == rostered.id }, rostered.name)
+            val detail = checkNotNull(client.getPlayer(rostered.id)) { "no detail for ${rostered.name}" }
+            assertTrue(
+                detail.weeks.map { it.week }.containsAll((league.firstWeek..league.finalWeek).toList()),
+                "${rostered.name} is missing weeks: ${detail.weeks.map { it.week }}",
+            )
+            assertTrue(detail.news.isNotEmpty(), "no news for ${rostered.name}")
             assertTrue(client.getNflGamesForWeek(week).isNotEmpty())
             assertTrue(client.getSchedule().isNotEmpty())
             // Ending on an assertion keeps the method void; JUnit silently skips a test that returns a value.

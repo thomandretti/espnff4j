@@ -1,6 +1,7 @@
 package com.thomandretti.espnff4j.internal.espn
 
 import com.thomandretti.espnff4j.model.InjuryStatus
+import com.thomandretti.espnff4j.model.PlayerWeek
 import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.RosterPlayer
 import com.thomandretti.espnff4j.model.TeamRoster
@@ -115,6 +116,15 @@ internal data class EspnPlayer(
         seasonId: Int,
         week: Int,
     ): Double? = weekTotal(seasonId, week, STAT_SOURCE_PROJECTED)
+
+    /** Every week of [seasonId] with an actual or projected figure, in order. */
+    fun weeks(seasonId: Int): List<PlayerWeek> =
+        stats
+            .filter { it.seasonId == seasonId && it.scoringPeriodId > 0 && it.statSplitTypeId == STAT_SPLIT_WEEK }
+            .map { it.scoringPeriodId }
+            .distinct()
+            .sorted()
+            .map { PlayerWeek(it, weekPoints(seasonId, it), weekProjection(seasonId, it)) }
 
     private fun weekTotal(
         seasonId: Int,

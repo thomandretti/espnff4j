@@ -32,7 +32,7 @@ class EspnLiveResponseTest {
         }
         val espn = mock<EspnFantasyFootballClient>()
         whenever(espn.getScheduleAtWeek(any(), any(), any(), anyVararg())).thenReturn(call)
-        return FantasyFootballClient.create(espn, seasonId = 2026, leagueId = 12345)
+        return FantasyFootballClient.create(espn, mock(), seasonId = 2026, leagueId = 12345)
     }
 
     private fun response(): ScheduleResponse =

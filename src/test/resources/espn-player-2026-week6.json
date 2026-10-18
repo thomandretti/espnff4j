@@ -1,0 +1,428 @@
+{
+  "players": [
+    {
+      "draftAuctionValue": 0,
+      "droppedByEliminatedTeam": false,
+      "id": 4427366,
+      "keeperValue": 5,
+      "keeperValueFuture": 3,
+      "lineupLocked": true,
+      "onTeamId": 2,
+      "player": {
+        "active": true,
+        "defaultPositionId": 2,
+        "droppable": true,
+        "eligibleSlots": [
+          2,
+          3,
+          23,
+          7,
+          20,
+          21
+        ],
+        "firstName": "Breece",
+        "fullName": "Breece Hall",
+        "id": 4427366,
+        "injured": true,
+        "injuryStatus": "OUT",
+        "jersey": "20",
+        "lastName": "Hall",
+        "lastNewsDate": 1792164590000,
+        "lastVideoDate": 1789343761000,
+        "ownership": {
+          "activityLevel": null,
+          "auctionValueAverage": 19.73,
+          "auctionValueAverageChange": -0.52,
+          "averageDraftPosition": 56.46,
+          "averageDraftPositionPercentChange": -0.79,
+          "date": 1792294225126,
+          "leagueType": 0,
+          "percentChange": -0.12,
+          "percentOwned": 95.86,
+          "percentStarted": 13.74
+        },
+        "proTeamId": 20,
+        "stats": [
+          {
+            "appliedTotal": 0.0,
+            "externalId": "202613",
+            "id": "11202613",
+            "proTeamId": 0,
+            "scoringPeriodId": 13,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 15.79237533,
+            "externalId": "20262",
+            "id": "1120262",
+            "proTeamId": 0,
+            "scoringPeriodId": 2,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 16.49959332,
+            "externalId": "20261",
+            "id": "1120261",
+            "proTeamId": 0,
+            "scoringPeriodId": 1,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 16.25073616,
+            "externalId": "202612",
+            "id": "11202612",
+            "proTeamId": 0,
+            "scoringPeriodId": 12,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 16.68958993,
+            "externalId": "202615",
+            "id": "11202615",
+            "proTeamId": 0,
+            "scoringPeriodId": 15,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 0.0,
+            "externalId": "20264",
+            "id": "1120264",
+            "proTeamId": 0,
+            "scoringPeriodId": 4,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 15.23330048,
+            "externalId": "202614",
+            "id": "11202614",
+            "proTeamId": 0,
+            "scoringPeriodId": 14,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 16.16674747,
+            "externalId": "20263",
+            "id": "1120263",
+            "proTeamId": 0,
+            "scoringPeriodId": 3,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 0.0,
+            "externalId": "401872983",
+            "id": "01401872983",
+            "proTeamId": 20,
+            "scoringPeriodId": 5,
+            "seasonId": 2026,
+            "statSourceId": 0,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 13.66115708,
+            "externalId": "202617",
+            "id": "11202617",
+            "proTeamId": 0,
+            "scoringPeriodId": 17,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 15.02989983,
+            "externalId": "202616",
+            "id": "11202616",
+            "proTeamId": 0,
+            "scoringPeriodId": 16,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 15.64851172,
+            "externalId": "202618",
+            "id": "11202618",
+            "proTeamId": 0,
+            "scoringPeriodId": 18,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 13.53316746,
+            "externalId": "20269",
+            "id": "1120269",
+            "proTeamId": 0,
+            "scoringPeriodId": 9,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 0.0,
+            "externalId": "20266",
+            "id": "1120266",
+            "proTeamId": 0,
+            "scoringPeriodId": 6,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 0.0,
+            "externalId": "20265",
+            "id": "1120265",
+            "proTeamId": 0,
+            "scoringPeriodId": 5,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 14.93383111,
+            "externalId": "202611",
+            "id": "11202611",
+            "proTeamId": 0,
+            "scoringPeriodId": 11,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 17.14853489,
+            "externalId": "20268",
+            "id": "1120268",
+            "proTeamId": 0,
+            "scoringPeriodId": 8,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedAverage": 15.576391641636366,
+            "appliedTotal": 171.34030806,
+            "externalId": "2026",
+            "id": "102026",
+            "proTeamId": 0,
+            "scoringPeriodId": 0,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 0
+          },
+          {
+            "appliedTotal": 16.29991444,
+            "externalId": "202610",
+            "id": "11202610",
+            "proTeamId": 0,
+            "scoringPeriodId": 10,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 16.91175791,
+            "externalId": "20267",
+            "id": "1120267",
+            "proTeamId": 0,
+            "scoringPeriodId": 7,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedAverage": 14.166666666666666,
+            "appliedTotal": 42.5,
+            "externalId": "2026",
+            "id": "002026",
+            "proTeamId": 0,
+            "scoringPeriodId": 0,
+            "seasonId": 2026,
+            "statSourceId": 0,
+            "statSplitTypeId": 0
+          },
+          {
+            "appliedTotal": 19.8,
+            "externalId": "401872924",
+            "id": "01401872924",
+            "proTeamId": 20,
+            "scoringPeriodId": 1,
+            "seasonId": 2026,
+            "statSourceId": 0,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 8.5,
+            "externalId": "401872954",
+            "id": "01401872954",
+            "proTeamId": 20,
+            "scoringPeriodId": 3,
+            "seasonId": 2026,
+            "statSourceId": 0,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedTotal": 0.0,
+            "externalId": "401872972",
+            "id": "01401872972",
+            "proTeamId": 20,
+            "scoringPeriodId": 4,
+            "seasonId": 2026,
+            "statSourceId": 0,
+            "statSplitTypeId": 1
+          },
+          {
+            "appliedAverage": 15.461751785125001,
+            "appliedTotal": 247.38802856,
+            "externalId": "2026",
+            "id": "122026",
+            "proTeamId": 0,
+            "scoringPeriodId": 0,
+            "seasonId": 2026,
+            "statSourceId": 1,
+            "statSplitTypeId": 2
+          },
+          {
+            "appliedTotal": 14.2,
+            "externalId": "401872936",
+            "id": "01401872936",
+            "proTeamId": 20,
+            "scoringPeriodId": 2,
+            "seasonId": 2026,
+            "statSourceId": 0,
+            "statSplitTypeId": 1
+          }
+        ]
+      },
+      "ratings": {
+        "0": {
+          "positionalRanking": 35,
+          "totalRanking": 148,
+          "totalRating": 42.5
+        }
+      },
+      "rosterLocked": true,
+      "status": "ONTEAM",
+      "tradeLocked": false
+    }
+  ],
+  "teams": [
+    {
+      "abbrev": "TB",
+      "currentProjectedRank": 3,
+      "divisionId": 0,
+      "draftDayProjectedRank": 6,
+      "draftStrategy": {
+        "futureKeeperPlayerIds": [],
+        "keeperPlayerIds": []
+      },
+      "eliminated": false,
+      "eliminationMatchupPeriod": 0,
+      "id": 2,
+      "isActive": false,
+      "isTransactionLocked": false,
+      "logo": "https://example.com/logo-2.png",
+      "logoType": "CUSTOM_UPLOAD",
+      "name": "Team B",
+      "owners": [
+        "{00000000-0000-4000-8000-000000000002}"
+      ],
+      "playoffSeed": 3,
+      "points": 680.4599999999999,
+      "pointsAdjusted": 0.0,
+      "pointsDelta": 0.0,
+      "primaryOwner": "{00000000-0000-4000-8000-000000000002}",
+      "rankCalculatedFinal": 0,
+      "rankFinal": 0,
+      "record": {
+        "away": {
+          "gamesBack": 0.0,
+          "losses": 1,
+          "percentage": 0.6666666666666666,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "division": {
+          "gamesBack": 1.0,
+          "losses": 1,
+          "percentage": 0.8,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 4,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        },
+        "home": {
+          "gamesBack": 0.0,
+          "losses": 0,
+          "percentage": 1.0,
+          "pointsAgainst": 0.0,
+          "pointsFor": 0.0,
+          "streakLength": 2,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 2
+        },
+        "overall": {
+          "gamesBack": 1.0,
+          "losses": 1,
+          "percentage": 0.8,
+          "pointsAgainst": 640.24,
+          "pointsFor": 680.4599999999999,
+          "streakLength": 4,
+          "streakType": "WIN",
+          "ties": 0,
+          "wins": 4
+        }
+      },
+      "tradeBlock": {},
+      "transactionCounter": {
+        "acquisitionBudgetSpent": 0,
+        "acquisitions": 9,
+        "drops": 8,
+        "matchupAcquisitionTotals": {
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 4,
+          "6": 2
+        },
+        "misc": 0,
+        "moveToActive": 15,
+        "moveToIR": 2,
+        "paid": 0.0,
+        "teamCharges": 0.0,
+        "trades": 0
+      },
+      "waiverRank": 9
+    }
+  ],
+  "members": [
+    {
+      "displayName": "owner2",
+      "firstName": "Owner",
+      "id": "{00000000-0000-4000-8000-000000000002}",
+      "isLeagueManager": false,
+      "lastName": "2"
+    }
+  ]
+}

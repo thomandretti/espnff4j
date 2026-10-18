@@ -1,0 +1,42 @@
+{
+  "feed": [
+    {
+      "id": 64268728,
+      "type": "Rotowire",
+      "headline": "Hall (quadriceps) is out for Sunday's game, Brian Costello of the New York Post reports.",
+      "description": "Hall (quadriceps) is out for Sunday's game, Brian Costello of the New York Post reports.",
+      "story": "With Hall set to miss a third straight contest, Braelon Allen is in line for another start. Hall still hasn't returned to practice and thus looks uncertain for Week 7.",
+      "published": "2026-10-16T15:29:50Z",
+      "lastModified": "2026-10-16T15:29:50Z",
+      "premium": false,
+      "playerId": 4427366
+    },
+    {
+      "id": 64256328,
+      "type": "Rotowire",
+      "headline": "Hall (quadriceps) wasn't taking part in practice but was spotted working out on a side field with trainers Thursday, Zack Rosenblatt of The Athletic reports.",
+      "description": "Hall (quadriceps) wasn't taking part in practice but was spotted working out on a side field with trainers Thursday, Zack Rosenblatt of The Athletic reports.",
+      "story": "Though he'll go down as a non-participant in practice once again Thursday since he isn't taking part in individual or team drills, Hall is at least showing some incremental signs of progress in his recovery from a quadriceps injury he sustained during the Jets' Week 3 loss to the Lions. He has missed the team's last two games, with Braelon Allen stepping into the lead role at running back. With head coach Aaron Glenn labeling him week-to-week Wednesday, Hall is expected to remain out for Sunday's game against the Patriots, setting up Allen for another turn as the main option out of the New York backfield.",
+      "published": "2026-10-15T16:59:50Z",
+      "lastModified": "2026-10-15T16:59:50Z",
+      "premium": false,
+      "playerId": 4427366
+    },
+    {
+      "id": 64240628,
+      "type": "Rotowire",
+      "headline": "Jets head coach Aaron Glenn said that Hall (quadriceps) won't practice Wednesday and remains week-to-week, Al Iannazzone of Newsday reports.",
+      "description": "Jets head coach Aaron Glenn said that Hall (quadriceps) won't practice Wednesday and remains week-to-week, Al Iannazzone of Newsday reports.",
+      "story": "Hall hasn't practiced in any fashion since sustaining a right quad injury in the Jets' Week 3 loss to the Lions. With Glenn still classifying him as week-to-week, Hall looks to be trending toward missing a third consecutive game Sunday at New England. Hall's expected absence should once again clear the way for Braelon Allen to handle a lead role out of the backfield.",
+      "published": "2026-10-14T16:49:32Z",
+      "lastModified": "2026-10-14T16:49:32Z",
+      "premium": false,
+      "playerId": 4427366
+    }
+  ],
+  "resultsCount": 3,
+  "resultsLimit": 3,
+  "resultsOffset": 0,
+  "status": "success",
+  "timestamp": "2026-10-18T00:30:55Z"
+}

@@ -8,8 +8,9 @@ A small Kotlin/JVM library (Java 21 toolchain) wrapping the unofficial, undocume
 Football API. Public operations: league settings and season state (`getLeague`), standings, weekly
 matchups (with live scores, projections and ESPN win probabilities), weekly rosters (lineup slot,
 injury status, points and projection per player), box scores (matchups plus both lineups), completed
-transactions and pending trades, free agents and player search, the whole season's schedule with final standings (and so
-league history, via a client per past season), the draft, and NFL game times.
+transactions and pending trades, free agents and player search, a player's week-by-week points and
+news (`getPlayer`), the whole season's schedule with final standings (and so league history, via a
+client per past season), the draft, and NFL game times.
 
 ## Commands
 
@@ -93,8 +94,22 @@ lineup slot ID, which is how ESPN filters by position) or `filterName`. `filterN
 of the full name or surname, so "josh al" and "allen" find Josh Allen but "llen" finds nothing. ESPN
 rejects a `limit` without a sort (HTTP 400, "Limit request must be accompanied by a sort"). Sorting by
 a week's projection is `sortAppliedStatTotal` with the value source + split + season + week, e.g.
-`"1120266"`. Always send `filterStatsForCurrentSeasonScoringPeriodId`, or each player brings their
-whole season.
+`"1120266"`. Always send `filterStatsForCurrentSeasonScoringPeriodId` with 0 (the season totals) plus
+the weeks wanted. Leaving it out does *not* bring the whole season: with `scoringPeriodId=0`, ESPN sent
+only week 1 and the season totals (checked 2026 week 6). So `getPlayer` lists weeks 1–18 explicitly
+(`PlayerFilters.wholeSeason`), about 20 KB a player. ESPN then sends a projection for every week and points
+for each week played. A bye, or a week the player is ruled out, has a 0.0 projection rather than none,
+and a player who sat out scores 0.0.
+
+`getPlayer`'s news is the one call not on the fantasy host: `site.api.espn.com/apis/fantasy/v2/games/ffl/
+news/players?playerId=…&limit=…` (`EspnNewsClient`), public and identical for every league. It holds the
+Rotowire blurbs ESPN's player card shows, newest first: injury and practice updates ("Hall (quadriceps)
+is out for Sunday's game…") and game recaps. An unknown ID gets 200 with an empty `feed`. The factory
+gives it its own Retrofit with no cookie jar, so account cookies never go there. A custom `baseUrl` (a
+proxy or `MockWebServer`) serves it too, under `news/players`. Both of `getPlayer`'s requests run
+concurrently, so tests answer them with a path-based `Dispatcher` rather than `enqueue` order.
+`kona_player_info` also carries `seasonOutlook` and `outlooks.outlooksByWeek` (ESPN analysts' weekly
+write-ups), which the library doesn't read yet.
 
 `mTransactions2` lists everything proposed in a scoring period: lineup moves (`ROSTER`), the draft,
 pending and failed waiver claims, and trade offers. `completed()` keeps only `EXECUTED` free-agent,

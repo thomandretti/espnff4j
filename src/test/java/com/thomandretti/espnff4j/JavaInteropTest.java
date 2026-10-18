@@ -2,6 +2,7 @@ package com.thomandretti.espnff4j;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,6 +11,7 @@ import com.thomandretti.espnff4j.model.DraftType;
 import com.thomandretti.espnff4j.model.NflGame;
 import com.thomandretti.espnff4j.model.PendingTrade;
 import com.thomandretti.espnff4j.model.Player;
+import com.thomandretti.espnff4j.model.PlayerDetail;
 import com.thomandretti.espnff4j.model.Position;
 import com.thomandretti.espnff4j.model.RosterPlayer;
 import com.thomandretti.espnff4j.model.Team;
@@ -85,8 +87,11 @@ class JavaInteropTest {
         List<Player> topRbs = client.getFreeAgentsAsync(6, Position.RB, 5).join();
         List<Player> found = client.searchPlayersAsync("allen", 6).join();
         List<Player> topFound = client.searchPlayersAsync("allen", 6, 3).join();
+        server.enqueue(new MockResponse().setBody(noPlayers));
+        PlayerDetail detail = client.getPlayerAsync(3918298, 0).join();
 
         assertTrue(all.isEmpty() && rbs.isEmpty() && topRbs.isEmpty() && found.isEmpty() && topFound.isEmpty());
+        assertNull(detail);
     }
 
     @Test

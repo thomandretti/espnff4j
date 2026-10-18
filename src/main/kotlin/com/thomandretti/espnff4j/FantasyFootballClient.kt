@@ -1,6 +1,7 @@
 package com.thomandretti.espnff4j
 
 import com.thomandretti.espnff4j.internal.espn.EspnFantasyFootballClient
+import com.thomandretti.espnff4j.internal.espn.EspnNewsClient
 import com.thomandretti.espnff4j.internal.espn.Matchup
 import com.thomandretti.espnff4j.internal.espn.MatchupTeam
 import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
@@ -15,6 +16,7 @@ import com.thomandretti.espnff4j.internal.espn.playerIds
 import com.thomandretti.espnff4j.internal.espn.toDraft
 import com.thomandretti.espnff4j.internal.espn.toPendingTrade
 import com.thomandretti.espnff4j.internal.espn.toPlayer
+import com.thomandretti.espnff4j.internal.espn.toPlayerNote
 import com.thomandretti.espnff4j.internal.espn.toPlayers
 import com.thomandretti.espnff4j.internal.espn.toTeams
 import com.thomandretti.espnff4j.internal.espn.toTransaction
@@ -25,6 +27,7 @@ import com.thomandretti.espnff4j.model.MatchupInfo
 import com.thomandretti.espnff4j.model.NflGame
 import com.thomandretti.espnff4j.model.PendingTrade
 import com.thomandretti.espnff4j.model.Player
+import com.thomandretti.espnff4j.model.PlayerDetail
 import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.TeamRoster
@@ -32,6 +35,8 @@ import com.thomandretti.espnff4j.model.Transaction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.future.future
 import retrofit2.Call
 import retrofit2.HttpException
@@ -45,6 +50,7 @@ import java.util.concurrent.CompletableFuture
 
 private const val DEFAULT_FREE_AGENTS = 25
 private const val DEFAULT_SEARCH_RESULTS = 10
+private const val DEFAULT_PLAYER_NEWS = 5
 
 /**
  * One league's data for one season. Build it with [EspnFantasyFootball.client].
@@ -56,6 +62,7 @@ private const val DEFAULT_SEARCH_RESULTS = 10
 @Suppress("TooManyFunctions") // Each operation is a suspend function plus its *Async twin for Java.
 class FantasyFootballClient private constructor(
     private val espnClient: EspnFantasyFootballClient,
+    private val newsClient: EspnNewsClient,
     private val seasonId: Int,
     private val leagueId: Int,
 ) {
@@ -100,6 +107,12 @@ class FantasyFootballClient private constructor(
         week: Int,
         limit: Int = DEFAULT_SEARCH_RESULTS,
     ): CompletableFuture<List<Player>> = scope.future { searchPlayers(name, week, limit) }
+
+    @JvmOverloads
+    fun getPlayerAsync(
+        playerId: Int,
+        newsLimit: Int = DEFAULT_PLAYER_NEWS,
+    ): CompletableFuture<PlayerDetail?> = scope.future { getPlayer(playerId, newsLimit) }
 
     /** League settings and where the season stands, including the current week. */
     @JvmSynthetic
@@ -264,6 +277,48 @@ class FantasyFootballClient private constructor(
     }
 
     /**
+     * The player with [playerId] (as on [Player.id] or [RosterPlayer.id]) as ESPN reports them now, with
+     * their points and projection for every week of the season and up to [newsLimit] of ESPN's latest news
+     * items on them, such as injury updates. Null if ESPN has no such player. Costs two requests, made
+     * together; a [newsLimit] of 0 skips the news one.
+     */
+    @JvmSynthetic
+    suspend fun getPlayer(
+        playerId: Int,
+        newsLimit: Int = DEFAULT_PLAYER_NEWS,
+    ): PlayerDetail? {
+        require(newsLimit >= 0) { "newsLimit must not be negative, was $newsLimit" }
+        return coroutineScope {
+            val news =
+                async {
+                    if (newsLimit == 0) {
+                        emptyList()
+                    } else {
+                        newsClient
+                            .getPlayerNews(playerId, newsLimit)
+                            .awaitEspn()
+                            .feed
+                            .mapNotNull { it.toPlayerNote() }
+                    }
+                }
+            val response =
+                espnClient
+                    // scoringPeriodId 0 is the season as a whole; the filter asks for every week.
+                    .getPlayers(seasonId, leagueId, 0, PlayerFilters.wholeSeason(playerId))
+                    .awaitEspn()
+            val teamsById = response.teams.toTeams(response.members).associateBy { it.id }
+            val entry = response.players.firstOrNull { it.id == playerId }
+            entry?.let {
+                PlayerDetail(
+                    player = it.toPlayer(seasonId, null, teamsById),
+                    weeks = it.player.weeks(seasonId),
+                    news = news.await(),
+                )
+            }
+        }
+    }
+
+    /**
      * The NFL games of NFL [week], by kickoff. A team with no game is on bye. Join on
      * [RosterPlayer.proTeam] to tell which players have yet to play. The schedule is the same for every
      * league and changes rarely, so it suits caching.
@@ -395,8 +450,9 @@ class FantasyFootballClient private constructor(
         @JvmSynthetic
         internal fun create(
             espnClient: EspnFantasyFootballClient,
+            newsClient: EspnNewsClient,
             seasonId: Int,
             leagueId: Int,
-        ): FantasyFootballClient = FantasyFootballClient(espnClient, seasonId, leagueId)
+        ): FantasyFootballClient = FantasyFootballClient(espnClient, newsClient, seasonId, leagueId)
     }
 }

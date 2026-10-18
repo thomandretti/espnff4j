@@ -2,8 +2,8 @@
 
 A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
 league settings, standings, rosters, weekly matchups and box scores (with ESPN's live scores, projections and win
-probabilities), transactions and pending trades, waiver order, free agents and player search, the season schedule and league history, the draft,
-and NFL game times.
+probabilities), transactions and pending trades, waiver order, free agents and player search, a player's
+week-by-week points and injury news, the season schedule and league history, the draft, and NFL game times.
 
 ## Usage
 
@@ -31,6 +31,9 @@ val moves: List<Transaction> = client.getTransactionsForWeek(week = 3) // pickup
 val offers: List<PendingTrade> = client.getPendingTrades(week = 3)     // offered, or accepted and under review
 val bestRbs: List<Player> = client.getFreeAgents(week = 3, position = Position.RB, limit = 10)
 val found: List<Player> = client.searchPlayers("josh al", week = 3)  // player.team: who rosters them
+val allen: PlayerDetail? = client.getPlayer(found.first().id)       // every week's points, plus injury news
+allen?.weeks?.filter { it.points != null }?.takeLast(3)              // "how has he done lately"
+allen?.news?.first()?.headline                                      // "Allen (ankle) is questionable for ..."
 
 val season: List<MatchupInfo> = client.getSchedule()        // every matchup, with playoffTier
 val draft: Draft = client.getDraft()                        // every pick, with players' season points
