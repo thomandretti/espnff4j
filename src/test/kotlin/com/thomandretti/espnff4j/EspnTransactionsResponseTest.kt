@@ -1,7 +1,17 @@
 package com.thomandretti.espnff4j
 
+import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
+import com.thomandretti.espnff4j.internal.espn.OpenTrade
+import com.thomandretti.espnff4j.internal.espn.TransactionsResponse
+import com.thomandretti.espnff4j.internal.espn.openTrades
+import com.thomandretti.espnff4j.internal.espn.toPendingTrade
 import com.thomandretti.espnff4j.model.MoveType
+import com.thomandretti.espnff4j.model.PendingTrade
+import com.thomandretti.espnff4j.model.PendingTradeStatus
 import com.thomandretti.espnff4j.model.Position
+import com.thomandretti.espnff4j.model.Record
+import com.thomandretti.espnff4j.model.RecordPart
+import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.Transaction
 import com.thomandretti.espnff4j.model.TransactionType
 import kotlinx.coroutines.runBlocking
@@ -136,4 +146,64 @@ class EspnTransactionsResponseTest {
         assertTrue(transactions.none { it.type == TransactionType.TRADE }, transactions.toString())
         assertEquals(18, transactions.size)
     }
+
+    @Test
+    fun `an accepted trade awaiting review is pending, with the drop it forces`() {
+        // Asked for in week 6 of 2024, when the trade was accepted; week 5 had no trades.
+        server.enqueue(MockResponse().setBody(fixture("espn-transactions-2024-week6.json")))
+        server.enqueue(MockResponse().setBody("""{"transactions":[]}"""))
+        server.enqueue(MockResponse().setBody(fixture("espn-transaction-players-2024-week7.json")))
+
+        val trade = runBlocking { client2024().getPendingTrades(6) }.single()
+
+        assertEquals(PendingTradeStatus.UNDER_REVIEW, trade.status)
+        assertEquals("Team A", trade.proposingTeam.name)
+        assertEquals(listOf("Team A", "Team B"), trade.teams.map { it.name })
+        assertEquals(Instant.ofEpochMilli(1728735914930), trade.proposedAt)
+        assertEquals(Instant.ofEpochMilli(1728758649569), trade.acceptedAt)
+        assertEquals(Instant.ofEpochMilli(1728908714970), trade.expiresAt)
+        assertEquals(
+            listOf(
+                "TRADE Alexander Mattison Team A -> Team B",
+                "TRADE Patrick Mahomes Team A -> Team B",
+                "TRADE Chuba Hubbard Team B -> Team A",
+                "DROP Tucker Kraft Team B -> null",
+            ),
+            trade.moves.map { "${it.type} ${it.player.name} ${it.fromTeam?.name} -> ${it.toTeam?.name}" },
+        )
+        val (thisWeek, lastWeek) = List(2) { requireNotNull(server.takeRequest().path) }
+        assertTrue("scoringPeriodId=6" in thisWeek && "mTransactions2" in thisWeek, thisWeek)
+        assertTrue("scoringPeriodId=5" in lastWeek && "mTransactions2" in lastWeek, lastWeek)
+    }
+
+    @Test
+    fun `a trade offered last week and executed this week is no longer pending`() {
+        server.enqueue(MockResponse().setBody(fixture("espn-transactions-2024-week7.json")))
+        server.enqueue(MockResponse().setBody(fixture("espn-transactions-2024-week6.json")))
+
+        assertEquals(emptyList<PendingTrade>(), runBlocking { client2024().getPendingTrades(7) })
+        assertEquals(2, server.requestCount, "no player lookup without a pending trade")
+    }
+
+    @Test
+    fun `an offer not yet accepted is open until it lapses, and a cancellation closes it`() {
+        val week6 =
+            OBJECT_MAPPER.readValue(
+                fixture("espn-transactions-2024-week6.json"),
+                TransactionsResponse::class.java,
+            )
+        val proposal = week6.transactions.single { it.type == "TRADE_PROPOSAL" }
+        val beforeAccepted = week6.transactions.filterNot { it.type == "TRADE_ACCEPT" }
+        val deadline = Instant.ofEpochMilli(checkNotNull(proposal.expirationDate))
+
+        val open = beforeAccepted.openTrades(deadline.minusSeconds(60)).single()
+        assertNull(open.acceptance)
+        assertEquals(PendingTradeStatus.OFFERED, open.toPendingTrade(mapOf(1 to teamA), emptyMap())?.status)
+        assertEquals(emptyList<OpenTrade>(), beforeAccepted.openTrades(deadline.plusSeconds(60)))
+        // ESPN records a cancellation as a second proposal pointing at the first, which stays PENDING.
+        val cancellation = proposal.copy(id = "cancel", status = "CANCELED", relatedTransactionId = proposal.id)
+        assertEquals(emptyList<OpenTrade>(), (beforeAccepted + cancellation).openTrades(deadline.minusSeconds(60)))
+    }
+
+    private val teamA = Team(id = 1, name = "Team A", record = Record(RecordPart(0, 0, 0)), playoffSeed = 1)
 }

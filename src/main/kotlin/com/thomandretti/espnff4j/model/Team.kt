@@ -16,6 +16,22 @@ data class Team(
     val logoUrl: String? = null,
     // Where the team finished once the season, playoffs included, is over: 1 is the champion. Null until then.
     val finalRank: Int? = null,
+    // Position in the waiver order, 1 picking first. Null if ESPN didn't send it.
+    val waiverRank: Int? = null,
+    val transactionCounts: TransactionCounts? = null,
+)
+
+/** A team's roster moves so far this season, as ESPN counts them. */
+data class TransactionCounts(
+    // Players added from free agency or waivers, and players dropped.
+    val acquisitions: Int,
+    val drops: Int,
+    val trades: Int,
+    // Lineup moves into a starting slot.
+    val movesToActive: Int,
+    val movesToIr: Int,
+    // FAAB spent on waiver claims; always 0 in a league without a budget (see League.waivers).
+    val faabSpent: Int,
 )
 
 data class Streak(

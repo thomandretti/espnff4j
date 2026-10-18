@@ -4,6 +4,7 @@ import com.thomandretti.espnff4j.model.RecordPart
 import com.thomandretti.espnff4j.model.Streak
 import com.thomandretti.espnff4j.model.StreakType
 import com.thomandretti.espnff4j.model.Team
+import com.thomandretti.espnff4j.model.TransactionCounts
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -72,5 +73,25 @@ class EspnStandingsResponseTest {
 
         assertEquals((1..10).toList(), teams.map { it.playoffSeed })
         assertEquals(Streak(StreakType.LOSS, 3), teams.single { it.name == "Team C" }.streak)
+    }
+
+    @Test
+    fun `waiver order and season transaction counts`() {
+        val teams = standings()
+
+        assertEquals((1..10).toSet(), teams.mapNotNull { it.waiverRank }.toSet())
+        val busiest = teams.single { it.name == "Team H" }
+        assertEquals(4, busiest.waiverRank)
+        assertEquals(
+            TransactionCounts(
+                acquisitions = 13,
+                drops = 12,
+                trades = 0,
+                movesToActive = 13,
+                movesToIr = 2,
+                faabSpent = 0,
+            ),
+            busiest.transactionCounts,
+        )
     }
 }

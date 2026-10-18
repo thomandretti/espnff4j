@@ -1,5 +1,7 @@
 package com.thomandretti.espnff4j.model
 
+import java.time.DayOfWeek
+
 data class League(
     val id: Int,
     val seasonId: Int,
@@ -19,4 +21,22 @@ data class League(
     val isActive: Boolean,
     // Earlier seasons of this league, oldest first. Each is readable with a client for that seasonId.
     val previousSeasons: List<Int> = emptyList(),
+    // Null if ESPN omits the league's acquisition settings.
+    val waivers: WaiverSettings? = null,
+)
+
+/** How players are claimed off waivers. */
+data class WaiverSettings(
+    // Whether claims are FAAB bids rather than by waiver order.
+    val usesFaab: Boolean,
+    // Each team's season budget and the smallest bid; null without FAAB. Team.transactionCounts has what
+    // each team has spent.
+    val faabBudget: Int?,
+    val minimumBid: Int?,
+    // Season limit on pickups, null if there is none.
+    val acquisitionLimit: Int?,
+    // How long a dropped player stays on waivers.
+    val waiverHours: Int,
+    // The days ESPN processes claims, Monday first.
+    val processDays: List<DayOfWeek>,
 )

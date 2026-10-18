@@ -35,3 +35,31 @@ enum class MoveType {
     DROP,
     TRADE,
 }
+
+/** A trade that hasn't gone through: offered and awaiting the other team, or accepted and under review. */
+data class PendingTrade(
+    // ESPN's id for the offer.
+    val id: String,
+    val status: PendingTradeStatus,
+    val proposingTeam: Team,
+    // The players changing hands, then any drop the accepting team made to make room.
+    val moves: List<PlayerMove>,
+    val proposedAt: Instant,
+    // Null until the other team accepts.
+    val acceptedAt: Instant?,
+    // ESPN's deadline: an offer lapses then, and an accepted trade's review period ends, after which the
+    // trade goes through when ESPN next processes transactions.
+    val expiresAt: Instant?,
+) {
+    /** Every team the trade involves, the proposer first. */
+    val teams: List<Team>
+        get() = (listOf(proposingTeam) + moves.flatMap { listOfNotNull(it.fromTeam, it.toTeam) }).distinctBy { it.id }
+}
+
+enum class PendingTradeStatus {
+    // Waiting for the other team to accept or decline.
+    OFFERED,
+
+    // Accepted, and waiting out the league's review period (and any votes).
+    UNDER_REVIEW,
+}

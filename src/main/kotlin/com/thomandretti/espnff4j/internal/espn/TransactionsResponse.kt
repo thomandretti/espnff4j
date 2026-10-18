@@ -1,6 +1,8 @@
 package com.thomandretti.espnff4j.internal.espn
 
 import com.thomandretti.espnff4j.model.MoveType
+import com.thomandretti.espnff4j.model.PendingTrade
+import com.thomandretti.espnff4j.model.PendingTradeStatus
 import com.thomandretti.espnff4j.model.Player
 import com.thomandretti.espnff4j.model.PlayerMove
 import com.thomandretti.espnff4j.model.Team
@@ -12,7 +14,7 @@ internal data class TransactionsResponse(
     // Every transaction proposed in the requested week, including lineup changes, failed waiver
     // claims and trade offers that never went through.
     val transactions: List<EspnTransaction> = emptyList(),
-    val teams: List<EspnTeam>,
+    val teams: List<EspnTeam> = emptyList(),
     val members: List<Member> = emptyList(),
 )
 
@@ -29,6 +31,10 @@ internal data class EspnTransaction(
     // Epoch milliseconds. Waivers are proposed earlier and processed overnight.
     val proposedDate: Long? = null,
     val processDate: Long? = null,
+    // A trade offer's deadline: it lapses then unless accepted, and an accepted trade's review period ends.
+    val expirationDate: Long? = null,
+    // The TRADE_PROPOSAL that every later record of a trade points back to.
+    val relatedTransactionId: String? = null,
     val items: List<EspnTransactionItem> = emptyList(),
 )
 
@@ -58,15 +64,7 @@ internal fun EspnTransaction.toTransaction(
         type = type,
         team = team,
         date = Instant.ofEpochMilli(processDate ?: proposedDate ?: 0),
-        moves =
-            moves().map { item ->
-                PlayerMove(
-                    type = MoveType.valueOf(item.type),
-                    player = playersById[item.playerId] ?: unknownPlayer(item.playerId),
-                    fromTeam = teamsById[item.fromTeamId],
-                    toTeam = teamsById[item.toTeamId],
-                )
-            },
+        moves = moves().map { it.toPlayerMove(teamsById, playersById) },
         waiverBid = bidAmount.takeIf { type == TransactionType.WAIVER },
     )
 }
@@ -86,3 +84,61 @@ private fun EspnTransaction.transactionType(): TransactionType? =
 // LINEUP items are the slot changes ESPN attaches to some pickups.
 private fun EspnTransaction.moves(): List<EspnTransactionItem> =
     items.filter { item -> MoveType.entries.any { it.name == item.type } }
+
+/** A trade offer that is still open, with the TRADE_ACCEPT recorded if the other team has accepted it. */
+internal data class OpenTrade(
+    val proposal: EspnTransaction,
+    val acceptance: EspnTransaction?,
+)
+
+/**
+ * Trade offers still waiting on the other team or on league review at [now]. ESPN never updates a
+ * TRADE_PROPOSAL: a cancellation is a second, CANCELED proposal pointing back at it, and a trade that
+ * went through is an EXECUTED TRADE_ACCEPT, often in the next week. So pass every week a pending trade
+ * could have been resolved in.
+ */
+internal fun List<EspnTransaction>.openTrades(now: Instant): List<OpenTrade> {
+    val chains = filter { it.relatedTransactionId != null }.groupBy { it.relatedTransactionId }
+    return filter { it.type == "TRADE_PROPOSAL" && it.status == "PENDING" && it.relatedTransactionId == null }
+        .distinctBy { it.id }
+        .mapNotNull { proposal ->
+            val chain = chains[proposal.id].orEmpty()
+            val acceptance = chain.firstOrNull { it.type == "TRADE_ACCEPT" && it.status == null }
+            val lapsed = acceptance == null && proposal.expirationDate?.let { now.toEpochMilli() > it } == true
+            OpenTrade(proposal, acceptance).takeUnless { chain.any { it.resolvesTrade() } || lapsed }
+        }
+}
+
+private fun EspnTransaction.resolvesTrade() =
+    (type == "TRADE_PROPOSAL" && status == "CANCELED") ||
+        type == "TRADE_DECLINE" ||
+        (type == "TRADE_ACCEPT" && status == "EXECUTED")
+
+internal fun OpenTrade.playerIds(): List<Int> = (proposal.items + acceptance?.items.orEmpty()).map { it.playerId }
+
+internal fun OpenTrade.toPendingTrade(
+    teamsById: Map<Int, Team>,
+    playersById: Map<Int, Player>,
+): PendingTrade? {
+    val team = teamsById[proposal.teamId] ?: return null
+    return PendingTrade(
+        id = proposal.id,
+        status = if (acceptance == null) PendingTradeStatus.OFFERED else PendingTradeStatus.UNDER_REVIEW,
+        proposingTeam = team,
+        // The players offered, then any drop the accepting team made to fit them.
+        moves = (proposal.moves() + acceptance?.moves().orEmpty()).map { it.toPlayerMove(teamsById, playersById) },
+        proposedAt = Instant.ofEpochMilli(proposal.proposedDate ?: 0),
+        acceptedAt = acceptance?.proposedDate?.let(Instant::ofEpochMilli),
+        expiresAt = proposal.expirationDate?.let(Instant::ofEpochMilli),
+    )
+}
+
+private fun EspnTransactionItem.toPlayerMove(
+    teamsById: Map<Int, Team>,
+    playersById: Map<Int, Player>,
+) = PlayerMove(
+    type = MoveType.valueOf(type),
+    player = playersById[playerId] ?: unknownPlayer(playerId),
+    fromTeam = teamsById[fromTeamId],
+    toTeam = teamsById[toTeamId],
+)

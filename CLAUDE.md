@@ -8,7 +8,7 @@ A small Kotlin/JVM library (Java 21 toolchain) wrapping the unofficial, undocume
 Football API. Public operations: league settings and season state (`getLeague`), standings, weekly
 matchups (with live scores, projections and ESPN win probabilities), weekly rosters (lineup slot,
 injury status, points and projection per player), box scores (matchups plus both lineups), completed
-transactions, free agents and player search, the whole season's schedule with final standings (and so
+transactions and pending trades, free agents and player search, the whole season's schedule with final standings (and so
 league history, via a client per past season), the draft, and NFL game times.
 
 ## Commands
@@ -61,6 +61,9 @@ Teams are never deserialised straight into the public `Team`. Every response car
 the league `members`, and `List<EspnTeam>.toTeams(members)` resolves owner SWIDs to `Owner`s, rounds
 points for and against to the cent (ESPN sends 680.4599999999999) and builds the record splits. Only
 the overall split has real points; ESPN zeroes them for home, away and division.
+`mTeam` also carries each team's `waiverRank` and season `transactionCounter`, and `mSettings` the
+league's `acquisitionSettings` (FAAB or waiver order, budget, process days). ESPN sends the FAAB budget
+even in a league that doesn't use one, so `WaiverSettings` nulls it unless `isUsingAcquisitionBudget`.
 
 ### Rosters and box scores
 
@@ -109,6 +112,15 @@ Only when the review period ends, often in the next week, does ESPN add a second
 That one is `EXECUTED`, holds the `TRADE` items plus any `DROP` the receiving team made to fit them,
 and has the proposer as `teamId`. So the only trade the library reports is an executed `TRADE_ACCEPT`.
 This held for every week of this league's 2020–2026 seasons.
+
+ESPN never updates a `TRADE_PROPOSAL` after the fact: in a past week's data, an offer that was later
+cancelled still says `PENDING`, and the cancellation is a second, `CANCELED` proposal whose
+`relatedTransactionId` points at it. So `getPendingTrades` works out each offer from its whole chain
+(`openTrades`): an offer is open unless something in the chain cancels, declines or executes it, or it
+has passed its `expirationDate` (48 hours after the proposal) without being accepted. An accepted
+offer stays under review past that deadline until the executed `TRADE_ACCEPT` appears, which is often
+in the next week, so the call reads the requested week and the one before. Replaying every week of
+2020–2025 flags exactly the two real trades, each only in the week it was under review.
 
 ### Seasons, history and the draft
 

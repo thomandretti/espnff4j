@@ -1,5 +1,6 @@
 package com.thomandretti.espnff4j
 
+import com.thomandretti.espnff4j.model.WaiverSettings
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.DayOfWeek
 import kotlin.test.assertFailsWith
 
 class EspnFantasyFootballTest {
@@ -111,6 +113,17 @@ class EspnFantasyFootballTest {
             assertEquals(listOf(16), league.matchupPeriods[16])
             assertTrue(league.isActive)
             assertEquals((2020..2025).toList(), league.previousSeasons)
+            assertEquals(
+                WaiverSettings(
+                    usesFaab = false,
+                    faabBudget = null,
+                    minimumBid = null,
+                    acquisitionLimit = null,
+                    waiverHours = 24,
+                    processDays = DayOfWeek.entries - DayOfWeek.TUESDAY,
+                ),
+                league.waivers,
+            )
             val path = requireNotNull(server.takeRequest().path)
             assertTrue(path.startsWith("/seasons/2026/segments/0/leagues/12345?view=mSettings"), path)
         }

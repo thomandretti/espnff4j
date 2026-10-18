@@ -6,6 +6,7 @@ import com.thomandretti.espnff4j.model.RecordPart
 import com.thomandretti.espnff4j.model.Streak
 import com.thomandretti.espnff4j.model.StreakType
 import com.thomandretti.espnff4j.model.Team
+import com.thomandretti.espnff4j.model.TransactionCounts
 import kotlin.math.roundToLong
 
 private const val CENTS = 100.0
@@ -20,11 +21,34 @@ internal data class EspnTeam(
     val logo: String? = null,
     // 0 until the season is over.
     val rankCalculatedFinal: Int = 0,
+    // 1 picks first. Sent only by the mTeam view.
+    val waiverRank: Int = 0,
+    val transactionCounter: EspnTransactionCounter? = null,
     val owners: List<String> = emptyList(),
     val record: EspnRecord,
     // Only with the mRoster view.
     val roster: Roster? = null,
 )
+
+// Season totals. ESPN also sends per-matchup acquisition totals and league fees, which this library skips.
+internal data class EspnTransactionCounter(
+    val acquisitions: Int = 0,
+    val drops: Int = 0,
+    val trades: Int = 0,
+    val moveToActive: Int = 0,
+    val moveToIR: Int = 0,
+    val acquisitionBudgetSpent: Int = 0,
+) {
+    fun toTransactionCounts() =
+        TransactionCounts(
+            acquisitions = acquisitions,
+            drops = drops,
+            trades = trades,
+            movesToActive = moveToActive,
+            movesToIr = moveToIR,
+            faabSpent = acquisitionBudgetSpent,
+        )
+}
 
 internal data class EspnRecord(
     val overall: EspnRecordPart,
@@ -93,5 +117,7 @@ private fun EspnTeam.toTeam(membersById: Map<String, Member>): Team {
         divisionId = divisionId,
         logoUrl = logo,
         finalRank = rankCalculatedFinal.takeIf { it > 0 },
+        waiverRank = waiverRank.takeIf { it > 0 },
+        transactionCounts = transactionCounter?.toTransactionCounts(),
     )
 }

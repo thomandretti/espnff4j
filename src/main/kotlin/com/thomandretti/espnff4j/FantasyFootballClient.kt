@@ -10,7 +10,10 @@ import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
 import com.thomandretti.espnff4j.internal.espn.completed
 import com.thomandretti.espnff4j.internal.espn.gamesFor
+import com.thomandretti.espnff4j.internal.espn.openTrades
+import com.thomandretti.espnff4j.internal.espn.playerIds
 import com.thomandretti.espnff4j.internal.espn.toDraft
+import com.thomandretti.espnff4j.internal.espn.toPendingTrade
 import com.thomandretti.espnff4j.internal.espn.toPlayer
 import com.thomandretti.espnff4j.internal.espn.toPlayers
 import com.thomandretti.espnff4j.internal.espn.toTeams
@@ -20,6 +23,7 @@ import com.thomandretti.espnff4j.model.Draft
 import com.thomandretti.espnff4j.model.League
 import com.thomandretti.espnff4j.model.MatchupInfo
 import com.thomandretti.espnff4j.model.NflGame
+import com.thomandretti.espnff4j.model.PendingTrade
 import com.thomandretti.espnff4j.model.Player
 import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
@@ -36,6 +40,7 @@ import java.io.IOException
 import java.net.HttpURLConnection.HTTP_FORBIDDEN
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
 import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
+import java.time.Instant
 import java.util.concurrent.CompletableFuture
 
 private const val DEFAULT_FREE_AGENTS = 25
@@ -79,6 +84,9 @@ class FantasyFootballClient private constructor(
     fun getTransactionsForWeekAsync(week: Int): CompletableFuture<List<Transaction>> =
         scope.future { getTransactionsForWeek(week) }
 
+    fun getPendingTradesAsync(week: Int): CompletableFuture<List<PendingTrade>> =
+        scope.future { getPendingTrades(week) }
+
     @JvmOverloads
     fun getFreeAgentsAsync(
         week: Int,
@@ -113,6 +121,7 @@ class FantasyFootballClient private constructor(
             matchupPeriods = schedule.matchupPeriods,
             isActive = response.status.isActive,
             previousSeasons = response.status.previousSeasons,
+            waivers = response.settings.acquisitionSettings?.toWaiverSettings(),
         )
     }
 
@@ -196,6 +205,25 @@ class FantasyFootballClient private constructor(
         val playerIds = completed.flatMap { tx -> tx.items.map { it.playerId } }.toSet()
         val playersById = lookUpPlayers(playerIds, week, teamsById)
         return completed.mapNotNull { it.toTransaction(teamsById, playersById) }.sortedByDescending { it.date }
+    }
+
+    /**
+     * Trades that haven't gone through as of NFL [week], normally the current week: offers awaiting the
+     * other team, and accepted trades in their review period, oldest first. Trades resolve in a later week
+     * than they're offered in, so this reads [week] and the week before. ESPN may show an offer only to
+     * the teams involved, so which offers appear can depend on whose cookies the client uses. Costs up
+     * to three requests: two weeks, then the players.
+     */
+    @JvmSynthetic
+    suspend fun getPendingTrades(week: Int): List<PendingTrade> {
+        val response = espnClient.getTransactionsAtWeek(seasonId, leagueId, week).awaitEspn()
+        val earlier =
+            if (week > 1) espnClient.getTransactionsAtWeek(seasonId, leagueId, week - 1).awaitEspn() else null
+        val open = (earlier?.transactions.orEmpty() + response.transactions).openTrades(Instant.now())
+        if (open.isEmpty()) return emptyList()
+        val teamsById = response.teams.toTeams(response.members).associateBy { it.id }
+        val playersById = lookUpPlayers(open.flatMap { it.playerIds() }.toSet(), week, teamsById)
+        return open.mapNotNull { it.toPendingTrade(teamsById, playersById) }.sortedBy { it.proposedAt }
     }
 
     /**

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.thomandretti.espnff4j.model.Draft;
 import com.thomandretti.espnff4j.model.DraftType;
 import com.thomandretti.espnff4j.model.NflGame;
+import com.thomandretti.espnff4j.model.PendingTrade;
 import com.thomandretti.espnff4j.model.Player;
 import com.thomandretti.espnff4j.model.Position;
 import com.thomandretti.espnff4j.model.RosterPlayer;
@@ -103,6 +104,17 @@ class JavaInteropTest {
 
         assertEquals(DraftType.UNKNOWN, draft.getType());
         assertTrue(game.hasKickedOff() && game.involves("KC"));
+    }
+
+    @Test
+    void pendingTradesReadFromJava() {
+        server.enqueue(new MockResponse().setBody("{\"transactions\":[]}"));
+        server.enqueue(new MockResponse().setBody("{\"transactions\":[]}"));
+        FantasyFootballClient client = EspnFantasyFootball.client(2026, 12345, null, baseUrl());
+
+        List<PendingTrade> trades = client.getPendingTradesAsync(6).join();
+
+        assertTrue(trades.isEmpty());
     }
 
     @Test

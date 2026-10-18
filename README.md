@@ -2,7 +2,7 @@
 
 A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
 league settings, standings, rosters, weekly matchups and box scores (with ESPN's live scores, projections and win
-probabilities), transactions, free agents and player search, the season schedule and league history, the draft,
+probabilities), transactions and pending trades, waiver order, free agents and player search, the season schedule and league history, the draft,
 and NFL game times.
 
 ## Usage
@@ -20,14 +20,15 @@ val client = EspnFantasyFootball.client(
     addInterceptor(myMetricsInterceptor)
 }
 
-val league: League = client.getLeague()   // settings, plus league.currentWeek
-val standings: List<Team> = client.getStandingsForWeek(week = 3) // records, points for/against, streaks, owners
+val league: League = client.getLeague()   // settings, waiver rules, plus league.currentWeek
+val standings: List<Team> = client.getStandingsForWeek(week = 3) // records, points, streaks, owners, waiver order
 val matchups: List<MatchupInfo> = client.getMatchupsForWeek(week = 3)
 val rosters: List<TeamRoster> = client.getRostersForWeek(week = 3)   // lineups, injuries, points
 val boxScores: List<BoxScore> = client.getBoxScoresForWeek(week = 3) // matchups plus both lineups
 rosters.first().starters.forEach { println("${it.lineupSlot} ${it.name} (${it.proTeam}) ${it.points ?: "-"}") }
 
 val moves: List<Transaction> = client.getTransactionsForWeek(week = 3) // pickups, waiver claims, trades
+val offers: List<PendingTrade> = client.getPendingTrades(week = 3)     // offered, or accepted and under review
 val bestRbs: List<Player> = client.getFreeAgents(week = 3, position = Position.RB, limit = 10)
 val found: List<Player> = client.searchPlayers("josh al", week = 3)  // player.team: who rosters them
 

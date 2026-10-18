@@ -39,7 +39,11 @@ class EspnLiveSmokeTest {
             val league = client.getLeague()
             val week = league.currentWeek.coerceIn(league.firstWeek, league.finalWeek)
 
-            assertEquals(league.size, client.getStandingsForWeek(week).size)
+            assertTrue(league.waivers != null, "no acquisition settings")
+            val standings = client.getStandingsForWeek(week)
+            assertEquals(league.size, standings.size)
+            assertEquals((1..league.size).toList(), standings.mapNotNull { it.waiverRank }.sorted())
+            assertTrue(standings.all { it.transactionCounts != null }, "no transaction counts")
             assertEquals(league.size, client.getRostersForWeek(week).size)
             val matchups = client.getMatchupsForWeek(week)
             val boxScores = client.getBoxScoresForWeek(week)
@@ -58,6 +62,7 @@ class EspnLiveSmokeTest {
                     assertNear(it.matchup.awayScore, it.awayStarters.sumOf { p -> p.points ?: 0.0 })
                 }
             client.getTransactionsForWeek(week)
+            client.getPendingTrades(week)
             assertTrue(client.getFreeAgents(week, limit = 5).isNotEmpty())
             val rostered = client.getRostersForWeek(week).flatMap { it.players }.first()
             assertTrue(client.searchPlayers(rostered.name, week).any { it.id == rostered.id }, rostered.name)

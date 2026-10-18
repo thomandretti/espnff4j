@@ -91,6 +91,28 @@
     },
     "scoringSettings": {
       "scoringType": "H2H_POINTS"
+    },
+    "acquisitionSettings": {
+      "acquisitionBudget": 100,
+      "acquisitionLimit": -1,
+      "acquisitionType": "WAIVERS_TRADITIONAL",
+      "finalPlaceTransactionEligible": 0,
+      "isUsingAcquisitionBudget": false,
+      "matchupAcquisitionLimit": -1.0,
+      "matchupLimitPerScoringPeriod": true,
+      "minimumBid": 1,
+      "transactionLockingEnabled": false,
+      "waiverHours": 24,
+      "waiverOrderReset": true,
+      "waiverProcessDays": [
+        "SUNDAY",
+        "SATURDAY",
+        "MONDAY",
+        "THURSDAY",
+        "WEDNESDAY",
+        "FRIDAY"
+      ],
+      "waiverProcessHour": 11
     }
   }
 }
