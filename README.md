@@ -2,7 +2,8 @@
 
 A small Kotlin client, usable from Java, for the (unofficial, undocumented) ESPN Fantasy Football API:
 league settings, standings, rosters, weekly matchups and box scores (with ESPN's live scores, projections and win
-probabilities), transactions, free agents and player search.
+probabilities), transactions, free agents and player search, the season schedule and league history, the draft,
+and NFL game times.
 
 ## Usage
 
@@ -94,7 +95,7 @@ ESPN's payload changes shape over the course of a week, and the client normalise
 Requires Java 21. Not yet published to Maven Central, so build it into your local Maven repository:
 
 ```bash
-git checkout v0.3.1
+git checkout v0.4.0
 ./gradlew publishToMavenLocal
 ```
 
@@ -102,7 +103,7 @@ Then depend on it with Gradle:
 
 ```kotlin
 repositories { mavenLocal() }
-dependencies { implementation("com.thomandretti:espnff4j:0.3.1") }
+dependencies { implementation("com.thomandretti:espnff4j:0.4.0") }
 ```
 
 or Maven, which reads the local repository by default:
@@ -111,7 +112,7 @@ or Maven, which reads the local repository by default:
 <dependency>
   <groupId>com.thomandretti</groupId>
   <artifactId>espnff4j</artifactId>
-  <version>0.3.1</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
