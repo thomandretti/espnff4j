@@ -8,7 +8,8 @@ A small Kotlin/JVM library (Java 21 toolchain) wrapping the unofficial, undocume
 Football API. Public operations: league settings and season state (`getLeague`), standings, weekly
 matchups (with live scores, projections and ESPN win probabilities), weekly rosters (lineup slot,
 injury status, points and projection per player), box scores (matchups plus both lineups), completed
-transactions, free agents and player search.
+transactions, free agents and player search, the whole season's schedule with final standings (and so
+league history, via a client per past season), the draft, and NFL game times.
 
 ## Commands
 
@@ -35,12 +36,21 @@ Request path, outermost first:
    (3 attempts, linear back-off, retries 5xx and `IOException` only), then the caller's `configure`
    block, which runs *after* the library's interceptors. Retrofit + Jackson (`OBJECT_MAPPER`, unknown
    properties ignored) produce the raw interface.
-2. `internal/espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every endpoint
-   hits the same URL and differs only in the `view` query params: `mSettings` (league), `mTeam`
-   (standings), `mRoster,mTeam` (rosters), `mMatchupScore,mTeam,mSettings` (matchups) and
-   `mMatchupScore,mScoreboard,mTeam,mSettings` (box scores), `mTransactions2,mTeam` (transactions) and
-   `kona_player_info` (player lookups, see below). Request only the views a call needs, because
-   `mRoster` alone is ~3 MB for a ten-team league.
+2. `internal/espn/EspnFantasyFootballClient` — Retrofit interface returning `Call<T>`. Every league
+   endpoint hits the same URL and differs only in the `view` query params:
+   - `mSettings` (league)
+   - `mTeam` (standings)
+   - `mRoster,mTeam` (rosters)
+   - `mMatchupScore,mTeam,mSettings` (matchups for a week; with no `scoringPeriodId`, the whole season)
+   - `mMatchupScore,mScoreboard,mTeam,mSettings` (box scores)
+   - `mTransactions2,mTeam` (transactions)
+   - `mDraftDetail,mTeam,mSettings` (draft)
+   - `kona_player_info` (player lookups, see below)
+
+   Request only the views a call needs: `mRoster` alone is ~3 MB for a ten-team league, and `mMatchup`
+   is ten times `mMatchupScore` (it adds per-stat breakdowns), so it's never used. The NFL schedule is
+   the exception: `seasons/{season}?view=proTeamSchedules_wl`, not under the league and identical for
+   every league.
 3. `FantasyFootballClient` — awaits the `Call`s and normalises the raw ESPN DTOs (`internal/espn/`,
    `*Response` and friends) into the public `model/` types (`League`, `Team`, `MatchupInfo`, …).
    Standings are sorted by `playoffSeed`. Matchups and box scores share `matchupsFor(week)`, which
@@ -64,10 +74,12 @@ projection, both as `appliedTotal`, i.e. scored with the league's settings. Actu
 until a player's game starts. ESPN's numeric IDs for lineup slots, positions and NFL teams are mapped in
 `internal/espn/EspnIds.kt`. Unknown IDs map to `UNKNOWN` (or a null `proTeam`) rather than failing.
 
-`mMatchupScore` alone sends lineup entries with stats but **no player identity** (null id and name).
-`mScoreboard` fills them in and roughly doubles the response, which is why box scores are a separate
-call from matchups. Starters' week points sum to the side's `totalPointsLive`, which
-`EspnBoxScoreResponseTest` checks.
+`mMatchupScore` alone sends the requested week's lineup entries with stats but **no player identity**
+(no id, name or position). `mScoreboard` fills them in and roughly doubles the response, which is why
+box scores are a separate call from matchups. So `EspnPlayer`'s identity fields must stay optional, and
+`toPlayers` skips anonymous entries. 0.3.0 required them, which made `getMatchupsForWeek` fail on the
+live week. `EspnFantasyFootballTest` pins this with `espn-matchups-week6.json`. Starters' week points
+sum to the side's `totalPointsLive`, which `EspnBoxScoreResponseTest` checks.
 
 ### Transactions and player lookups
 
@@ -96,6 +108,24 @@ Only when the review period ends, often in the next week, does ESPN add a second
 That one is `EXECUTED`, holds the `TRADE` items plus any `DROP` the receiving team made to fit them,
 and has the proposer as `teamId`. So the only trade the library reports is an executed `TRADE_ACCEPT`.
 This held for every week of this league's 2020–2026 seasons.
+
+### Seasons, history and the draft
+
+The normal league endpoint serves every season the league has existed, back to 2020 for the league
+these captures come from (2019 is a 404). So history is a client per past season, with no separate
+`leagueHistory` endpoint. `League.previousSeasons` comes from `status.previousSeasons` in `mSettings`.
+`getSchedule` is the season's `mMatchupScore` with no `scoringPeriodId`. Playoff matchups exist only
+once ESPN seeds them, carry a `playoffTierType` (`WINNERS_BRACKET`, `WINNERS_CONSOLATION_LADDER`,
+`LOSERS_CONSOLATION_LADDER`; `NONE` in the regular season), and a first-round bye has `away == null`.
+`Team.finalRank` is `rankCalculatedFinal` (0 until the season ends); `rankFinal` stays 0, so don't use
+it. `mTeam` records are always the latest, whatever `scoringPeriodId` asks for (2020 at week 1 and
+week 17 are identical), so `getStandingsForWeek`'s week doesn't change standings.
+
+`getDraft` reads `draftDetail.picks` (player IDs only) and `settings.draftSettings` (type, date), then
+looks up all ~160 players in one `filterIds` request with no week. That request is the heaviest the
+library makes, about 2 MB for a current season. With no week, the stats filter asks for scoring period
+0, the season total: `statSplitTypeId` 0 and `statSourceId` 0, i.e. `Player.seasonPoints`. Every
+player lookup also includes period 0.
 
 ### Weeks vs matchup periods
 
@@ -146,18 +176,13 @@ model fields nullable/defaulted unless ESPN always sends them.
 
 ## Testing notes
 
-- Fixtures in `src/test/resources/` are trimmed, anonymised captures of real ESPN responses
-  (`espn-live-week1.json` for a live `mMatchupScore` week, `espn-league-settings.json` for `mSettings`,
-  `espn-rosters-week6.json` for two teams' `mRoster,mTeam` mid-week, `espn-box-scores-week6.json` for
-  two of that week's matchups with `mScoreboard` lineups, `espn-teams-week6.json` for all ten teams'
-  `mTeam` standings, `espn-transactions-week6.json` plus `espn-transaction-players-week6.json` for that
-  week's activity and its player lookup, `espn-transactions-2024-week6.json` / `-week7.json` (plus
-  `espn-transaction-players-2024-week7.json`) for a trade under review and then executed, and
-  `espn-free-agents-week6.json` /
-  `espn-player-search-week6.json` for `kona_player_info`).
-  They pin the model against the real API shape. Refresh or add captures rather than hand-writing
-  payloads when ESPN changes something. Before committing, replace the league ID, team and member
-  names, logos and every SWID (the `{...}` member and owner IDs).
+- Fixtures in `src/test/resources/` are trimmed, anonymised captures of real ESPN responses, named
+  `espn-<what>-<season or week>.json`. Each test class's KDoc says which views its fixture holds. Most
+  are 2026 week 6, captured mid-week. Exceptions: `espn-live-week1.json` (week 1), the 2024 weeks 6–7
+  transactions (a trade under review, then executed), and the 2025 schedule and draft (a completed
+  season). They pin the model against the real API shape. Refresh or add captures rather than
+  hand-writing payloads when ESPN changes something. Before committing, replace the league ID, team
+  and member names, logos and every SWID (the `{...}` member and owner IDs).
 - `EspnFantasyFootballTest` exercises the full factory stack against `MockWebServer` (pass its URL as
   `baseUrl`).
 - When mocking `Call<T>` with Mockito, stub `enqueue()` — `retrofit2.await()` resumes from the

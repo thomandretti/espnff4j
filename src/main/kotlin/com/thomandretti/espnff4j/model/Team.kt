@@ -14,6 +14,8 @@ data class Team(
     val owners: List<Owner> = emptyList(),
     val divisionId: Int? = null,
     val logoUrl: String? = null,
+    // Where the team finished once the season, playoffs included, is over: 1 is the champion. Null until then.
+    val finalRank: Int? = null,
 )
 
 data class Streak(

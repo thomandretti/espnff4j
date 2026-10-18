@@ -110,6 +110,7 @@ class EspnFantasyFootballTest {
             assertEquals(6, league.playoffTeamCount)
             assertEquals(listOf(16), league.matchupPeriods[16])
             assertTrue(league.isActive)
+            assertEquals((2020..2025).toList(), league.previousSeasons)
             val path = requireNotNull(server.takeRequest().path)
             assertTrue(path.startsWith("/seasons/2026/segments/0/leagues/12345?view=mSettings"), path)
         }

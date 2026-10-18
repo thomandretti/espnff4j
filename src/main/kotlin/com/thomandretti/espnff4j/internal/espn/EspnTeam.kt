@@ -18,6 +18,8 @@ internal data class EspnTeam(
     val playoffSeed: Int,
     val divisionId: Int? = null,
     val logo: String? = null,
+    // 0 until the season is over.
+    val rankCalculatedFinal: Int = 0,
     val owners: List<String> = emptyList(),
     val record: EspnRecord,
     // Only with the mRoster view.
@@ -90,5 +92,6 @@ private fun EspnTeam.toTeam(membersById: Map<String, Member>): Team {
             },
         divisionId = divisionId,
         logoUrl = logo,
+        finalRank = rankCalculatedFinal.takeIf { it > 0 },
     )
 }

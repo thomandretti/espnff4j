@@ -7,11 +7,13 @@ probabilities), transactions, free agents and player search.
 ## Usage
 
 ```kotlin
+// Private leagues only: the SWID and espn_s2 cookies from a logged-in browser session.
+val credentials = EspnCredentials(swid = System.getenv("ESPN_SWID"), espnS2 = System.getenv("ESPN_S2"))
+
 val client = EspnFantasyFootball.client(
     seasonId = 2026,
     leagueId = 12345,
-    // Private leagues only: the SWID and espn_s2 cookies from a logged-in browser session.
-    credentials = EspnCredentials(swid = System.getenv("ESPN_SWID"), espnS2 = System.getenv("ESPN_S2")),
+    credentials = credentials,
 ) {
     // Optional: this is an OkHttpClient.Builder, so add logging, metrics or timeouts here.
     addInterceptor(myMetricsInterceptor)
@@ -27,6 +29,16 @@ rosters.first().starters.forEach { println("${it.lineupSlot} ${it.name} (${it.pr
 val moves: List<Transaction> = client.getTransactionsForWeek(week = 3) // pickups, waiver claims, trades
 val bestRbs: List<Player> = client.getFreeAgents(week = 3, position = Position.RB, limit = 10)
 val found: List<Player> = client.searchPlayers("josh al", week = 3)  // player.team: who rosters them
+
+val season: List<MatchupInfo> = client.getSchedule()        // every matchup, with playoffTier
+val draft: Draft = client.getDraft()                        // every pick, with players' season points
+val games: List<NflGame> = client.getNflGamesForWeek(week = 3) // kickoffs; join on player.proTeam
+
+// Past seasons: one client per season. Records are final whatever the week; Team.finalRank is where each
+// team finished (1 = champion).
+val history = league.previousSeasons.associateWith { season ->
+    EspnFantasyFootball.client(season, leagueId = 12345, credentials = credentials).getStandingsForWeek(week = 1)
+}
 ```
 
 Free agents include players on waivers and are ordered by ESPN's projection for the week. Search

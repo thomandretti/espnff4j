@@ -4,8 +4,8 @@ import com.thomandretti.espnff4j.model.Position
 
 /**
  * Builders for the X-Fantasy-Filter header that kona_player_info needs. ESPN rejects a `limit`
- * without a sort. Every filter limits the stats to the requested week; otherwise each player brings
- * their whole season.
+ * without a sort. Every filter limits the stats to the season total (scoring period 0) and the requested
+ * week; otherwise each player brings every week of the season.
  */
 internal object PlayerFilters {
     // ESPN encodes a stat to sort by as source + split + season + week, so "11" + "2026" + "6" is the
@@ -14,7 +14,7 @@ internal object PlayerFilters {
 
     fun byIds(
         ids: Collection<Int>,
-        week: Int,
+        week: Int?,
     ): String = players(week) { put("filterIds", values(ids.toList())) }
 
     fun freeAgents(
@@ -42,10 +42,11 @@ internal object PlayerFilters {
         }
 
     private fun players(
-        week: Int,
+        week: Int?,
         filters: MutableMap<String, Any>.() -> Unit,
     ): String {
-        val players = buildMap(filters) + ("filterStatsForCurrentSeasonScoringPeriodId" to values(listOf(week)))
+        val players =
+            buildMap(filters) + ("filterStatsForCurrentSeasonScoringPeriodId" to values(listOfNotNull(0, week)))
         return OBJECT_MAPPER.writeValueAsString(mapOf("players" to players))
     }
 

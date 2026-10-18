@@ -10,6 +10,7 @@ import com.thomandretti.espnff4j.model.TeamRoster
 private const val STAT_SOURCE_ACTUAL = 0
 private const val STAT_SOURCE_PROJECTED = 1
 private const val STAT_SPLIT_WEEK = 1
+private const val STAT_SPLIT_SEASON = 0
 
 internal data class RostersResponse(
     val teams: List<EspnTeam>,
@@ -94,6 +95,16 @@ internal data class EspnPlayer(
             null -> InjuryStatus.ACTIVE
             else -> InjuryStatus.entries.firstOrNull { it.name == status } ?: InjuryStatus.UNKNOWN
         }
+
+    // The season total: scoring period 0, statSplitTypeId 0.
+    fun seasonPoints(seasonId: Int): Double? =
+        stats
+            .firstOrNull {
+                it.seasonId == seasonId &&
+                    it.scoringPeriodId == 0 &&
+                    it.statSourceId == STAT_SOURCE_ACTUAL &&
+                    it.statSplitTypeId == STAT_SPLIT_SEASON
+            }?.appliedTotal
 
     fun weekPoints(
         seasonId: Int,

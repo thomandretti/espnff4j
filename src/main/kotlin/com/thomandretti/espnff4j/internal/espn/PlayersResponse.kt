@@ -1,7 +1,9 @@
 package com.thomandretti.espnff4j.internal.espn
 
+import com.thomandretti.espnff4j.model.InjuryStatus
 import com.thomandretti.espnff4j.model.Player
 import com.thomandretti.espnff4j.model.PlayerStatus
+import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
 import java.time.Instant
 
@@ -25,7 +27,8 @@ internal data class EspnPoolPlayer(
 
 internal fun EspnPoolPlayer.toPlayer(
     seasonId: Int,
-    week: Int,
+    // Null when no week was asked for, as for the draft: points and projection are then null.
+    week: Int?,
     teamsById: Map<Int, Team>,
 ): Player =
     Player(
@@ -44,6 +47,24 @@ internal fun EspnPoolPlayer.toPlayer(
         team = teamsById[onTeamId],
         waiverClearsAt = waiverProcessDate?.let(Instant::ofEpochMilli),
         percentOwned = player.ownership?.percentOwned,
-        points = player.weekPoints(seasonId, week),
-        projectedPoints = player.weekProjection(seasonId, week),
+        points = week?.let { player.weekPoints(seasonId, it) },
+        projectedPoints = week?.let { player.weekProjection(seasonId, it) },
+        seasonPoints = player.seasonPoints(seasonId),
+    )
+
+// For an id ESPN's player lookup didn't return, e.g. a player who has since retired, so that the pick or
+// move that refers to them isn't lost.
+internal fun unknownPlayer(id: Int) =
+    Player(
+        id = id,
+        name = "Unknown player $id",
+        position = Position.UNKNOWN,
+        proTeam = null,
+        injuryStatus = InjuryStatus.UNKNOWN,
+        status = PlayerStatus.UNKNOWN,
+        team = null,
+        waiverClearsAt = null,
+        percentOwned = null,
+        points = null,
+        projectedPoints = null,
     )

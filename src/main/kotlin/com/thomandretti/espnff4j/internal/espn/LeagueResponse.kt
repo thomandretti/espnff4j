@@ -14,4 +14,6 @@ internal data class LeagueStatus(
     val firstScoringPeriod: Int,
     val finalScoringPeriod: Int,
     val isActive: Boolean = false,
+    // Earlier seasons of this league, oldest first.
+    val previousSeasons: List<Int> = emptyList(),
 )

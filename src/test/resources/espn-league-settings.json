@@ -10,7 +10,15 @@
     "firstScoringPeriod": 1,
     "isActive": true,
     "latestScoringPeriod": 6,
-    "teamsJoined": 10
+    "teamsJoined": 10,
+    "previousSeasons": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ]
   },
   "settings": {
     "name": "Test League",

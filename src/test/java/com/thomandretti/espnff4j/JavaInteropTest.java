@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.thomandretti.espnff4j.model.Draft;
+import com.thomandretti.espnff4j.model.DraftType;
+import com.thomandretti.espnff4j.model.NflGame;
 import com.thomandretti.espnff4j.model.Player;
 import com.thomandretti.espnff4j.model.Position;
 import com.thomandretti.espnff4j.model.RosterPlayer;
@@ -83,6 +86,23 @@ class JavaInteropTest {
         List<Player> topFound = client.searchPlayersAsync("allen", 6, 3).join();
 
         assertTrue(all.isEmpty() && rbs.isEmpty() && topRbs.isEmpty() && found.isEmpty() && topFound.isEmpty());
+    }
+
+    @Test
+    void scheduleDraftAndNflGamesReadFromJava() {
+        server.enqueue(new MockResponse().setBody("{\"schedule\":[],\"teams\":[]}"));
+        server.enqueue(new MockResponse().setBody("{\"draftDetail\":{\"drafted\":false}}"));
+        server.enqueue(new MockResponse().setBody(
+            "{\"settings\":{\"proTeams\":[{\"id\":12,\"abbrev\":\"KC\",\"proGamesByScoringPeriod\":{\"6\":"
+                + "[{\"id\":1,\"date\":0,\"homeProTeamId\":12,\"awayProTeamId\":24}]}}]}}"));
+        FantasyFootballClient client = EspnFantasyFootball.client(2026, 12345, null, baseUrl());
+
+        assertTrue(client.getScheduleAsync().join().isEmpty());
+        Draft draft = client.getDraftAsync().join();
+        NflGame game = client.getNflGamesForWeekAsync(6).join().get(0);
+
+        assertEquals(DraftType.UNKNOWN, draft.getType());
+        assertTrue(game.hasKickedOff() && game.involves("KC"));
     }
 
     @Test

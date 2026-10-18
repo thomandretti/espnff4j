@@ -5,6 +5,7 @@ internal data class LeagueSettings(
     val size: Int = 0,
     val scheduleSettings: ScheduleSettings? = null,
     val scoringSettings: ScoringSettings? = null,
+    val draftSettings: DraftSettings? = null,
 )
 
 internal data class ScheduleSettings(
@@ -22,4 +23,11 @@ internal data class ScheduleSettings(
 internal data class ScoringSettings(
     // e.g. H2H_POINTS, H2H_CATEGORY, TOTAL_POINTS
     val scoringType: String? = null,
+)
+
+internal data class DraftSettings(
+    // SNAKE, AUCTION, ...
+    val type: String? = null,
+    // Epoch milliseconds the draft was scheduled to start.
+    val date: Long? = null,
 )

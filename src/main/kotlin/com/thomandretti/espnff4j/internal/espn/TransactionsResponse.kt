@@ -1,11 +1,8 @@
 package com.thomandretti.espnff4j.internal.espn
 
-import com.thomandretti.espnff4j.model.InjuryStatus
 import com.thomandretti.espnff4j.model.MoveType
 import com.thomandretti.espnff4j.model.Player
 import com.thomandretti.espnff4j.model.PlayerMove
-import com.thomandretti.espnff4j.model.PlayerStatus
-import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.Transaction
 import com.thomandretti.espnff4j.model.TransactionType
@@ -89,19 +86,3 @@ private fun EspnTransaction.transactionType(): TransactionType? =
 // LINEUP items are the slot changes ESPN attaches to some pickups.
 private fun EspnTransaction.moves(): List<EspnTransactionItem> =
     items.filter { item -> MoveType.entries.any { it.name == item.type } }
-
-// ESPN could not find the player, e.g. one who has since retired. Keep the move rather than drop it.
-private fun unknownPlayer(id: Int) =
-    Player(
-        id = id,
-        name = "Unknown player $id",
-        position = Position.UNKNOWN,
-        proTeam = null,
-        injuryStatus = InjuryStatus.UNKNOWN,
-        status = PlayerStatus.UNKNOWN,
-        team = null,
-        waiverClearsAt = null,
-        percentOwned = null,
-        points = null,
-        projectedPoints = null,
-    )

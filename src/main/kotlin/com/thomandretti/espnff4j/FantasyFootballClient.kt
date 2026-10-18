@@ -9,13 +9,17 @@ import com.thomandretti.espnff4j.internal.espn.PlayersResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleResponse
 import com.thomandretti.espnff4j.internal.espn.ScheduleSettings
 import com.thomandretti.espnff4j.internal.espn.completed
+import com.thomandretti.espnff4j.internal.espn.gamesFor
+import com.thomandretti.espnff4j.internal.espn.toDraft
 import com.thomandretti.espnff4j.internal.espn.toPlayer
 import com.thomandretti.espnff4j.internal.espn.toPlayers
 import com.thomandretti.espnff4j.internal.espn.toTeams
 import com.thomandretti.espnff4j.internal.espn.toTransaction
 import com.thomandretti.espnff4j.model.BoxScore
+import com.thomandretti.espnff4j.model.Draft
 import com.thomandretti.espnff4j.model.League
 import com.thomandretti.espnff4j.model.MatchupInfo
+import com.thomandretti.espnff4j.model.NflGame
 import com.thomandretti.espnff4j.model.Player
 import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
@@ -63,6 +67,12 @@ class FantasyFootballClient private constructor(
     fun getRostersForWeekAsync(week: Int): CompletableFuture<List<TeamRoster>> =
         scope.future { getRostersForWeek(week) }
 
+    fun getScheduleAsync(): CompletableFuture<List<MatchupInfo>> = scope.future { getSchedule() }
+
+    fun getDraftAsync(): CompletableFuture<Draft> = scope.future { getDraft() }
+
+    fun getNflGamesForWeekAsync(week: Int): CompletableFuture<List<NflGame>> = scope.future { getNflGamesForWeek(week) }
+
     fun getBoxScoresForWeekAsync(week: Int): CompletableFuture<List<BoxScore>> =
         scope.future { getBoxScoresForWeek(week) }
 
@@ -102,6 +112,7 @@ class FantasyFootballClient private constructor(
             playoffTeamCount = schedule.playoffTeamCount,
             matchupPeriods = schedule.matchupPeriods,
             isActive = response.status.isActive,
+            previousSeasons = response.status.previousSeasons,
         )
     }
 
@@ -137,6 +148,21 @@ class FantasyFootballClient private constructor(
             .map { (_, info) -> info }
 
     /**
+     * Every matchup of the season, regular season and playoffs, in matchup-period order. Settled
+     * matchups carry their final scores and [MatchupInfo.outcome]; the live one its running score; future
+     * ones zero. Playoff matchups appear only once ESPN has seeded them, and first-round byes are left
+     * out. For an earlier season, use a client built for that season (see [League.previousSeasons]).
+     */
+    @JvmSynthetic
+    suspend fun getSchedule(): List<MatchupInfo> =
+        espnClient
+            .getSeasonSchedule(seasonId, leagueId)
+            .awaitEspn()
+            .matchups { true }
+            .map { (_, info) -> info }
+            .sortedBy { it.matchupPeriod }
+
+    /**
      * The matchups in play during NFL [week], as [getMatchupsForWeek], plus both lineups with each
      * player's points and projection for the week. The response is about twice the size, so prefer
      * [getMatchupsForWeek] when the lineups aren't needed.
@@ -168,13 +194,7 @@ class FantasyFootballClient private constructor(
         if (completed.isEmpty()) return emptyList()
         val teamsById = response.teams.toTeams(response.members).associateBy { it.id }
         val playerIds = completed.flatMap { tx -> tx.items.map { it.playerId } }.toSet()
-        val playersById =
-            espnClient
-                .getPlayers(seasonId, leagueId, week, PlayerFilters.byIds(playerIds, week), "kona_player_info")
-                .awaitEspn()
-                .players
-                .map { it.toPlayer(seasonId, week, teamsById) }
-                .associateBy { it.id }
+        val playersById = lookUpPlayers(playerIds, week, teamsById)
         return completed.mapNotNull { it.toTransaction(teamsById, playersById) }.sortedByDescending { it.date }
     }
 
@@ -215,6 +235,48 @@ class FantasyFootballClient private constructor(
             .toPlayers(week)
     }
 
+    /**
+     * The NFL games of NFL [week], by kickoff. A team with no game is on bye. Join on
+     * [RosterPlayer.proTeam] to tell which players have yet to play. The schedule is the same for every
+     * league and changes rarely, so it suits caching.
+     */
+    @JvmSynthetic
+    suspend fun getNflGamesForWeek(week: Int): List<NflGame> =
+        espnClient
+            .getProTeamSchedules(seasonId)
+            .awaitEspn()
+            .gamesFor(week)
+
+    /**
+     * Every pick of this season's draft, in order, with each player's season points so far. Costs two
+     * requests: ESPN identifies the players only by id, and the lookup for a full draft is about 1.5 MB.
+     */
+    @JvmSynthetic
+    suspend fun getDraft(): Draft {
+        val response = espnClient.getDraft(seasonId, leagueId).awaitEspn()
+        val teamsById = response.teams.toTeams(response.members).associateBy { it.id }
+        val playerIds =
+            response.draftDetail.picks
+                .map { it.playerId }
+                .toSet()
+        val playersById = if (playerIds.isEmpty()) emptyMap() else lookUpPlayers(playerIds, null, teamsById)
+        return response.toDraft(teamsById, playersById)
+    }
+
+    /** ESPN's current view of the players with [ids], with stats for [week] if given. */
+    private suspend fun lookUpPlayers(
+        ids: Set<Int>,
+        week: Int?,
+        teamsById: Map<Int, Team>,
+    ): Map<Int, Player> =
+        espnClient
+            // scoringPeriodId 0 is the season as a whole.
+            .getPlayers(seasonId, leagueId, week ?: 0, PlayerFilters.byIds(ids, week), "kona_player_info")
+            .awaitEspn()
+            .players
+            .map { it.toPlayer(seasonId, week, teamsById) }
+            .associateBy { it.id }
+
     private fun PlayersResponse.toPlayers(week: Int): List<Player> {
         val teamsById = teams.toTeams(members).associateBy { it.id }
         return players.map { it.toPlayer(seasonId, week, teamsById) }
@@ -225,9 +287,14 @@ class FantasyFootballClient private constructor(
         // ESPN numbers matchups by matchup period, not NFL week. The two line up one-to-one until a
         // multi-week playoff round, so fall back to the week itself if ESPN sends no mapping.
         val matchupPeriod = settings?.scheduleSettings?.matchupPeriodFor(week) ?: week
+        return matchups { it.matchupPeriodId == matchupPeriod }
+    }
+
+    /** The schedule's matchups that pass [include], byes dropped, each with the summary built from it. */
+    private fun ScheduleResponse.matchups(include: (Matchup) -> Boolean): List<Pair<Matchup, MatchupInfo>> {
         val teamsById = teams.toTeams(members).associateBy { it.id }
         return schedule
-            .filter { it.matchupPeriodId == matchupPeriod && it.away != null }
+            .filter { include(it) && it.away != null }
             .mapNotNull { matchup ->
                 val homeTeam = teamsById[matchup.home.teamId] ?: return@mapNotNull null
                 val awayTeam = teamsById[matchup.away!!.teamId] ?: return@mapNotNull null
@@ -241,6 +308,8 @@ class FantasyFootballClient private constructor(
                         awayProjected = matchup.away.projectedTotal(),
                         espnHomeWinProbability = matchup.home.winProbability,
                         outcome = matchup.outcome,
+                        matchupPeriod = matchup.matchupPeriodId,
+                        playoffTier = matchup.playoffTier,
                     )
             }
     }

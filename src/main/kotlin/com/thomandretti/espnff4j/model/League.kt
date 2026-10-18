@@ -17,4 +17,6 @@ data class League(
     // Matchup period -> the weeks it spans; a multi-week playoff round lists more than one.
     val matchupPeriods: Map<Int, List<Int>>,
     val isActive: Boolean,
+    // Earlier seasons of this league, oldest first. Each is readable with a client for that seasonId.
+    val previousSeasons: List<Int> = emptyList(),
 )

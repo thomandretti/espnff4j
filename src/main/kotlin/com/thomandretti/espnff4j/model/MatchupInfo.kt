@@ -11,4 +11,7 @@ data class MatchupInfo(
     // ESPN's own win probability for the home side, when it publishes one.
     val espnHomeWinProbability: Double? = null,
     val outcome: MatchupOutcome = MatchupOutcome.UNDECIDED,
+    // ESPN's fantasy round; equal to the NFL week except in multi-week playoff rounds.
+    val matchupPeriod: Int = 0,
+    val playoffTier: PlayoffTier = PlayoffTier.REGULAR_SEASON,
 )

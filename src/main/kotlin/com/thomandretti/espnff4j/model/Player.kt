@@ -2,7 +2,9 @@ package com.thomandretti.espnff4j.model
 
 import java.time.Instant
 
-/** A player as ESPN reports them now, with points and projection for the requested week. */
+/** A player as ESPN reports them now, with points and projection for the requested week
+ * (null when the call has no week, as for the draft).
+ */
 data class Player(
     val id: Int,
     val name: String,
@@ -20,6 +22,8 @@ data class Player(
     val percentOwned: Double?,
     val points: Double?,
     val projectedPoints: Double?,
+    // Fantasy points so far this season, under the league's scoring.
+    val seasonPoints: Double? = null,
 )
 
 enum class PlayerStatus {

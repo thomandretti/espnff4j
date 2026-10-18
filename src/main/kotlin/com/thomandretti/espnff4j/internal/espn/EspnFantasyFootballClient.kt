@@ -41,6 +41,30 @@ internal interface EspnFantasyFootballClient {
         @Query("view") vararg views: String = arrayOf("mMatchupScore", "mTeam", "mSettings"),
     ): Call<ScheduleResponse>
 
+    // Not a league endpoint: the same NFL schedule for every league, readable without cookies.
+    @GET("{seasonId}")
+    fun getProTeamSchedules(
+        @Path("seasonId") seasonId: Int,
+        @Query("view") vararg views: String = arrayOf("proTeamSchedules_wl"),
+    ): Call<ProTeamsResponse>
+
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getDraft(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        // mSettings carries the draft type and date.
+        @Query("view") vararg views: String = arrayOf("mDraftDetail", "mTeam", "mSettings"),
+    ): Call<DraftResponse>
+
+    // With no scoringPeriodId, mMatchupScore covers the whole season in ~200 KB. mMatchup, oddly, is ten
+    // times that: it adds every side's per-stat breakdown.
+    @GET("{seasonId}/segments/0/leagues/{leagueId}")
+    fun getSeasonSchedule(
+        @Path("seasonId") seasonId: Int,
+        @Path("leagueId") leagueId: Int,
+        @Query("view") vararg views: String = arrayOf("mMatchupScore", "mTeam", "mSettings"),
+    ): Call<ScheduleResponse>
+
     @GET("{seasonId}/segments/0/leagues/{leagueId}")
     fun getBoxScoresAtWeek(
         @Path("seasonId") seasonId: Int,
