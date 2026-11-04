@@ -52,9 +52,9 @@ internal data class EspnTransactionItem(
     val toLineupSlotId: Int = -1,
 )
 
-/** Executed free-agent pickups, waiver claims, trades, drops on their own and IR moves. */
+/** Executed free-agent pickups, waiver claims, trades, drops on their own and IR moves, and failed waiver claims. */
 internal fun TransactionsResponse.completed(): List<EspnTransaction> =
-    transactions.filter { it.status == "EXECUTED" && it.transactionType() != null && it.moves().isNotEmpty() }
+    transactions.filter { it.transactionType() != null && it.moves().isNotEmpty() }
 
 internal fun EspnTransaction.toTransaction(
     teamsById: Map<Int, Team>,
@@ -69,12 +69,15 @@ internal fun EspnTransaction.toTransaction(
         team = team,
         date = Instant.ofEpochMilli(processDate ?: proposedDate ?: 0),
         moves = moves().map { it.toPlayerMove(teamsById, playersById) },
-        waiverBid = bidAmount.takeIf { type == TransactionType.WAIVER },
+        waiverBid = bidAmount.takeIf { type == TransactionType.WAIVER || type == TransactionType.FAILED_WAIVER },
     )
 }
 
 private fun EspnTransaction.transactionType(): TransactionType? =
     when {
+        // FAILED_INVALIDPLAYERSOURCE, when the player went to a team ahead in the order, and others.
+        type == "WAIVER" && status?.startsWith("FAILED_") == true -> TransactionType.FAILED_WAIVER
+        status != "EXECUTED" -> null
         type == "FREEAGENT" -> TransactionType.FREE_AGENT
         type == "WAIVER" -> TransactionType.WAIVER
         // A trade leaves a chain: the TRADE_PROPOSAL (PENDING, later CANCELED), a TRADE_ACCEPT with no

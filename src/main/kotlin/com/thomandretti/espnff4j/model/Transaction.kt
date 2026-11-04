@@ -2,7 +2,10 @@ package com.thomandretti.espnff4j.model
 
 import java.time.Instant
 
-/** A completed roster move: a free-agent pickup, a waiver claim, a trade, a drop on its own or an IR move. */
+/**
+ * A completed roster move: a free-agent pickup, a waiver claim, a trade, a drop on its own or an IR move. Or a
+ * waiver claim that failed ([TransactionType.FAILED_WAIVER]), whose moves are what was asked for and didn't happen.
+ */
 data class Transaction(
     val id: String,
     val type: TransactionType,
@@ -11,7 +14,7 @@ data class Transaction(
     // When it took effect; for a waiver claim, when waivers were processed.
     val date: Instant,
     val moves: List<PlayerMove>,
-    // The FAAB bid for a waiver claim; null for other types.
+    // The FAAB bid for a waiver claim, failed or not; null for other types.
     val waiverBid: Int?,
 )
 
@@ -31,6 +34,10 @@ enum class TransactionType {
 
     // A drop with no pickup, or a move on or off injured reserve. Other lineup changes are left out.
     ROSTER,
+
+    // A waiver claim that didn't go through, usually because a team ahead in the order got the player.
+    // Nothing moved: its moves are only what the team asked for.
+    FAILED_WAIVER,
 }
 
 enum class MoveType {

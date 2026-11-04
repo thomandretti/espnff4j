@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.Duration
 import java.time.Instant
 
 /**
@@ -53,16 +54,56 @@ class EspnTransactionsResponseTest {
     }
 
     @Test
-    fun `keeps executed pickups, waiver claims and drops, newest first`() {
+    fun `keeps executed pickups, waiver claims and drops, and failed claims, newest first`() {
         val transactions = transactions()
 
-        // The capture also holds 22 lineup changes, a pending claim and a failed one.
-        assertEquals(11, transactions.size)
+        // The capture also holds 22 lineup changes and a pending claim.
+        assertEquals(12, transactions.size)
         assertEquals(transactions.sortedByDescending { it.date }, transactions)
         assertEquals(
-            mapOf(TransactionType.FREE_AGENT to 6, TransactionType.WAIVER to 4, TransactionType.ROSTER to 1),
+            mapOf(
+                TransactionType.FREE_AGENT to 6,
+                TransactionType.WAIVER to 4,
+                TransactionType.ROSTER to 1,
+                TransactionType.FAILED_WAIVER to 1,
+            ),
             transactions.groupingBy { it.type }.eachCount(),
         )
+    }
+
+    @Test
+    fun `a failed waiver claim says who wanted whom, dated with the rest of its run`() {
+        val transactions = transactions()
+        val failed = transactions.single { it.type == TransactionType.FAILED_WAIVER }
+        val won = transactions.first { it.type == TransactionType.WAIVER }
+
+        assertEquals(7, failed.team.id)
+        assertEquals(
+            "Chiefs D/ST",
+            failed.moves
+                .first { it.type == MoveType.ADD }
+                .player.name,
+        )
+        assertEquals(listOf(MoveType.ADD, MoveType.DROP), failed.moves.map { it.type })
+        assertEquals(0, failed.waiverBid)
+        assertTrue(Duration.between(failed.date, won.date).abs() < Duration.ofSeconds(1))
+    }
+
+    @Test
+    fun `other unsuccessful transactions stay out`() {
+        val response =
+            OBJECT_MAPPER.readValue(
+                """
+                {"transactions":[
+                  {"id":"1","type":"WAIVER","status":"PENDING","teamId":1,"items":[{"type":"ADD","playerId":7}]},
+                  {"id":"2","type":"WAIVER","status":"CANCELED","teamId":1,"items":[{"type":"ADD","playerId":7}]},
+                  {"id":"3","type":"FREEAGENT","status":"FAILED_ROSTERLIMIT","teamId":1,"items":[{"type":"ADD","playerId":7}]}
+                ]}
+                """.trimIndent(),
+                TransactionsResponse::class.java,
+            )
+
+        assertEquals(emptyList<Any>(), response.completed())
     }
 
     @Test
@@ -195,8 +236,8 @@ class EspnTransactionsResponseTest {
         val transactions = runBlocking { client2024().getTransactionsForWeek(6) }
 
         assertTrue(transactions.none { it.type == TransactionType.TRADE }, transactions.toString())
-        // 18 pickups and claims, and a move off IR with a drop.
-        assertEquals(19, transactions.size)
+        // 18 pickups and claims, a move off IR with a drop, and 3 failed claims.
+        assertEquals(22, transactions.size)
     }
 
     @Test

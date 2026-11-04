@@ -32,6 +32,7 @@ import com.thomandretti.espnff4j.model.Position
 import com.thomandretti.espnff4j.model.Team
 import com.thomandretti.espnff4j.model.TeamRoster
 import com.thomandretti.espnff4j.model.Transaction
+import com.thomandretti.espnff4j.model.TransactionType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -205,9 +206,10 @@ class FantasyFootballClient private constructor(
 
     /**
      * Free-agent pickups, waiver claims, trades, drops on their own and IR moves completed during NFL
-     * [week], newest first. Other lineup changes, failed claims and trade offers that didn't go through
-     * are left out. A trade appears in the week its review period ended, which can be the week after it
-     * was accepted. Costs two requests: ESPN identifies the players only by id.
+     * [week], newest first, plus waiver claims that failed ([TransactionType.FAILED_WAIVER], whose moves
+     * never happened). Other lineup changes and trade offers that didn't go through are left out. A trade
+     * appears in the week its review period ended, which can be the week after it was accepted. Costs two
+     * requests: ESPN identifies the players only by id.
      */
     @JvmSynthetic
     suspend fun getTransactionsForWeek(week: Int): List<Transaction> {
