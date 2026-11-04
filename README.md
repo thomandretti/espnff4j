@@ -101,7 +101,7 @@ ESPN's payload changes shape over the course of a week, and the client normalise
 Requires Java 21. Not yet published to Maven Central, so build it into your local Maven repository:
 
 ```bash
-git checkout v0.6.0
+git checkout v0.7.0
 ./gradlew publishToMavenLocal
 ```
 
@@ -109,7 +109,7 @@ Then depend on it with Gradle:
 
 ```kotlin
 repositories { mavenLocal() }
-dependencies { implementation("com.thomandretti:espnff4j:0.6.0") }
+dependencies { implementation("com.thomandretti:espnff4j:0.7.0") }
 ```
 
 or Maven, which reads the local repository by default:
@@ -118,7 +118,7 @@ or Maven, which reads the local repository by default:
 <dependency>
   <groupId>com.thomandretti</groupId>
   <artifactId>espnff4j</artifactId>
-  <version>0.6.0</version>
+  <version>0.7.0</version>
 </dependency>
 ```
 
