@@ -2,7 +2,7 @@ package com.thomandretti.espnff4j.model
 
 import java.time.Instant
 
-/** A completed roster move: a free-agent pickup, a waiver claim or a trade. */
+/** A completed roster move: a free-agent pickup, a waiver claim, a trade, a drop on its own or an IR move. */
 data class Transaction(
     val id: String,
     val type: TransactionType,
@@ -15,7 +15,7 @@ data class Transaction(
     val waiverBid: Int?,
 )
 
-/** One player changing hands. Free agency and waivers are a null team. */
+/** One player changing hands, or moving on or off IR. Free agency, waivers and IR moves are a null team. */
 data class PlayerMove(
     val type: MoveType,
     // The player as ESPN reports them now, which may differ from when the move was made.
@@ -28,12 +28,17 @@ enum class TransactionType {
     FREE_AGENT,
     WAIVER,
     TRADE,
+
+    // A drop with no pickup, or a move on or off injured reserve. Other lineup changes are left out.
+    ROSTER,
 }
 
 enum class MoveType {
     ADD,
     DROP,
     TRADE,
+    TO_IR,
+    FROM_IR,
 }
 
 /** A trade that hasn't gone through: offered and awaiting the other team, or accepted and under review. */

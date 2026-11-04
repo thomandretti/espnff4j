@@ -3,8 +3,10 @@ package com.thomandretti.espnff4j
 import com.thomandretti.espnff4j.internal.espn.OBJECT_MAPPER
 import com.thomandretti.espnff4j.internal.espn.OpenTrade
 import com.thomandretti.espnff4j.internal.espn.TransactionsResponse
+import com.thomandretti.espnff4j.internal.espn.completed
 import com.thomandretti.espnff4j.internal.espn.openTrades
 import com.thomandretti.espnff4j.internal.espn.toPendingTrade
+import com.thomandretti.espnff4j.internal.espn.toTransaction
 import com.thomandretti.espnff4j.model.MoveType
 import com.thomandretti.espnff4j.model.PendingTrade
 import com.thomandretti.espnff4j.model.PendingTradeStatus
@@ -51,16 +53,65 @@ class EspnTransactionsResponseTest {
     }
 
     @Test
-    fun `keeps executed pickups and waiver claims, newest first`() {
+    fun `keeps executed pickups, waiver claims and drops, newest first`() {
         val transactions = transactions()
 
-        // The capture also holds 23 lineup changes, a pending claim and a failed one.
-        assertEquals(10, transactions.size)
+        // The capture also holds 22 lineup changes, a pending claim and a failed one.
+        assertEquals(11, transactions.size)
         assertEquals(transactions.sortedByDescending { it.date }, transactions)
         assertEquals(
-            mapOf(TransactionType.FREE_AGENT to 6, TransactionType.WAIVER to 4),
+            mapOf(TransactionType.FREE_AGENT to 6, TransactionType.WAIVER to 4, TransactionType.ROSTER to 1),
             transactions.groupingBy { it.type }.eachCount(),
         )
+    }
+
+    @Test
+    fun `a drop with no pickup is a roster move`() {
+        val drop = transactions().single { it.type == TransactionType.ROSTER }.moves.single()
+
+        assertEquals(MoveType.DROP, drop.type)
+        assertEquals(4574716, drop.player.id)
+        assertNull(drop.toTeam)
+        assertEquals(2, drop.fromTeam?.id)
+    }
+
+    @Test
+    fun `a move off IR is reported with the drop that made room, and other lineup changes are not`() {
+        // Week 7 of 2024: a starter to the bench, a player from IR into his slot, and a bench player dropped.
+        server.enqueue(MockResponse().setBody(fixture("espn-transactions-2024-week7.json")))
+        server.enqueue(MockResponse().setBody(fixture("espn-transaction-players-2024-week7.json")))
+
+        val moves =
+            runBlocking { client2024().getTransactionsForWeek(7) }
+                .single { it.type == TransactionType.ROSTER && it.team.id == 10 }
+                .moves
+
+        assertEquals(listOf(MoveType.FROM_IR, MoveType.DROP), moves.map { it.type })
+        assertEquals(listOf(2977187, 15795), moves.map { it.player.id })
+        assertNull(moves.first().fromTeam)
+        assertNull(moves.first().toTeam)
+    }
+
+    @Test
+    fun `a move onto IR is reported, and a lineup change alone is not`() {
+        val response =
+            OBJECT_MAPPER.readValue(
+                """
+                {"transactions":[{"id":"1","type":"ROSTER","status":"EXECUTED","teamId":1,"items":[
+                  {"type":"LINEUP","playerId":7,"fromLineupSlotId":20,"toLineupSlotId":21},
+                  {"type":"LINEUP","playerId":8,"fromLineupSlotId":20,"toLineupSlotId":4}
+                ]},
+                {"id":"2","type":"ROSTER","status":"EXECUTED","teamId":1,"items":[
+                  {"type":"LINEUP","playerId":8,"fromLineupSlotId":4,"toLineupSlotId":20}
+                ]}]}
+                """.trimIndent(),
+                TransactionsResponse::class.java,
+            )
+
+        val irMove = response.completed().single().toTransaction(mapOf(1 to teamA), emptyMap())
+
+        assertEquals(listOf(MoveType.TO_IR), irMove?.moves?.map { it.type })
+        assertEquals(listOf(7), irMove?.moves?.map { it.player.id })
     }
 
     @Test
@@ -144,7 +195,8 @@ class EspnTransactionsResponseTest {
         val transactions = runBlocking { client2024().getTransactionsForWeek(6) }
 
         assertTrue(transactions.none { it.type == TransactionType.TRADE }, transactions.toString())
-        assertEquals(18, transactions.size)
+        // 18 pickups and claims, and a move off IR with a drop.
+        assertEquals(19, transactions.size)
     }
 
     @Test

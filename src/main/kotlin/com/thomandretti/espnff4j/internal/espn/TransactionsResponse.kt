@@ -1,5 +1,6 @@
 package com.thomandretti.espnff4j.internal.espn
 
+import com.thomandretti.espnff4j.model.LineupSlot
 import com.thomandretti.espnff4j.model.MoveType
 import com.thomandretti.espnff4j.model.PendingTrade
 import com.thomandretti.espnff4j.model.PendingTradeStatus
@@ -46,9 +47,12 @@ internal data class EspnTransactionItem(
     // 0 is free agency or waivers.
     val fromTeamId: Int = 0,
     val toTeamId: Int = 0,
+    // LINEUP items move a player between these; ADD and DROP use -1 for off the roster.
+    val fromLineupSlotId: Int = -1,
+    val toLineupSlotId: Int = -1,
 )
 
-/** Executed free-agent pickups, waiver claims and trades. */
+/** Executed free-agent pickups, waiver claims, trades, drops on their own and IR moves. */
 internal fun TransactionsResponse.completed(): List<EspnTransaction> =
     transactions.filter { it.status == "EXECUTED" && it.transactionType() != null && it.moves().isNotEmpty() }
 
@@ -78,12 +82,20 @@ private fun EspnTransaction.transactionType(): TransactionType? =
         // no players. When the review period ends, often the next week, ESPN adds a second TRADE_ACCEPT that
         // is EXECUTED and carries the players, plus any drop the receiving team made to fit them.
         type == "TRADE_ACCEPT" -> TransactionType.TRADE
+        // Usually only lineup changes, which moves() leaves out, so most of these are not completed().
+        type == "ROSTER" -> TransactionType.ROSTER
         else -> null
     }
 
-// LINEUP items are the slot changes ESPN attaches to some pickups.
-private fun EspnTransaction.moves(): List<EspnTransactionItem> =
-    items.filter { item -> MoveType.entries.any { it.name == item.type } }
+private fun EspnTransaction.moves(): List<EspnTransactionItem> = items.filter { it.moveType() != null }
+
+// LINEUP items are slot changes, on their own or attached to a pickup or drop. Only IR moves count.
+private fun EspnTransactionItem.moveType(): MoveType? =
+    when {
+        type == "LINEUP" && lineupSlot(toLineupSlotId) == LineupSlot.IR -> MoveType.TO_IR
+        type == "LINEUP" && lineupSlot(fromLineupSlotId) == LineupSlot.IR -> MoveType.FROM_IR
+        else -> MoveType.entries.firstOrNull { it.name == type }
+    }
 
 /** A trade offer that is still open, with the TRADE_ACCEPT recorded if the other team has accepted it. */
 internal data class OpenTrade(
@@ -137,7 +149,7 @@ private fun EspnTransactionItem.toPlayerMove(
     teamsById: Map<Int, Team>,
     playersById: Map<Int, Player>,
 ) = PlayerMove(
-    type = MoveType.valueOf(type),
+    type = checkNotNull(moveType()) { "Not a move: $type" },
     player = playersById[playerId] ?: unknownPlayer(playerId),
     fromTeam = teamsById[fromTeamId],
     toTeam = teamsById[toTeamId],

@@ -204,10 +204,10 @@ class FantasyFootballClient private constructor(
             }
 
     /**
-     * Free-agent pickups, waiver claims and trades completed during NFL [week], newest first. Lineup
-     * changes, failed claims and trade offers that didn't go through are left out. A trade appears in the
-     * week its review period ended, which can be the week after it was accepted. Costs two requests:
-     * ESPN identifies the players only by id.
+     * Free-agent pickups, waiver claims, trades, drops on their own and IR moves completed during NFL
+     * [week], newest first. Other lineup changes, failed claims and trade offers that didn't go through
+     * are left out. A trade appears in the week its review period ended, which can be the week after it
+     * was accepted. Costs two requests: ESPN identifies the players only by id.
      */
     @JvmSynthetic
     suspend fun getTransactionsForWeek(week: Int): List<Transaction> {
