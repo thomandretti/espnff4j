@@ -31,7 +31,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.1")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.20")
 }
 
