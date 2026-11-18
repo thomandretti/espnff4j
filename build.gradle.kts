@@ -57,7 +57,35 @@ val liveTest by tasks.registering(Test::class) {
 }
 
 tasks.check {
-    dependsOn("detekt", "ktlintCheck")
+    dependsOn("detekt", "ktlintCheck", "checkOkHttpMatchesRetrofit")
+}
+
+// OkHttp is part of the public API (`configure` exposes OkHttpClient.Builder) and Retrofit is built against one
+// OkHttp major. Gradle quietly picks the highest version, so a bump past Retrofit's major would pass every test
+// but put an untested OkHttp on consumers' classpaths. Patch and minor bumps are fine; a new major is not.
+val checkOkHttpMatchesRetrofit by tasks.registering {
+    group = "verification"
+    description = "Fails if the runtime OkHttp is a different major version from the one Retrofit requests."
+    doLast {
+        val mismatches = configurations.runtimeClasspath
+            .get()
+            .incoming
+            .resolutionResult
+            .allDependencies
+            .filterIsInstance<ResolvedDependencyResult>()
+            .filter { it.from.moduleVersion?.group == "com.squareup.retrofit2" }
+            .filter { it.selected.moduleVersion?.group == "com.squareup.okhttp3" }
+            .mapNotNull { edge ->
+                val wanted = (edge.requested as? ModuleComponentSelector)?.version.orEmpty()
+                val actual = edge.selected.moduleVersion?.version.orEmpty()
+                "${edge.from.moduleVersion} wants OkHttp $wanted but $actual is selected"
+                    .takeIf { wanted.substringBefore('.') != actual.substringBefore('.') }
+            }
+        check(mismatches.isEmpty()) {
+            "OkHttp's major version differs from Retrofit's; bump them together once Retrofit supports it:\n" +
+                mismatches.joinToString("\n")
+        }
+    }
 }
 
 mavenPublishing {

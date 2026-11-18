@@ -6,10 +6,24 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["java-version"],
-      "matchUpdateTypes": ["major"],
+      "matchDatasources": [
+        "java-version"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "enabled": false,
       "description": "detekt 1.23.x cannot run on JDK 22+; re-enable once on detekt 2.0 stable"
+    },
+    {
+      "matchPackageNames": [
+        "com.squareup.okhttp3:okhttp"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false,
+      "description": "OkHttp is public API and Retrofit 3.0.0 is built against OkHttp 4. Bump both together once Retrofit supports OkHttp 5 (checkOkHttpMatchesRetrofit enforces it)."
     }
   ]
 }
