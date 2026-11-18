@@ -30,7 +30,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
-    testImplementation("com.squareup.okhttp3:mockwebserver:5.5.1")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.20")
 }
 
@@ -65,26 +65,28 @@ tasks.check {
 // but put an untested OkHttp on consumers' classpaths. Patch and minor bumps are fine; a new major is not.
 val checkOkHttpMatchesRetrofit by tasks.registering {
     group = "verification"
-    description = "Fails if the runtime OkHttp is a different major version from the one Retrofit requests."
+    description = "Fails if OkHttp on the runtime or test classpath is another major version than Retrofit requests."
     doLast {
         val mismatches =
-            configurations.runtimeClasspath
-                .get()
-                .incoming
-                .resolutionResult
-                .allDependencies
-                .filterIsInstance<ResolvedDependencyResult>()
-                .filter { it.from.moduleVersion?.group == "com.squareup.retrofit2" }
-                .filter { it.selected.moduleVersion?.group == "com.squareup.okhttp3" }
-                .mapNotNull { edge ->
-                    val wanted = (edge.requested as? ModuleComponentSelector)?.version.orEmpty()
-                    val actual =
-                        edge.selected.moduleVersion
-                            ?.version
-                            .orEmpty()
-                    "${edge.from.moduleVersion} wants OkHttp $wanted but $actual is selected"
-                        .takeIf { wanted.substringBefore('.') != actual.substringBefore('.') }
-                }
+            listOf(configurations.runtimeClasspath, configurations.testRuntimeClasspath).flatMap { configuration ->
+                configuration
+                    .get()
+                    .incoming
+                    .resolutionResult
+                    .allDependencies
+                    .filterIsInstance<ResolvedDependencyResult>()
+                    .filter { it.from.moduleVersion?.group == "com.squareup.retrofit2" }
+                    .filter { it.selected.moduleVersion?.group == "com.squareup.okhttp3" }
+                    .mapNotNull { edge ->
+                        val wanted = (edge.requested as? ModuleComponentSelector)?.version.orEmpty()
+                        val actual =
+                            edge.selected.moduleVersion
+                                ?.version
+                                .orEmpty()
+                        "${edge.from.moduleVersion} wants OkHttp $wanted but $actual is selected"
+                            .takeIf { wanted.substringBefore('.') != actual.substringBefore('.') }
+                    }
+            }
         check(mismatches.isEmpty()) {
             "OkHttp's major version differs from Retrofit's; bump them together once Retrofit supports it:\n" +
                 mismatches.joinToString("\n")
