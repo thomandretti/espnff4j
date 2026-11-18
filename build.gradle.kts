@@ -19,7 +19,7 @@ repositories {
 dependencies {
     // Exposed in the public API: the factory hands callers an OkHttpClient.Builder to configure. Keep
     // this in step with the OkHttp version Retrofit depends on.
-    api("com.squareup.okhttp3:okhttp:4.12.1")
+    api("com.squareup.okhttp3:okhttp:5.5.1")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-jackson:3.0.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.23.0")
