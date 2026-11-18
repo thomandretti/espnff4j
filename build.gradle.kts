@@ -97,20 +97,3 @@ mavenPublishing {
         }
     }
 }
-
-publishing {
-    repositories {
-        // Set MAVEN_REPO_URL, MAVEN_REPO_USER and MAVEN_REPO_TOKEN to also publish to a plain Maven repository,
-        // such as a private package registry.
-        System.getenv("MAVEN_REPO_URL")?.let { repoUrl ->
-            maven {
-                name = "remote"
-                url = uri(repoUrl)
-                credentials {
-                    username = System.getenv("MAVEN_REPO_USER")
-                    password = System.getenv("MAVEN_REPO_TOKEN")
-                }
-            }
-        }
-    }
-}
