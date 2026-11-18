@@ -7,7 +7,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
     // Builds the javadoc jar Maven Central requires from the KDoc.
-    id("org.jetbrains.dokka") version "2.2.0"
+    id("org.jetbrains.dokka") version "2.3.0"
     // Sources and javadoc jars, signing, POM checks and the Central Portal upload.
     id("com.vanniktech.maven.publish") version "0.37.0"
 }
@@ -19,18 +19,18 @@ repositories {
 dependencies {
     // Exposed in the public API: the factory hands callers an OkHttpClient.Builder to configure. Keep
     // this in step with the OkHttp version Retrofit depends on.
-    api("com.squareup.okhttp3:okhttp:4.12.0")
+    api("com.squareup.okhttp3:okhttp:4.12.1")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-jackson:3.0.0")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.22.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.23.0")
     // Retrofit's await() and the *Async futures both need it at runtime.
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
-    implementation("io.github.oshai:kotlin-logging-jvm:8.0.4")
+    implementation("io.github.oshai:kotlin-logging-jvm:8.0.7")
 
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")
     testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
-    testImplementation("com.squareup.okhttp3:mockwebserver:5.5.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:5.5.1")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.20")
 }
 
