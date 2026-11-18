@@ -1,5 +1,6 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinJvm
+import com.vanniktech.maven.publish.SourcesJar
 
 plugins {
     kotlin("jvm") version "2.4.21"
@@ -43,7 +44,7 @@ tasks.test {
 }
 
 // Calls the real ESPN API, so it's never part of check. See EspnLiveSmokeTest for the variables it needs.
-val liveTest by tasks.registering(Test::class) {
+tasks.register<Test>("liveTest") {
     description = "Runs the live smoke tests against ESPN."
     group = "verification"
     testClassesDirs =
@@ -63,7 +64,7 @@ tasks.check {
 // OkHttp is part of the public API (`configure` exposes OkHttpClient.Builder) and Retrofit is built against one
 // OkHttp major. Gradle quietly picks the highest version, so a bump past Retrofit's major would pass every test
 // but put an untested OkHttp on consumers' classpaths. Patch and minor bumps are fine; a new major is not.
-val checkOkHttpMatchesRetrofit by tasks.registering {
+tasks.register("checkOkHttpMatchesRetrofit") {
     group = "verification"
     description = "Fails if OkHttp on the runtime or test classpath is another major version than Retrofit requests."
     doLast {
@@ -95,7 +96,7 @@ val checkOkHttpMatchesRetrofit by tasks.registering {
 }
 
 mavenPublishing {
-    configure(KotlinJvm(javadocJar = JavadocJar.Dokka("dokkaGeneratePublicationHtml"), sourcesJar = true))
+    configure(KotlinJvm(javadocJar = JavadocJar.Dokka("dokkaGeneratePublicationHtml"), sourcesJar = SourcesJar.Sources()))
     publishToMavenCentral()
     // Only when a key is configured, so publishToMavenLocal works without one.
     if (providers.gradleProperty("signingInMemoryKey").isPresent) signAllPublications()
