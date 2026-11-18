@@ -17,13 +17,13 @@
     },
     {
       "matchPackageNames": [
-        "com.squareup.okhttp3:okhttp"
+        "com.squareup.okhttp3:*"
       ],
       "matchUpdateTypes": [
         "major"
       ],
       "enabled": false,
-      "description": "OkHttp is public API and Retrofit 3.0.0 is built against OkHttp 4. Bump both together once Retrofit supports OkHttp 5 (checkOkHttpMatchesRetrofit enforces it)."
+      "description": "OkHttp (and mockwebserver) is public API and Retrofit 3.0.0 is built against OkHttp 4. Bump all of them together once Retrofit supports OkHttp 5 (checkOkHttpMatchesRetrofit enforces it)."
     }
   ]
 }
