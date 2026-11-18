@@ -181,7 +181,8 @@ Java ignores Kotlin's `internal`, so the API is shaped for both languages, and `
   Java (and for Kotlin calls with no lambda).
 
 Retrofit is an `implementation` dependency; OkHttp is `api` because `configure` exposes
-`OkHttpClient.Builder`, so keep its version in step with the one Retrofit pulls in.
+`OkHttpClient.Builder`, so keep its major version the one Retrofit is built against. `checkOkHttpMatchesRetrofit`
+(part of `check`) fails otherwise, and Renovate skips OkHttp major updates.
 `kotlinx-coroutines-core` is a runtime requirement (Retrofit's `await()` and the futures use it).
 
 Every client call goes through `awaitEspn()`, which maps failures to the sealed `EspnException`:
