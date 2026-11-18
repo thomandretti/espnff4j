@@ -67,20 +67,24 @@ val checkOkHttpMatchesRetrofit by tasks.registering {
     group = "verification"
     description = "Fails if the runtime OkHttp is a different major version from the one Retrofit requests."
     doLast {
-        val mismatches = configurations.runtimeClasspath
-            .get()
-            .incoming
-            .resolutionResult
-            .allDependencies
-            .filterIsInstance<ResolvedDependencyResult>()
-            .filter { it.from.moduleVersion?.group == "com.squareup.retrofit2" }
-            .filter { it.selected.moduleVersion?.group == "com.squareup.okhttp3" }
-            .mapNotNull { edge ->
-                val wanted = (edge.requested as? ModuleComponentSelector)?.version.orEmpty()
-                val actual = edge.selected.moduleVersion?.version.orEmpty()
-                "${edge.from.moduleVersion} wants OkHttp $wanted but $actual is selected"
-                    .takeIf { wanted.substringBefore('.') != actual.substringBefore('.') }
-            }
+        val mismatches =
+            configurations.runtimeClasspath
+                .get()
+                .incoming
+                .resolutionResult
+                .allDependencies
+                .filterIsInstance<ResolvedDependencyResult>()
+                .filter { it.from.moduleVersion?.group == "com.squareup.retrofit2" }
+                .filter { it.selected.moduleVersion?.group == "com.squareup.okhttp3" }
+                .mapNotNull { edge ->
+                    val wanted = (edge.requested as? ModuleComponentSelector)?.version.orEmpty()
+                    val actual =
+                        edge.selected.moduleVersion
+                            ?.version
+                            .orEmpty()
+                    "${edge.from.moduleVersion} wants OkHttp $wanted but $actual is selected"
+                        .takeIf { wanted.substringBefore('.') != actual.substringBefore('.') }
+                }
         check(mismatches.isEmpty()) {
             "OkHttp's major version differs from Retrofit's; bump them together once Retrofit supports it:\n" +
                 mismatches.joinToString("\n")
